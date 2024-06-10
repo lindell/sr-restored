@@ -1,4 +1,4 @@
-FROM golang:alpine as builder
+FROM golang:alpine as gobuilder
 
 WORKDIR /build
 
@@ -12,8 +12,23 @@ RUN go mod download
 COPY . ./
 RUN CGO_ENABLED=0 go build -v -o main
 
+FROM node:20-alpine AS sveltebuilder
+
+WORKDIR /app
+
+ENV BASE_URL="test"
+
+COPY ./frontend/package*.json .
+RUN npm ci
+COPY ./frontend .
+RUN npm run build
+RUN npm prune --production
+
 FROM scratch
 WORKDIR /app
-COPY --from=builder /build/main ./main
-COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
-ENTRYPOINT ["./main"]
+
+COPY --from=gobuilder /build/main ./main
+COPY --from=gobuilder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+COPY --from=sveltebuilder /app/build ./static
+
+CMD ["./main"]

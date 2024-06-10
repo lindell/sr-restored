@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/NYTimes/gziphandler"
 	"github.com/lindell/sr-uncensored/podcast"
 )
 
@@ -20,6 +21,9 @@ func (s *Server) ListenAndServe(addr string) error {
 func (s *Server) Handler() http.Handler {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/rss/{id}", s.getRSS)
+
+	mux.Handle("/", gziphandler.GzipHandler(http.FileServer(http.Dir("./static"))))
+
 	return loggingMiddleware(slog.Default())(mux)
 }
 
