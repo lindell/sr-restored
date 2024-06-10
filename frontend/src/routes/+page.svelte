@@ -13,7 +13,11 @@
 
 <h1>Sverige Radio Unsensored</h1>
 
-<input type="text" placeholder="Sök" bind:value={searchQuery} />
+<div class="search">
+	<input class="search-input" type="text" placeholder="Sök program" bind:value={searchQuery} />
+</div>
+
+<hr />
 
 <div class="programs">
 	{#each results.slice(0, 12) as program (program.id)}
@@ -23,12 +27,38 @@
 
 <style lang="scss">
 	h1 {
+		margin-top: 5em;
+		text-align: center;
 		color: #fff;
+	}
+
+	hr {
+		border-color: #9e9e9e;
+		margin: 2rem;
 	}
 
 	.programs {
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: space-around;
+	}
+
+	.search {
+		display: flex;
+		justify-content: center;
+	}
+
+	.search-input {
+		border: none;
+		outline: solid 1.5px #9e9e9e;
+		font-size: 1.5rem;
+		border-radius: 1.5rem;
+		background: none;
+		padding: 1.5rem;
+		color: #fff;
+	}
+
+	.search-input:focus {
+		outline: solid 2px #e3e3e3;
 	}
 </style>
