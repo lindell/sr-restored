@@ -16,7 +16,7 @@ FROM node:20-alpine AS sveltebuilder
 
 WORKDIR /app
 
-ENV BASE_URL="test"
+ENV PUBLIC_BASE_URL="https://sr-uncensored.fly.dev"
 
 COPY ./frontend/package*.json .
 RUN npm ci
