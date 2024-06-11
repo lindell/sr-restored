@@ -18,13 +18,20 @@ export const load: PageLoad = async () => {
         name: program["@_name"],
         description: program.description,
         image: program.programimage,
-    }));
+    })).sort((a, b) => (ranks.get(b.id) ?? 0) - (ranks.get(a.id) ?? 0));
 
     return {
         programs,
     };
 };
 
+// Used to reorder frontpage
+const ranks = new Map<number, number>([
+    [2519, 100], // P3 Dokumentär
+    [2071, 99], // Sommar & Vinter i P1
+    [2024, 98], // Morgonpasset i P3
+    [4923, 97], // USApodden
+]);
 
 interface XMLProgram {
     "@_id": string;
