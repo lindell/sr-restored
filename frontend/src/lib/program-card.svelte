@@ -41,6 +41,7 @@
 		overflow: hidden;
 		margin: 1em;
 		background: #ddb967;
+		color: #000;
 	}
 
 	.thumbnail img {

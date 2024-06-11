@@ -6,11 +6,32 @@
 	/>
 </svelte:head>
 
+<a href="https://github.com/lindell/sr-uncensored" class="ribbon"
+	><img
+		decoding="async"
+		width="149"
+		height="149"
+		src="https://github.blog/wp-content/uploads/2008/12/forkme_right_white_ffffff.png?resize=149%2C149"
+		class="attachment-full size-full"
+		alt="Fork me on GitHub"
+		loading="lazy"
+		data-recalc-dims="1"
+	/></a
+>
+
 <slot />
 
 <style>
 	:global(body) {
+		margin: 1rem;
 		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 		background: #221d23;
+		color: #fff;
+	}
+
+	.ribbon {
+		position: absolute;
+		right: 0;
+		top: 0;
 	}
 </style>
