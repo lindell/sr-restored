@@ -25,13 +25,19 @@
 	:global(body) {
 		margin: 1rem;
 		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-		background: #221d23;
-		color: #fff;
+		background: #252323;
+		color: #eef4ed;
 	}
 
 	.ribbon {
 		position: absolute;
 		right: 0;
 		top: 0;
+	}
+
+	@media (max-width: 600px) {
+		.ribbon {
+			display: none;
+		}
 	}
 </style>

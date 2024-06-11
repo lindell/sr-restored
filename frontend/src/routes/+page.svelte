@@ -9,6 +9,10 @@
 	$: results = data.programs.filter((program) =>
 		program.name.toLowerCase().includes(searchQuery.toLowerCase())
 	);
+
+	function onSearchFocus(e: FocusEvent) {
+		e.target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+	}
 </script>
 
 <h1>Sverige Radio Unsensored</h1>
@@ -36,11 +40,17 @@
 	</section>
 </div>
 
-<div class="search">
-	<input class="search-input" type="text" placeholder="Sök program" bind:value={searchQuery} />
-</div>
-
 <hr />
+
+<div class="search">
+	<input
+		class="search-input"
+		type="text"
+		placeholder="Sök program"
+		bind:value={searchQuery}
+		on:focus={onSearchFocus}
+	/>
+</div>
 
 <div class="programs">
 	{#each results.slice(0, 12) as program (program.id)}
@@ -52,18 +62,20 @@
 	h1 {
 		margin-top: min(10vw, 15vh);
 		text-align: center;
-		color: #fff;
 	}
 
 	hr {
-		border-color: #9e9e9e;
+		border: none;
+		background-color: #414141;
+		height: 0.125rem;
 		margin: 2rem;
 	}
 
 	.programs {
 		display: flex;
 		flex-wrap: wrap;
-		justify-content: space-around;
+		justify-content: center;
+		align-items: center;
 	}
 
 	.search {
@@ -81,6 +93,7 @@
 		color: #fff;
 		width: 30rem;
 		max-width: calc(100% - 3rem);
+		scroll-margin: 1em;
 	}
 
 	.search-input:focus {
@@ -96,7 +109,7 @@
 	}
 
 	.info a {
-		color: #fff;
+		color: inherit;
 	}
 
 	.info section {
