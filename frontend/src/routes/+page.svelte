@@ -11,7 +11,9 @@
 	);
 
 	function onSearchFocus(e: FocusEvent) {
-		e.target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		if (e.target instanceof Element) {
+			e.target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		}
 	}
 </script>
 
