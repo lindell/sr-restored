@@ -90,13 +90,12 @@ func convertEpisode(original client.Episode) PodItem {
 
 	// URL and GUID persistence
 	target.Link = original.URL
-	target.Guid.Text = original.URL
-	target.Guid.IsPermaLink = "true"
+	target.Guid.Text = fmt.Sprintf("rss:sr.se/pod/eid/%s", original.ID)
+	target.Guid.IsPermaLink = "false"
 
-	target.PubDate = original.Publishdateutc
+	target.PubDate = original.Publishdateutc.Format(time.RFC1123)
 
 	target.Programid = original.Program.ID
-	// target.Poddid
 
 	target.Summary = original.Description
 
@@ -106,7 +105,9 @@ func convertEpisode(original client.Episode) PodItem {
 
 	target.Image.Href = original.Imageurl
 
-	target.Duration = original.Downloadpodfile.Duration
+	target.Duration = fmtDuration(
+		time.Second * time.Duration(original.Downloadpodfile.Duration),
+	)
 	target.Subtitle = original.Description
 
 	target.Enclosure.URL = original.Downloadpodfile.URL
@@ -114,4 +115,16 @@ func convertEpisode(original client.Episode) PodItem {
 	target.Enclosure.Type = "audio/mpeg" // TODO: Determine based on
 
 	return target
+}
+
+func fmtDuration(d time.Duration) string {
+	d = d.Round(time.Second)
+
+	h := d / time.Hour
+	d -= h * time.Hour
+	m := d / time.Minute
+	d -= m * time.Minute
+	s := d / time.Second
+
+	return fmt.Sprintf("%02d:%02d:%02d", h, m, s)
 }

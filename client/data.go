@@ -1,6 +1,9 @@
 package client
 
-import "encoding/xml"
+import (
+	"encoding/xml"
+	"time"
+)
 
 type EpisodeListing struct {
 	XMLName    xml.Name `xml:"sr"`
@@ -31,22 +34,22 @@ type Episode struct {
 		ID   string `xml:"id,attr"`
 		Name string `xml:"name,attr"`
 	} `xml:"program"`
-	Audiopreference   string `xml:"audiopreference"`
-	Audiopriority     string `xml:"audiopriority"`
-	Audiopresentation string `xml:"audiopresentation"`
-	Publishdateutc    string `xml:"publishdateutc"`
-	Imageurl          string `xml:"imageurl"`
-	Imageurltemplate  string `xml:"imageurltemplate"`
+	Audiopreference   string    `xml:"audiopreference"`
+	Audiopriority     string    `xml:"audiopriority"`
+	Audiopresentation string    `xml:"audiopresentation"`
+	Publishdateutc    time.Time `xml:"publishdateutc"`
+	Imageurl          string    `xml:"imageurl"`
+	Imageurltemplate  string    `xml:"imageurltemplate"`
 	Listenpodfile     struct {
-		Text            string `xml:",chardata"`
-		ID              string `xml:"id,attr"`
-		URL             string `xml:"url"`
-		Statkey         string `xml:"statkey"`
-		Duration        string `xml:"duration"`
-		Publishdateutc  string `xml:"publishdateutc"`
-		Title           string `xml:"title"`
-		Description     string `xml:"description"`
-		Filesizeinbytes string `xml:"filesizeinbytes"`
+		Text            string    `xml:",chardata"`
+		ID              string    `xml:"id,attr"`
+		URL             string    `xml:"url"`
+		Statkey         string    `xml:"statkey"`
+		Duration        int       `xml:"duration"`
+		Publishdateutc  time.Time `xml:"publishdateutc"`
+		Title           string    `xml:"title"`
+		Description     string    `xml:"description"`
+		Filesizeinbytes string    `xml:"filesizeinbytes"`
 		Program         struct {
 			Text string `xml:",chardata"`
 			ID   string `xml:"id,attr"`
@@ -55,15 +58,15 @@ type Episode struct {
 		Availablefromutc string `xml:"availablefromutc"`
 	} `xml:"listenpodfile"`
 	Downloadpodfile struct {
-		Text            string `xml:",chardata"`
-		ID              string `xml:"id,attr"`
-		URL             string `xml:"url"`
-		Statkey         string `xml:"statkey"`
-		Duration        string `xml:"duration"`
-		Publishdateutc  string `xml:"publishdateutc"`
-		Title           string `xml:"title"`
-		Description     string `xml:"description"`
-		Filesizeinbytes string `xml:"filesizeinbytes"`
+		Text            string    `xml:",chardata"`
+		ID              string    `xml:"id,attr"`
+		URL             string    `xml:"url"`
+		Statkey         string    `xml:"statkey"`
+		Duration        int       `xml:"duration"`
+		Publishdateutc  time.Time `xml:"publishdateutc"`
+		Title           string    `xml:"title"`
+		Description     string    `xml:"description"`
+		Filesizeinbytes string    `xml:"filesizeinbytes"`
 		Program         struct {
 			Text string `xml:",chardata"`
 			ID   string `xml:"id,attr"`

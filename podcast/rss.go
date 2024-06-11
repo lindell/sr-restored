@@ -58,17 +58,17 @@ type PodItem struct {
 		IsPermaLink string `xml:"isPermaLink,attr"`
 	} `xml:"guid"`
 	PubDate   string `xml:"pubDate"`
-	Programid string `xml:"programid"`
-	Poddid    string `xml:"poddid"`
-	Summary   string `xml:"summary"`
-	Author    string `xml:"author"`
-	Keywords  string `xml:"keywords"`
+	Programid string `xml:"sr:programid"`
+	Poddid    string `xml:"sr:poddid"`
+	Summary   string `xml:"itunes:summary"`
+	Author    string `xml:"itunes:author"`
+	Keywords  string `xml:"itunes:keywords"`
 	Image     struct {
 		Text string `xml:",chardata"`
 		Href string `xml:"href,attr"`
-	} `xml:"image"`
-	Duration  string `xml:"duration"`
-	Subtitle  string `xml:"subtitle"`
+	} `xml:"itunes:image"`
+	Duration  string `xml:"itunes:duration"`
+	Subtitle  string `xml:"itunes:subtitle"`
 	Enclosure struct {
 		Text   string `xml:",chardata"`
 		URL    string `xml:"url,attr"`
