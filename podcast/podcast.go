@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/lindell/sr-uncensored/client"
+	"github.com/lindell/sr-restored/client"
 	"github.com/pkg/errors"
 )
 

@@ -6,7 +6,7 @@ import (
 	"strconv"
 
 	"github.com/NYTimes/gziphandler"
-	"github.com/lindell/sr-uncensored/podcast"
+	"github.com/lindell/sr-restored/podcast"
 )
 
 type Server struct {

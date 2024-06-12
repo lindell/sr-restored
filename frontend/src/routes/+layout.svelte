@@ -6,7 +6,7 @@
 	/>
 </svelte:head>
 
-<a href="https://github.com/lindell/sr-uncensored" class="ribbon"
+<a href="https://github.com/lindell/sr-restored" class="ribbon"
 	><img
 		decoding="async"
 		width="149"

@@ -6,9 +6,9 @@ import (
 	"net/url"
 	"os"
 
-	"github.com/lindell/sr-uncensored/httpserver"
-	"github.com/lindell/sr-uncensored/memcache"
-	"github.com/lindell/sr-uncensored/podcast"
+	"github.com/lindell/sr-restored/httpserver"
+	"github.com/lindell/sr-restored/memcache"
+	"github.com/lindell/sr-restored/podcast"
 )
 
 const addr = ":8080"

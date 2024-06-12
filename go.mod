@@ -1,4 +1,4 @@
-module github.com/lindell/sr-uncensored
+module github.com/lindell/sr-restored
 
 go 1.22.4
 
