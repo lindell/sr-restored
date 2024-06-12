@@ -1,5 +1,5 @@
 <svelte:head>
-	<title>Sveriges Radio uncensored</title>
+	<title>SR restored</title>
 	<meta
 		name="description"
 		content="Sveriges Radios podcasts med innehåll som bara släpps på SR-Play"

@@ -17,7 +17,7 @@
 	}
 </script>
 
-<h1>Sverige Radio Unsensored</h1>
+<h1>SR restored</h1>
 
 <div class="info">
 	<section>
@@ -51,6 +51,11 @@
 		innehåll exlusivt till deras tjänster. Detta är tråkigt, men med privata bolag så är det
 		förståeligt, och något som är lätt att bojkotta om man inte tycker om metoderna. Att public
 		service artificiellt börjar låsa innehåll är dock förbryllande.
+
+		<section>
+			Snälla Sveriges Radio, gör så detta projektet kan arkiveras genom att inte exlusivt börja
+			lansera innehåll på Sveriges Radio Play.
+		</section>
 	</section>
 </div>
 
@@ -76,6 +81,7 @@
 	h1 {
 		margin-top: min(10vw, 15vh);
 		text-align: center;
+		font-size: min(4rem, 15vw);
 	}
 
 	hr {

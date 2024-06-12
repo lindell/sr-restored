@@ -65,6 +65,7 @@
 		margin-top: -$thumbnail-offset;
 		overflow: hidden;
 		box-shadow: 1px 1px 5px #00000063;
+		max-width: 40vh;
 	}
 
 	.thumbnail img {
