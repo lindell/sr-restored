@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { PUBLIC_BASE_URL } from '$env/static/public';
+	import Button from './button.svelte';
 
 	import type { Program } from './types/program';
 
@@ -34,14 +35,12 @@
 		<code on:click={select}>{rssUrl}</code>
 
 		<div>
-			<button class="copy-button" on:click={copy}>Kopiera</button>
+			<Button on:click={copy}>Kopiera</Button>
 		</div>
 	</div>
 </div>
 
 <style lang="scss">
-	@use 'sass:color';
-
 	$border-radius: 2rem;
 	$thumbnail-offset: 2rem;
 
@@ -102,22 +101,5 @@
 
 	.link > * {
 		margin: 1rem;
-	}
-
-	.copy-button {
-		background-color: #18a972;
-		color: #fff;
-		padding: 1em 4em;
-		border: none;
-		border-radius: 99rem;
-		cursor: pointer;
-	}
-
-	.copy-button:hover {
-		background-color: color.adjust(#18a972, $lightness: -5%);
-	}
-
-	.copy-button:active {
-		background-color: color.adjust(#18a972, $lightness: -10%);
 	}
 </style>

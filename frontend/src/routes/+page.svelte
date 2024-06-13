@@ -1,20 +1,8 @@
 <script lang="ts">
-	import ProgramCard from '$lib/program-card.svelte';
+	import Search from '$lib/search.svelte';
 	import type { PageData } from './$types';
 
-	let searchQuery = '';
-
 	export let data: PageData;
-
-	$: results = data.programs.filter((program) =>
-		program.name.toLowerCase().includes(searchQuery.toLowerCase())
-	);
-
-	function onSearchFocus(e: FocusEvent) {
-		if (e.target instanceof Element) {
-			e.target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-		}
-	}
 </script>
 
 <h1>SR restored</h1>
@@ -63,21 +51,7 @@
 
 <hr />
 
-<div class="search">
-	<input
-		class="search-input"
-		type="text"
-		placeholder="Sök program"
-		bind:value={searchQuery}
-		on:focus={onSearchFocus}
-	/>
-</div>
-
-<div class="programs">
-	{#each results.slice(0, 12) as program (program.id)}
-		<ProgramCard {program} />
-	{/each}
-</div>
+<Search programs={data.programs} />
 
 <style lang="scss">
 	h1 {
@@ -91,35 +65,6 @@
 		background-color: #414141;
 		height: 0.125rem;
 		margin: 2rem;
-	}
-
-	.programs {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
-		align-items: center;
-	}
-
-	.search {
-		display: flex;
-		justify-content: center;
-	}
-
-	.search-input {
-		border: none;
-		outline: solid 1.5px #9e9e9e;
-		font-size: 1.5rem;
-		border-radius: 1.5rem;
-		background: none;
-		padding: 1.5rem;
-		color: #fff;
-		width: 30rem;
-		max-width: calc(100% - 3rem);
-		scroll-margin: 1em;
-	}
-
-	.search-input:focus {
-		outline: solid 2px #e3e3e3;
 	}
 
 	.info {
@@ -136,10 +81,5 @@
 
 	.info section {
 		margin: 1rem 0;
-	}
-
-	.qoute {
-		border-left: solid 0.125rem #b3b3b3;
-		padding: 0 0.5em;
 	}
 </style>
