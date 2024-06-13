@@ -10,7 +10,7 @@ Sveriges Radio började 2023 plocka bort innehåll från sina RSS flöden och an
 
 ### Ett litet manifest... typ
 
-Podcasts är en underbar öppen teknologi där det öppna gränssnittet (podcast RSS flöden) tillåter både producenterna av media, samt lyssningsverktygen, att vara oberoende av varandra ❤️ Bland de stängda platformarna som vi sett växa fram de senaste åren, så står podcasts fortfarande kvar som en av de få riktigt öppna teknologierna. Dessvärra har flera streamingplatformar börjat låsa innehåll exlusivt till deras tjänster. Detta är tråkigt, men med privata bolag så är det förståeligt, och något som är lätt att bojkotta om man inte tycker om metoderna. Att public service artificiellt börjar låsa innehåll är dock förbryllande.
+Podcasts är en underbar öppen teknologi där det öppna gränssnittet (podcast RSS flöden) tillåter både producenterna av media, samt lyssningsverktygen, att vara oberoende av varandra ❤️ Bland de stängda plattformarna som vi sett växa fram de senaste åren, så står podcasts fortfarande kvar som en av de få riktigt öppna teknologierna. Dessvärre har flera streamingplatformar börjat låsa innehåll exklusivt till deras tjänster. Detta är tråkigt, men med privata bolag så är det förståeligt, och något som är lätt att bojkotta om man inte tycker om metoderna. Att public service artificiellt börjar låsa innehåll är dock förbryllande. Snälla Sveriges Radio, gör så detta projektet kan arkiveras genom att inte exklusivt börja lansera innehåll på Sveriges Radio Play.
 
 Snälla Sveriges Radio, gör så detta projektet kan arkiveras genom att inte exlusivt börja lansera innehåll på Sveriges Radio Play.
 
