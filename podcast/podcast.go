@@ -41,7 +41,7 @@ func (p *Podcast) GetPodcast(ctx context.Context, id int) ([]byte, error) {
 
 	rss := baseRSS
 
-	title := fmt.Sprintf("%s (sr-uncensored)", program.Program.Name)
+	title := fmt.Sprintf("%s (sr-restored)", program.Program.Name)
 	selfURL := p.RSSUrl.JoinPath(program.Program.ID)
 
 	rss.Channel.Title = title
