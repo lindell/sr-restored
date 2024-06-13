@@ -5,7 +5,7 @@ primary_region = "arn"
   dockerfile = "Dockerfile"
 
 [env]
-  BASE_URL = "https://sr-uncensored.fly.dev"
+  BASE_URL = "https://sr-restored.se"
 
 [http_service]
   internal_port = 8080

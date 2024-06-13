@@ -16,6 +16,6 @@ Snälla Sveriges Radio, gör så detta projektet kan arkiveras genom att inte ex
 
 # Hur använder jag projektet:
 
-1. Hitta URLen till podcasten: `https://sr-uncensored.fly.dev`
+1. Hitta URLen till podcasten: `https://sr-restored.se`
 2. Skriv in URLen i valfri podcastspelare
 3. Nu kan du fortsätta lyssna på podden i din favoritspelare 🎉
