@@ -17,7 +17,7 @@ func init() {
 }
 
 func GetEpisodes(ctx context.Context, id int) (EpisodeListing, error) {
-	u := baseURL.JoinPath("episodes/index?audioquality=hi&size=1000")
+	u := baseURL.JoinPath("episodes/index?audioquality=hi&size=500")
 	q := u.Query()
 	q.Add("programid", fmt.Sprint(id))
 	u.RawQuery = q.Encode()
