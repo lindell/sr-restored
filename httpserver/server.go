@@ -4,6 +4,7 @@ import (
 	"log/slog"
 	"net/http"
 	"strconv"
+	"time"
 
 	"github.com/NYTimes/gziphandler"
 	"github.com/lindell/sr-restored/podcast"
@@ -15,7 +16,15 @@ type Server struct {
 
 func (s *Server) ListenAndServe(addr string) error {
 	handler := s.Handler()
-	return http.ListenAndServe(addr, handler)
+
+	server := &http.Server{
+		ReadTimeout:  5 * time.Second,
+		WriteTimeout: 15 * time.Second,
+		Handler:      handler,
+		Addr:         addr,
+	}
+
+	return server.ListenAndServe()
 }
 
 func (s *Server) Handler() http.Handler {

@@ -22,7 +22,7 @@ func GetEpisodes(ctx context.Context, id int) (EpisodeListing, error) {
 	q.Add("programid", fmt.Sprint(id))
 	u.RawQuery = q.Encode()
 
-	resp, err := http.Get(u.String())
+	resp, err := fetch(ctx, http.MethodGet, u.String())
 	if err != nil {
 		return EpisodeListing{}, err
 	}
@@ -38,7 +38,7 @@ func GetEpisodes(ctx context.Context, id int) (EpisodeListing, error) {
 func GetProgram(ctx context.Context, id int) (ProgramInfo, error) {
 	u := baseURL.JoinPath("programs", fmt.Sprint(id))
 
-	resp, err := http.Get(u.String())
+	resp, err := fetch(ctx, http.MethodGet, u.String())
 	if err != nil {
 		return ProgramInfo{}, err
 	}
@@ -53,4 +53,16 @@ func GetProgram(ctx context.Context, id int) (ProgramInfo, error) {
 	}
 
 	return programInfo, nil
+}
+
+func fetch(ctx context.Context, method string, url string) (*http.Response, error) {
+	req, err := http.NewRequest(method, url, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	req = req.WithContext(ctx)
+	res, err := http.DefaultClient.Do(req)
+
+	return res, err
 }
