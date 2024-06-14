@@ -3,4 +3,5 @@ export interface Program {
 	name: string;
 	description: string;
 	image: string;
+	url: string;
 }

@@ -18,7 +18,8 @@ export const load: PageLoad = async () => {
 			id: Number(program['@_id']),
 			name: program['@_name'],
 			description: program.description,
-			image: program.programimage
+			image: program.programimage,
+			url: program.programurl
 		}))
 		.sort((a, b) => (ranks.get(b.id) ?? 0) - (ranks.get(a.id) ?? 0));
 
@@ -40,4 +41,5 @@ interface XMLProgram {
 	'@_name': string;
 	description: string;
 	programimage: string;
+	programurl: string;
 }

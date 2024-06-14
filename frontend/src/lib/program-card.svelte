@@ -20,11 +20,19 @@
 
 <div class="program">
 	<div class="thumbnail">
-		<img src={program.image} alt={program.name} class="thumbnail-image" width="512" height="512" />
+		<a href={program.url}
+			><img
+				src={program.image}
+				alt={program.name}
+				class="thumbnail-image"
+				width="512"
+				height="512"
+			/></a
+		>
 	</div>
 
 	<div class="content">
-		<h2>{program.name}</h2>
+		<h2><a href={program.url}>{program.name}</a></h2>
 		<div class="description">
 			{program.description}
 		</div>
@@ -57,6 +65,10 @@
 		max-width: 100%;
 	}
 
+	.program:hover .thumbnail {
+		transform: scale(1.02);
+	}
+
 	.thumbnail {
 		width: 94%;
 		margin: 0 auto;
@@ -65,6 +77,7 @@
 		overflow: hidden;
 		box-shadow: 1px 1px 5px #00000063;
 		max-width: 40vh;
+		transition: transform 0.2s;
 	}
 
 	.thumbnail img {
@@ -76,9 +89,12 @@
 	h2 {
 		text-align: center;
 		font-weight: 400;
-		text-decoration: underline;
 		padding: 0.5em 0;
 		margin: 0;
+
+		a {
+			color: inherit;
+		}
 	}
 
 	.description {
