@@ -21,6 +21,8 @@ jobs:
           cache-dependency-path: "./frontend/package-lock.json"
       - run: npm ci
       - run: npm run build
+        env:
+          PUBLIC_BASE_URL: "https://sr-restored.example"
       - run: npm run lint
       - run: npx playwright install --with-deps
       - run: npm test
