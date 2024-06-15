@@ -26,3 +26,5 @@ jobs:
       - run: npm run lint
       - run: npx playwright install --with-deps
       - run: npm test
+        env:
+          PUBLIC_BASE_URL: "https://sr-restored.example"
