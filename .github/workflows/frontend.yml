@@ -4,13 +4,14 @@ on:
   push:
   pull_request:
 
+defaults:
+  run:
+    working-directory: ./frontend
+
 jobs:
   frontend:
     name: Build and test
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./frontend
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js
