@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"net/url"
 
+	"github.com/lindell/sr-restored/domain"
 	"github.com/pkg/errors"
 )
 
@@ -16,7 +17,21 @@ func init() {
 	baseURL, _ = url.Parse("https://api.sr.se/api/v2/")
 }
 
-func GetEpisodes(ctx context.Context, id int) (EpisodeListing, error) {
+func GetProgram(ctx context.Context, id int) (domain.Program, error) {
+	program, err := getProgram(ctx, id)
+	if err != nil {
+		return domain.Program{}, errors.WithMessage(err, "could not fetch program from api")
+	}
+
+	program.Episodes, err = getEpisodes(ctx, id)
+	if err != nil {
+		return domain.Program{}, errors.WithMessage(err, "could not fetch episodes from api")
+	}
+
+	return program, nil
+}
+
+func getEpisodes(ctx context.Context, id int) ([]domain.Episode, error) {
 	u := baseURL.JoinPath("episodes/index?audioquality=hi&size=500")
 	q := u.Query()
 	q.Add("programid", fmt.Sprint(id))
@@ -24,35 +39,39 @@ func GetEpisodes(ctx context.Context, id int) (EpisodeListing, error) {
 
 	resp, err := fetch(ctx, http.MethodGet, u.String())
 	if err != nil {
-		return EpisodeListing{}, err
+		return nil, err
 	}
 
 	var listing EpisodeListing
 	if err := xml.NewDecoder(resp.Body).Decode(&listing); err != nil {
-		return EpisodeListing{}, err
+		return nil, err
 	}
 
-	return listing, nil
+	episodes := make([]domain.Episode, 0, len(listing.Episodes.Episode))
+	for _, episode := range listing.Episodes.Episode {
+		episodes = append(episodes, convertEpisode(episode))
+	}
+	return episodes, nil
 }
 
-func GetProgram(ctx context.Context, id int) (ProgramInfo, error) {
+func getProgram(ctx context.Context, id int) (domain.Program, error) {
 	u := baseURL.JoinPath("programs", fmt.Sprint(id))
 
 	resp, err := fetch(ctx, http.MethodGet, u.String())
 	if err != nil {
-		return ProgramInfo{}, err
+		return domain.Program{}, err
 	}
 
 	if resp.StatusCode != http.StatusOK {
-		return ProgramInfo{}, fmt.Errorf("unexpected status code %d", resp.StatusCode)
+		return domain.Program{}, fmt.Errorf("unexpected status code %d", resp.StatusCode)
 	}
 
 	var programInfo ProgramInfo
 	if err := xml.NewDecoder(resp.Body).Decode(&programInfo); err != nil {
-		return ProgramInfo{}, errors.WithMessage(err, "could not decode XML")
+		return domain.Program{}, errors.WithMessage(err, "could not decode XML")
 	}
 
-	return programInfo, nil
+	return convertProgram(programInfo), nil
 }
 
 func fetch(ctx context.Context, method string, url string) (*http.Response, error) {
