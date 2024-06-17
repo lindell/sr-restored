@@ -15,7 +15,7 @@
 
 	<section>
 		<a href="https://sverigesradio.se/artikel/vart-uppdrag"
-			>Detta går helt emot SRs definierade uppdrag!</a
+			>Detta går helt emot Sveriges Radios definierade uppdrag!</a
 		>
 	</section>
 
