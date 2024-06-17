@@ -47,6 +47,14 @@
 			lansera innehåll på Sveriges Radio Play.
 		</section>
 	</section>
+
+	<section class="signing">
+		<a
+			href="https://www.skrivunder.com/sveriges_radio_bor_sluta_publicera_innehall_exlusivt_pa_egna_plattformar#form"
+			>Skriv under för att Sveriges Radio bör börja publicera allt innehåll för alla
+			podcastanvändare igen!</a
+		>
+	</section>
 </div>
 
 <hr />
@@ -81,5 +89,10 @@
 
 	.info section {
 		margin: 1rem 0;
+	}
+
+	.signing a {
+		color: #18a972;
+		font-weight: bold;
 	}
 </style>
