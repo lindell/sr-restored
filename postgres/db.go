@@ -133,7 +133,8 @@ func (db *DB) InsertEpisodes(ctx context.Context, episodes []domain.Episode) err
 		return errors.WithMessage(err, "could not build query")
 	}
 
-	_, err = db.db.Exec(ctx, sql, args...)
+	tag, err := db.db.Exec(ctx, sql, args...)
+	log(tag, "insert episodes")
 	return err
 }
 
@@ -197,6 +198,7 @@ func (db *DB) InsertProgram(ctx context.Context, program domain.Program) error {
 		return errors.WithMessage(err, "could not build query")
 	}
 
-	_, err = db.db.Exec(ctx, sql, args...)
+	tag, err := db.db.Exec(ctx, sql, args...)
+	log(tag, "insert program")
 	return err
 }
