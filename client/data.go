@@ -25,13 +25,13 @@ type EpisodeListing struct {
 
 type Episode struct {
 	Text        string `xml:",chardata"`
-	ID          string `xml:"id,attr"`
+	ID          int    `xml:"id,attr"`
 	Title       string `xml:"title"`
 	Description string `xml:"description"`
 	URL         string `xml:"url"`
 	Program     struct {
 		Text string `xml:",chardata"`
-		ID   string `xml:"id,attr"`
+		ID   int    `xml:"id,attr"`
 		Name string `xml:"name,attr"`
 	} `xml:"program"`
 	Audiopreference   string    `xml:"audiopreference"`
@@ -66,7 +66,7 @@ type Episode struct {
 		Publishdateutc  time.Time `xml:"publishdateutc"`
 		Title           string    `xml:"title"`
 		Description     string    `xml:"description"`
-		Filesizeinbytes string    `xml:"filesizeinbytes"`
+		Filesizeinbytes int       `xml:"filesizeinbytes"`
 		Program         struct {
 			Text string `xml:",chardata"`
 			ID   string `xml:"id,attr"`
@@ -115,7 +115,7 @@ type ProgramInfo struct {
 	Copyright string   `xml:"copyright"`
 	Program   struct {
 		Text            string `xml:",chardata"`
-		ID              string `xml:"id,attr"`
+		ID              int    `xml:"id,attr"`
 		Name            string `xml:"name,attr"`
 		Description     string `xml:"description"`
 		Programcategory struct {

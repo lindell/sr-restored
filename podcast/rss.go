@@ -58,7 +58,7 @@ type PodItem struct {
 		IsPermaLink string `xml:"isPermaLink,attr"`
 	} `xml:"guid"`
 	PubDate   string `xml:"pubDate"`
-	Programid string `xml:"sr:programid"`
+	Programid int    `xml:"sr:programid"`
 	Poddid    string `xml:"sr:poddid"`
 	Summary   string `xml:"itunes:summary"`
 	Author    string `xml:"itunes:author"`
@@ -72,7 +72,7 @@ type PodItem struct {
 	Enclosure struct {
 		Text   string `xml:",chardata"`
 		URL    string `xml:"url,attr"`
-		Length string `xml:"length,attr"`
+		Length int    `xml:"length,attr"`
 		Type   string `xml:"type,attr"`
 	} `xml:"enclosure"`
 }
