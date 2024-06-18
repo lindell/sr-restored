@@ -10,6 +10,7 @@ type Episode struct {
 	URL         string    `db:"url"`
 	PublishDate time.Time `db:"publish_date"`
 	ImageURL    string    `db:"image_url"`
+	ContentType string
 
 	FileURL             string `db:"file_url"`
 	FileDurationSeconds int    `db:"file_duration"`

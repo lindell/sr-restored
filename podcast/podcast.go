@@ -133,7 +133,7 @@ func convertEpisode(original domain.Episode) PodItem {
 
 	target.Enclosure.URL = original.FileURL
 	target.Enclosure.Length = original.FileBytes
-	target.Enclosure.Type = "audio/mpeg" // TODO: Determine based on
+	target.Enclosure.Type = original.ContentType
 
 	return target
 }

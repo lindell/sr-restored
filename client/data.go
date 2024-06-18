@@ -97,7 +97,7 @@ type Episode struct {
 				ID             string `xml:"id,attr"`
 				URL            string `xml:"url"`
 				Statkey        string `xml:"statkey"`
-				Duration       string `xml:"duration"`
+				Duration       int    `xml:"duration"`
 				Publishdateutc string `xml:"publishdateutc"`
 			} `xml:"broadcastfile"`
 		} `xml:"broadcastfiles"`

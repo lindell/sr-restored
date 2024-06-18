@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/xml"
 	"fmt"
+	"log/slog"
 	"net/http"
 	"net/url"
 
@@ -49,7 +50,13 @@ func getEpisodes(ctx context.Context, id int) ([]domain.Episode, error) {
 
 	episodes := make([]domain.Episode, 0, len(listing.Episodes.Episode))
 	for _, episode := range listing.Episodes.Episode {
-		episodes = append(episodes, convertEpisode(episode))
+		if converted, err := convertEpisode(episode); err == nil {
+			episodes = append(episodes, converted)
+		} else {
+			slog.Error("could not convert episode",
+				"error", err.Error(),
+			)
+		}
 	}
 	return episodes, nil
 }
