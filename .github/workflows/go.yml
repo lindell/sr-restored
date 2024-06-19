@@ -1,0 +1,23 @@
+name: Go testing and building
+on: [push, pull_request]
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@v4.1.1
+
+      - name: Set up Go
+        uses: actions/setup-go@v4.1.0
+        with:
+          go-version-file: "go.mod"
+
+      - name: Test
+        run: go test ./... -v
+
+      - name: Build
+        run: go build main.go
