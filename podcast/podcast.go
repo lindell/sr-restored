@@ -9,8 +9,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/lindell/sr-restored/client"
 	"github.com/lindell/sr-restored/domain"
+	"github.com/lindell/sr-restored/scraper"
 	"github.com/pkg/errors"
 )
 
@@ -38,15 +38,19 @@ func (p *Podcast) GetPodcast(ctx context.Context, id int) ([]byte, error) {
 		return rss, nil
 	}
 
-	program, err := client.GetProgram(ctx, id)
+	program, err := p.Database.GetProgram(ctx, id)
 	if err != nil {
-		// Try to fetch from DB as a backup
-		var dbErr error
-		program, dbErr = p.Database.GetProgram(ctx, id)
-		if dbErr != nil {
-			return nil, errors.WithMessage(err, dbErr.Error())
-		}
+		return nil, err
 	}
+
+	// TODO: Loop until all an episode already in the DB is found
+	scraper := &scraper.Scraper{}
+	scrapedEpisodes, err := scraper.FindEpisodes(id)
+	if err != nil {
+		return nil, errors.WithMessage(err, "could not scrape episodes")
+	}
+
+	program.Episodes = mergeEpisodes(program.Episodes, scrapedEpisodes)
 
 	rss := baseRSS
 
