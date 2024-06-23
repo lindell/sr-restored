@@ -8,6 +8,7 @@ import (
 
 	"github.com/NYTimes/gziphandler"
 	"github.com/lindell/sr-restored/podcast"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 type Server struct {
@@ -28,12 +29,17 @@ func (s *Server) ListenAndServe(addr string) error {
 }
 
 func (s *Server) Handler() http.Handler {
-	mux := http.NewServeMux()
-	mux.HandleFunc("/rss/{id}", s.getRSS)
+	rootMux := http.NewServeMux()
 
-	mux.Handle("/", gziphandler.GzipHandler(http.FileServer(http.Dir("./static"))))
+	rootMux.Handle("/metrics", promhttp.Handler())
 
-	return loggingMiddleware(slog.Default())(mux)
+	mainMux := http.NewServeMux()
+	rootMux.Handle("/", loggingMiddleware(slog.Default())(mainMux))
+
+	mainMux.HandleFunc("/rss/{id}", s.getRSS)
+	mainMux.Handle("/", gziphandler.GzipHandler(http.FileServer(http.Dir("./static"))))
+
+	return rootMux
 }
 
 func (s *Server) getRSS(w http.ResponseWriter, r *http.Request) {

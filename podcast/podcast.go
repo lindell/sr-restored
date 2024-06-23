@@ -12,6 +12,8 @@ import (
 	"github.com/lindell/sr-restored/client"
 	"github.com/lindell/sr-restored/domain"
 	"github.com/pkg/errors"
+	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promauto"
 )
 
 type Podcast struct {
@@ -33,8 +35,26 @@ type Database interface {
 	InsertProgram(ctx context.Context, program domain.Program) error
 }
 
+var (
+	programGets = promauto.NewHistogramVec(prometheus.HistogramOpts{
+		Name:    "rss_get_seconds",
+		Help:    "Time to get an RSS feed",
+		Buckets: []float64{0.001, 0.1, 1, 10},
+	}, []string{"program_id", "cached"})
+)
+
 func (p *Podcast) GetPodcast(ctx context.Context, id int) ([]byte, error) {
+	before := time.Now()
+	cached := false
+	defer func() {
+		programGets.With(prometheus.Labels{
+			"program_id": fmt.Sprint(id),
+			"cached":     fmt.Sprint(cached),
+		}).Observe(float64(time.Since(before) / time.Second))
+	}()
+
 	if rss, ok := p.Cache.GetRSS(id); ok {
+		cached = true
 		return rss, nil
 	}
 
