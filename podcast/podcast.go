@@ -50,7 +50,7 @@ func (p *Podcast) GetPodcast(ctx context.Context, id int) ([]byte, error) {
 		programGets.With(prometheus.Labels{
 			"program_id": fmt.Sprint(id),
 			"cached":     fmt.Sprint(cached),
-		}).Observe(float64(time.Since(before) / time.Second))
+		}).Observe(time.Since(before).Seconds())
 	}()
 
 	if rss, ok := p.Cache.GetRSS(id); ok {
