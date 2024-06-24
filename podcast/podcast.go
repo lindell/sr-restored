@@ -68,6 +68,31 @@ func (p *Podcast) GetPodcast(ctx context.Context, id int) ([]byte, error) {
 		}
 	}
 
+	rss := p.convertToPodRSS(program)
+
+	raw, err := xml.Marshal(rss)
+	if err != nil {
+		return nil, err
+	}
+
+	go func() {
+		p.Cache.StoreRSS(id, raw)
+
+		err := p.Database.InsertEpisodes(context.Background(), program.Episodes)
+		if err != nil {
+			slog.Error(err.Error())
+		}
+
+		err = p.Database.InsertProgram(context.Background(), program)
+		if err != nil {
+			slog.Error(err.Error())
+		}
+	}()
+
+	return raw, nil
+}
+
+func (p *Podcast) convertToPodRSS(program domain.Program) RSS {
 	rss := baseRSS
 
 	title := fmt.Sprintf("%s — SR-restored", program.Name)
@@ -102,26 +127,7 @@ func (p *Podcast) GetPodcast(ctx context.Context, id int) ([]byte, error) {
 		rss.Channel.Item = append(rss.Channel.Item, convertEpisode(episode))
 	}
 
-	raw, err := xml.Marshal(rss)
-	if err != nil {
-		return nil, err
-	}
-
-	go func() {
-		p.Cache.StoreRSS(id, raw)
-
-		err := p.Database.InsertEpisodes(context.Background(), program.Episodes)
-		if err != nil {
-			slog.Error(err.Error())
-		}
-
-		err = p.Database.InsertProgram(context.Background(), program)
-		if err != nil {
-			slog.Error(err.Error())
-		}
-	}()
-
-	return raw, nil
+	return rss
 }
 
 func convertEpisode(original domain.Episode) PodItem {
