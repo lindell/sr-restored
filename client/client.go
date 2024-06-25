@@ -7,6 +7,7 @@ import (
 	"log/slog"
 	"net/http"
 	"net/url"
+	"time"
 
 	"github.com/lindell/sr-restored/domain"
 	"github.com/pkg/errors"
@@ -19,6 +20,9 @@ func init() {
 }
 
 func GetProgram(ctx context.Context, id int) (domain.Program, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+
 	program, err := getProgram(ctx, id)
 	if err != nil {
 		return domain.Program{}, errors.WithMessage(err, "could not fetch program from api")

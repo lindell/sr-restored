@@ -20,7 +20,7 @@ func (s *Server) ListenAndServe(addr string) error {
 
 	server := &http.Server{
 		ReadTimeout:  5 * time.Second,
-		WriteTimeout: 15 * time.Second,
+		WriteTimeout: 60 * time.Second,
 		Handler:      handler,
 		Addr:         addr,
 	}
