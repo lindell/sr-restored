@@ -36,21 +36,28 @@ type Database interface {
 }
 
 var (
-	programGets = promauto.NewHistogramVec(prometheus.HistogramOpts{
+	rssGetSecondsMetric = promauto.NewHistogramVec(prometheus.HistogramOpts{
 		Name:    "rss_get_seconds",
 		Help:    "Time to get an RSS feed",
-		Buckets: []float64{0.001, 0.1, 1, 10},
-	}, []string{"program_id", "cached"})
+		Buckets: []float64{0.1, 1, 5, 10},
+	}, []string{"cached"})
+	rssGetTotalMetric = promauto.NewCounterVec(prometheus.CounterOpts{
+		Name: "rss_get_total",
+		Help: "Number of fetched RSS feeds",
+	}, []string{"program_id"})
 )
 
 func (p *Podcast) GetPodcast(ctx context.Context, id int) ([]byte, error) {
 	before := time.Now()
 	cached := false
 	defer func() {
-		programGets.With(prometheus.Labels{
-			"program_id": fmt.Sprint(id),
-			"cached":     fmt.Sprint(cached),
+		rssGetSecondsMetric.With(prometheus.Labels{
+			"cached": fmt.Sprint(cached),
 		}).Observe(time.Since(before).Seconds())
+
+		rssGetTotalMetric.With(prometheus.Labels{
+			"program_id": fmt.Sprint(id),
+		}).Inc()
 	}()
 
 	if rss, ok := p.Cache.GetRSS(id); ok {
