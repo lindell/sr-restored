@@ -6,14 +6,12 @@ import (
 	"fmt"
 	"log/slog"
 	"net/url"
-	"strings"
 	"time"
 
 	"github.com/lindell/sr-restored/client"
 	"github.com/lindell/sr-restored/domain"
 	"github.com/pkg/errors"
 	"github.com/prometheus/client_golang/prometheus"
-	"github.com/prometheus/client_golang/prometheus/promauto"
 )
 
 type Podcast struct {
@@ -34,18 +32,6 @@ type Database interface {
 	GetProgram(ctx context.Context, programID int) (domain.Program, error)
 	InsertProgram(ctx context.Context, program domain.Program) error
 }
-
-var (
-	rssGetSecondsMetric = promauto.NewHistogramVec(prometheus.HistogramOpts{
-		Name:    "rss_get_seconds",
-		Help:    "Time to get an RSS feed",
-		Buckets: []float64{0.1, 1, 5, 10, 20, 30},
-	}, []string{"cached"})
-	rssGetTotalMetric = promauto.NewCounterVec(prometheus.CounterOpts{
-		Name: "rss_get_total",
-		Help: "Number of fetched RSS feeds",
-	}, []string{"program_id"})
-)
 
 func (p *Podcast) GetPodcast(ctx context.Context, id int) ([]byte, error) {
 	before := time.Now()
@@ -97,88 +83,4 @@ func (p *Podcast) GetPodcast(ctx context.Context, id int) ([]byte, error) {
 	}()
 
 	return raw, nil
-}
-
-func (p *Podcast) convertToPodRSS(program domain.Program) RSS {
-	rss := baseRSS
-
-	title := fmt.Sprintf("%s — SR-restored", program.Name)
-	selfURL := p.RSSUrl.JoinPath(fmt.Sprint(program.ID))
-
-	rss.Channel.Title = title
-
-	rss.Channel.ItunesNewFeedURL = selfURL.String()
-	rss.Channel.AtomLink.Href = selfURL.String()
-	rss.Channel.AtomLink.Rel = "self"
-	rss.Channel.AtomLink.Type = "application/rss+xml"
-	rss.Channel.LastBuildDate = time.Now().Format(time.RFC1123) // TODO
-
-	rss.Channel.Image.URL = program.ImageURL
-	rss.Channel.Image.Title = title
-	rss.Channel.Image.Link = program.URL
-
-	rss.Channel.ItunesImage = program.ImageURL
-	rss.Channel.ItunesSummary = program.Description
-	rss.Channel.ItunesAuthor = "Sveriges Radio"
-	// rss.Channel.ItunesCategory
-
-	rss.Channel.ItunesOwner.Name = title
-	rss.Channel.ItunesOwner.Email = program.Email
-
-	rss.Channel.Link = program.URL
-	rss.Channel.Description = program.Description
-	rss.Channel.Language = "sv"
-	rss.Channel.Copyright = program.Copyright
-
-	for _, episode := range program.Episodes {
-		rss.Channel.Item = append(rss.Channel.Item, convertEpisode(episode))
-	}
-
-	return rss
-}
-
-func convertEpisode(original domain.Episode) PodItem {
-	var target PodItem
-	target.Title = original.Title
-	target.Description = original.Description
-
-	// URL and GUID persistence
-	target.Link = original.URL
-	target.Guid.Text = fmt.Sprintf("rss:sr.se/pod/eid/%d", original.ID)
-	target.Guid.IsPermaLink = "false"
-
-	target.PubDate = original.PublishDate.Format(time.RFC1123)
-
-	target.Programid = original.ID
-
-	target.Summary = original.Description
-
-	target.Author = "Sveriges Radio"
-
-	target.Keywords = strings.ReplaceAll(original.Title, " ", ",")
-
-	target.Image.Href = original.ImageURL
-
-	target.Duration = fmtDuration(
-		time.Second * time.Duration(original.FileDurationSeconds),
-	)
-	target.Subtitle = original.Description
-
-	target.Enclosure.URL = original.FileURL
-	target.Enclosure.Length = original.FileBytes
-	target.Enclosure.Type = original.ContentType
-
-	return target
-}
-
-func fmtDuration(d time.Duration) string {
-	d = d.Round(time.Second)
-
-	h := d / time.Hour
-	d -= h * time.Hour
-	m := d / time.Minute
-	d -= m * time.Minute
-	s := d / time.Second
-
-	return fmt.Sprintf("%02d:%02d:%02d", h, m, s)
 }
