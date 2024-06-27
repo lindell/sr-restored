@@ -2,6 +2,7 @@ package httpserver
 
 import (
 	"context"
+	"errors"
 	"log/slog"
 	"net/http"
 	"strconv"
@@ -64,12 +65,29 @@ func (s *Server) getRSS(w http.ResponseWriter, r *http.Request) {
 
 	b, err := s.Podcast.GetPodcast(r.Context(), int(id))
 	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		_, _ = w.Write([]byte(err.Error()))
+		handleError(w, r, err)
 		return
 	}
 
 	w.Header().Add("Content-Type", "application/xml")
 	w.WriteHeader(http.StatusOK)
 	_, _ = w.Write(b)
+}
+
+func handleError(w http.ResponseWriter, _ *http.Request, err error) {
+	w.Header().Add("Content-Type", "text/plain")
+	w.WriteHeader(errorStatusCode(err))
+	_, _ = w.Write([]byte(err.Error()))
+}
+
+func errorStatusCode(err error) int {
+	var statusErr interface {
+		HTTPStatusCode() int
+	}
+
+	if ok := errors.As(err, &statusErr); ok {
+		return statusErr.HTTPStatusCode()
+	}
+
+	return http.StatusBadRequest
 }

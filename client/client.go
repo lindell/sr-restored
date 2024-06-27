@@ -94,7 +94,10 @@ func fetch(ctx context.Context, method string, url string) (*http.Response, erro
 	req = req.WithContext(ctx)
 	res, err := http.DefaultClient.Do(req)
 	if res.StatusCode >= 400 {
-		return res, fmt.Errorf("unexpected status code %d", res.StatusCode)
+		return res, statusCodeError{
+			msg:  fmt.Sprintf("unexpected status code %d", res.StatusCode),
+			code: res.StatusCode,
+		}
 	}
 
 	return res, err
