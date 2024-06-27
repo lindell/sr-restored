@@ -1,9 +1,13 @@
 package run
 
 import (
+	"context"
 	"fmt"
 	"log/slog"
 	"net/url"
+	"os"
+	"os/signal"
+	"syscall"
 
 	"github.com/lindell/sr-restored/httpserver"
 	"github.com/lindell/sr-restored/memcache"
@@ -11,15 +15,16 @@ import (
 	"github.com/lindell/sr-restored/postgres"
 )
 
-const addr = ":8080"
-
 type Config struct {
+	// Which address to listen on (HTTP)
+	ServerAddr string
+
 	// The URL in which the service is hosted
 	BaseURL     string
 	PostgresURL string
 }
 
-func Run(config Config) error {
+func Run(ctx context.Context, config Config) error {
 	baseURL, err := url.Parse(config.BaseURL)
 	if err != nil {
 		return err
@@ -44,11 +49,25 @@ func Run(config Config) error {
 		Podcast: podcast,
 	}
 
-	slog.Info(fmt.Sprintf("listening on %s", addr))
-	err = httpServer.ListenAndServe(addr)
-	if err != nil {
-		return err
-	}
+	slog.Info(fmt.Sprintf("listening on %s", config.ServerAddr))
+	stopHTTPServer := httpServer.ListenAndServe(ctx, config.ServerAddr)
+
+	waitForStop(ctx)
+
+	stopHTTPServer(ctx)
 
 	return nil
+}
+
+func waitForStop(ctx context.Context) {
+	sigc := make(chan os.Signal, 1)
+	signal.Notify(sigc,
+		syscall.SIGINT,
+		syscall.SIGTERM,
+		syscall.SIGQUIT)
+
+	select {
+	case <-sigc:
+	case <-ctx.Done():
+	}
 }

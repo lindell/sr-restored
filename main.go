@@ -1,15 +1,15 @@
 package main
 
 import (
+	"context"
 	"os"
 
 	"github.com/lindell/sr-restored/run"
 )
 
-const addr = ":8080"
-
 func main() {
-	err := run.Run(run.Config{
+	err := run.Run(context.Background(), run.Config{
+		ServerAddr:  ":8080",
 		BaseURL:     getEnv("BASE_URL", "http://localhost:8080"),
 		PostgresURL: getEnv("DATABASE_URL", ""),
 	})
