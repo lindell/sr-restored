@@ -1,6 +1,7 @@
 package httpserver
 
 import (
+	"context"
 	"log/slog"
 	"net/http"
 	"strconv"
@@ -15,7 +16,7 @@ type Server struct {
 	Podcast *podcast.Podcast
 }
 
-func (s *Server) ListenAndServe(addr string) error {
+func (s *Server) ListenAndServe(ctx context.Context, addr string) (stop func(context.Context) error) {
 	handler := s.Handler()
 
 	server := &http.Server{
@@ -25,7 +26,18 @@ func (s *Server) ListenAndServe(addr string) error {
 		Addr:         addr,
 	}
 
-	return server.ListenAndServe()
+	go func() {
+		if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			slog.Error("http server closed",
+				"error", err,
+			)
+		}
+	}()
+
+	return func(ctx context.Context) error {
+		slog.Info("shutting down http server")
+		return server.Shutdown(ctx)
+	}
 }
 
 func (s *Server) Handler() http.Handler {
