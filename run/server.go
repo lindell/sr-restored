@@ -8,6 +8,7 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
+	"time"
 
 	"github.com/lindell/sr-restored/httpserver"
 	"github.com/lindell/sr-restored/memcache"
@@ -22,9 +23,15 @@ type Config struct {
 	// The URL in which the service is hosted
 	BaseURL     string
 	PostgresURL string
+
+	Now func() time.Time
 }
 
 func Run(ctx context.Context, config Config) error {
+	if config.Now == nil {
+		config.Now = time.Now
+	}
+
 	baseURL, err := url.Parse(config.BaseURL)
 	if err != nil {
 		return err
@@ -43,6 +50,8 @@ func Run(ctx context.Context, config Config) error {
 		Cache:    cache,
 		Database: postgresDB,
 		RSSUrl:   baseURL.JoinPath("rss"),
+
+		Now: config.Now,
 	}
 
 	httpServer := httpserver.Server{

@@ -19,6 +19,8 @@ type Podcast struct {
 	Database Database
 
 	RSSUrl *url.URL
+
+	Now func() time.Time
 }
 
 type Cache interface {
@@ -63,7 +65,7 @@ func (p *Podcast) GetPodcast(ctx context.Context, id int) ([]byte, error) {
 
 	rss := p.convertToPodRSS(program)
 
-	raw, err := xml.Marshal(rss)
+	raw, err := xml.MarshalIndent(rss, "  ", "    ")
 	if err != nil {
 		return nil, err
 	}

@@ -20,7 +20,7 @@ func (p *Podcast) convertToPodRSS(program domain.Program) RSS {
 	rss.Channel.AtomLink.Href = selfURL.String()
 	rss.Channel.AtomLink.Rel = "self"
 	rss.Channel.AtomLink.Type = "application/rss+xml"
-	rss.Channel.LastBuildDate = time.Now().Format(time.RFC1123) // TODO
+	rss.Channel.LastBuildDate = p.Now().Format(time.RFC1123)
 
 	rss.Channel.Image.URL = program.ImageURL
 	rss.Channel.Image.Title = title
