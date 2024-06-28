@@ -13,6 +13,8 @@ import (
 	"github.com/pkg/errors"
 )
 
+var DefaultClient = http.DefaultClient
+
 var baseURL *url.URL
 
 func init() {
@@ -37,8 +39,10 @@ func GetProgram(ctx context.Context, id int) (domain.Program, error) {
 }
 
 func getEpisodes(ctx context.Context, id int) ([]domain.Episode, error) {
-	u := baseURL.JoinPath("episodes/index?audioquality=hi&size=500")
+	u := baseURL.JoinPath("episodes/index")
 	q := u.Query()
+	q.Add("audioquality", "hi")
+	q.Add("size", fmt.Sprint(500))
 	q.Add("programid", fmt.Sprint(id))
 	u.RawQuery = q.Encode()
 
@@ -92,7 +96,7 @@ func fetch(ctx context.Context, method string, url string) (*http.Response, erro
 	}
 
 	req = req.WithContext(ctx)
-	res, err := http.DefaultClient.Do(req)
+	res, err := DefaultClient.Do(req)
 	if res.StatusCode >= 400 {
 		return res, statusCodeError{
 			msg:  fmt.Sprintf("unexpected status code %d", res.StatusCode),

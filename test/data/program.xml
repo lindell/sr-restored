@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sr>
+  <copyright>Copyright Sveriges Radio 2024. All rights reserved.</copyright>
+  <program id="2519" name="P3 Dokumentär">
+    <description>Sveriges största podd om vår tids mest spännande och viktiga händelser.</description>
+    <programcategory id="82" name="Dokumentär" />
+    <broadcastinfo>Varannan torsdag</broadcastinfo>
+    <email>p3dokumentar@sverigesradio.se</email>
+    <phone />
+    <programurl>https://sverigesradio.se/default.aspx?programid=2519</programurl>
+    <programslug>p3dokumentar</programslug>
+    <programimage>https://static-cdn.sr.se/images/2519/53582c25-5165-432c-a16f-6b51b964d269.jpg?preset=api-default-square</programimage>
+    <programimagetemplate>https://static-cdn.sr.se/images/2519/53582c25-5165-432c-a16f-6b51b964d269.jpg</programimagetemplate>
+    <programimagewide>https://static-cdn.sr.se/images/2519/abde6242-2e44-4519-a4b0-d23d7279f52c.jpg?preset=api-default-rectangle</programimagewide>
+    <programimagetemplatewide>https://static-cdn.sr.se/images/2519/abde6242-2e44-4519-a4b0-d23d7279f52c.jpg</programimagetemplatewide>
+    <socialimage>https://static-cdn.sr.se/images/2519/53582c25-5165-432c-a16f-6b51b964d269.jpg?preset=api-default-square</socialimage>
+    <socialimagetemplate>https://static-cdn.sr.se/images/2519/53582c25-5165-432c-a16f-6b51b964d269.jpg</socialimagetemplate>
+    <socialmediaplatforms>
+      <socialmediaplatform platform="Facebook" platformurl="https://www.facebook.com/pages/P3-Dokument%C3%A4r/106256266063544" />
+      <socialmediaplatform platform="Twitter" platformurl="https://twitter.com/p3dokumentar/" />
+      <socialmediaplatform platform="Instagram" platformurl="https://instagram.com/p3dokumentar/" />
+    </socialmediaplatforms>
+    <channel id="164" name="P3" />
+    <archived>false</archived>
+    <hasondemand>true</hasondemand>
+    <haspod>true</haspod>
+    <responsibleeditor>Caroline Lagergren/Caroline Kernen</responsibleeditor>
+  </program>
+</sr>
