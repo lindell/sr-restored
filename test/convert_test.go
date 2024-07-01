@@ -23,7 +23,7 @@ func TestConvert(t *testing.T) {
 	mockTransport.AddFileRespons("/api/v2/episodes/index", "data/episodes.xml")
 
 	ctx, cancel := context.WithCancel(context.Background())
-	defer func() { cancel() }()
+	defer cancel()
 
 	u := setup(ctx, t)
 

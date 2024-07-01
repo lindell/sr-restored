@@ -14,7 +14,7 @@ import (
 // TestLive requests a real RSS feed. This test might fail if Sveriges Radios API is down
 func TestLive(t *testing.T) {
 	ctx, cancel := context.WithCancel(context.Background())
-	defer func() { cancel() }()
+	defer cancel()
 
 	u := setup(ctx, t)
 
