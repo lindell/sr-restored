@@ -2,6 +2,7 @@ package httpserver
 
 import (
 	"context"
+	"fmt"
 	"log/slog"
 	"net/http"
 	"strconv"
@@ -27,6 +28,7 @@ func (s *Server) ListenAndServe(ctx context.Context, addr string) (stop func(con
 	}
 
 	go func() {
+		slog.Info(fmt.Sprintf("listening on %s", addr))
 		if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 			slog.Error("http server closed",
 				"error", err,

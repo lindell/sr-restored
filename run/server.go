@@ -2,8 +2,6 @@ package run
 
 import (
 	"context"
-	"fmt"
-	"log/slog"
 	"net/url"
 	"os"
 	"os/signal"
@@ -58,7 +56,6 @@ func Run(ctx context.Context, config Config) error {
 		Podcast: podcast,
 	}
 
-	slog.Info(fmt.Sprintf("listening on %s", config.ServerAddr))
 	stopHTTPServer := httpServer.ListenAndServe(ctx, config.ServerAddr)
 
 	waitForStop(ctx)

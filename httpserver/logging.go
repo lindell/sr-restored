@@ -53,6 +53,8 @@ func loggingMiddleware(logger *slog.Logger) func(http.Handler) http.Handler {
 				"status", wrapped.status,
 				"method", r.Method,
 				"path", r.URL.EscapedPath(),
+				"user-agent", r.Header.Get("User-Agent"),
+				"origin", r.Header.Get("Origin"),
 				"duration", time.Since(start),
 			)
 		}
