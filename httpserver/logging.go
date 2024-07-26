@@ -54,7 +54,7 @@ func loggingMiddleware(logger *slog.Logger) func(http.Handler) http.Handler {
 				"method", r.Method,
 				"path", r.URL.EscapedPath(),
 				"user-agent", r.Header.Get("User-Agent"),
-				"origin", r.Header.Get("Origin"),
+				"headers", r.Header,
 				"duration", time.Since(start),
 			)
 		}
