@@ -4,6 +4,7 @@ import (
 	"log/slog"
 	"net/http"
 	"runtime/debug"
+	"strings"
 	"time"
 )
 
@@ -54,11 +55,22 @@ func loggingMiddleware(logger *slog.Logger) func(http.Handler) http.Handler {
 				"method", r.Method,
 				"path", r.URL.EscapedPath(),
 				"user-agent", r.Header.Get("User-Agent"),
-				"headers", r.Header,
+				"headers", flattenHeaders(r.Header),
 				"duration", time.Since(start),
 			)
 		}
 
 		return http.HandlerFunc(fn)
 	}
+}
+
+// flattenHeaders takes a headers map and converts it to only one value per header name
+func flattenHeaders(headers map[string][]string) map[string]string {
+	logHeaders := map[string]string{}
+
+	for name, values := range headers {
+		logHeaders[name] = strings.Join(values, " ||| ")
+	}
+
+	return logHeaders
 }
