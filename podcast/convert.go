@@ -52,7 +52,7 @@ func convertEpisode(original domain.Episode) PodItem {
 	description := fmt.Sprintf(`<p>%s</p>
 		<hr>
 		<p>
-			Innehållet i denna podcast kommer från Sveriges Radio. Podcastflödet har tillgängliggjorts av <a href="https://sr-restored.se">SR-restored</a> då Sveriges Radio ej publicerar alla poddar deras RSS flöden. Läs mer på <a href="https://sr-restored.se">se-restored.se</a>.
+			Innehållet i denna podcast kommer från Sveriges Radio. Podcastflödet har tillgängliggjorts av <a href="https://sr-restored.se">SR-restored</a> då Sveriges Radio ej publicerar alla poddar deras RSS flöden. Läs mer på <a href="https://sr-restored.se">sr-restored.se</a>.
 		</p>
 	`, original.Description)
 
