@@ -48,8 +48,16 @@ func (p *Podcast) convertToPodRSS(program domain.Program) RSS {
 
 func convertEpisode(original domain.Episode) PodItem {
 	var target PodItem
+
+	description := fmt.Sprintf(`<p>%s</p>
+		<hr>
+		<p>
+			Innehållet i denna podcast kommer från Sveriges Radio. Podcastflödet har tillgängliggjorts av <a href="https://sr-restored.se">SR-restored</a> då Sveriges Radio ej publicerar alla poddar deras RSS flöden. Läs mer på <a href="https://sr-restored.se">se-restored.se</a>.
+		</p>
+	`, original.Description)
+
 	target.Title = original.Title
-	target.Description = original.Description
+	target.Description = description
 
 	// URL and GUID persistence
 	target.Link = original.URL
@@ -60,7 +68,7 @@ func convertEpisode(original domain.Episode) PodItem {
 
 	target.Programid = original.ID
 
-	target.Summary = original.Description
+	target.Summary = description
 
 	target.Author = "Sveriges Radio"
 
