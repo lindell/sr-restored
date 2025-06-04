@@ -9,5 +9,7 @@ type Program struct {
 	URL         string `db:"url"`
 	ImageURL    string `db:"image_url"`
 
+	Hash []byte
+
 	Episodes []Episode
 }
