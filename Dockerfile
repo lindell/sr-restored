@@ -10,7 +10,7 @@ COPY go.* ./
 RUN go mod download
 
 COPY . ./
-RUN CGO_ENABLED=0 go build -v -o main
+RUN CGO_ENABLED=0 GOGC=40 go build -v -o main
 
 FROM node:20-alpine AS sveltebuilder
 
