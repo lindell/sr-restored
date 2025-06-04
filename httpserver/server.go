@@ -1,7 +1,9 @@
 package httpserver
 
 import (
+	"bytes"
 	"context"
+	"encoding/base64"
 	"fmt"
 	"log/slog"
 	"net/http"
@@ -64,13 +66,50 @@ func (s *Server) getRSS(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	b, err := s.Podcast.GetPodcast(r.Context(), int(id))
+	sentHash := getIfNoneMatchHash(r)
+	if sentHash != nil && s.Podcast.IsNewestVersion(r.Context(), int(id), sentHash) {
+		responseWithCacheHit(w, sentHash)
+		return
+	}
+
+	b, hash, err := s.Podcast.GetPodcast(r.Context(), int(id))
 	if err != nil {
 		handleError(w, r, err)
 		return
 	}
 
 	w.Header().Add("Content-Type", "application/xml")
+	if len(hash) > 0 {
+		if bytes.Equal(hash, sentHash) {
+			responseWithCacheHit(w, hash)
+			return
+		}
+		w.Header().Add("Etag", fmt.Sprintf("\"%s\"", base64.StdEncoding.EncodeToString(hash)))
+	}
 	w.WriteHeader(http.StatusOK)
 	_, _ = w.Write(b)
+}
+
+func responseWithCacheHit(w http.ResponseWriter, hash []byte) {
+	w.Header().Add("Etag", fmt.Sprintf("\"%s\"", base64.StdEncoding.EncodeToString(hash)))
+	w.WriteHeader(http.StatusNotModified)
+}
+
+func getIfNoneMatchHash(r *http.Request) []byte {
+	etag := r.Header.Get("If-None-Match")
+	if etag == "" {
+		return nil
+	}
+
+	b64hash, err := strconv.Unquote(etag)
+	if err != nil {
+		return nil
+	}
+
+	hash, err := base64.StdEncoding.DecodeString(b64hash)
+	if err != nil {
+		return nil
+	}
+
+	return hash
 }

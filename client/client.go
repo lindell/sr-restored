@@ -30,7 +30,7 @@ func GetProgram(ctx context.Context, id int) (domain.Program, error) {
 		return domain.Program{}, errors.WithMessage(err, "could not fetch program from api")
 	}
 
-	program.Episodes, err = getEpisodes(ctx, id)
+	program.Episodes, program.Hash, err = getEpisodes(ctx, id)
 	if err != nil {
 		return domain.Program{}, errors.WithMessage(err, "could not fetch episodes from api")
 	}
@@ -38,7 +38,7 @@ func GetProgram(ctx context.Context, id int) (domain.Program, error) {
 	return program, nil
 }
 
-func getEpisodes(ctx context.Context, id int) ([]domain.Episode, error) {
+func getEpisodes(ctx context.Context, id int) ([]domain.Episode, []byte, error) {
 	u := baseURL.JoinPath("episodes/index")
 	q := u.Query()
 	q.Add("audioquality", "hi")
@@ -48,12 +48,12 @@ func getEpisodes(ctx context.Context, id int) ([]domain.Episode, error) {
 
 	resp, err := fetch(ctx, http.MethodGet, u.String())
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
 	var listing EpisodeListing
 	if err := xml.NewDecoder(resp.Body).Decode(&listing); err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
 	episodes := make([]domain.Episode, 0, len(listing.Episodes.Episode))
@@ -66,7 +66,7 @@ func getEpisodes(ctx context.Context, id int) ([]domain.Episode, error) {
 			)
 		}
 	}
-	return episodes, nil
+	return episodes, listing.Hash(), nil
 }
 
 func getProgram(ctx context.Context, id int) (domain.Program, error) {

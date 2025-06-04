@@ -1,6 +1,7 @@
 package memcache
 
 import (
+	"fmt"
 	"log/slog"
 	"time"
 
@@ -43,6 +44,19 @@ func (c *Cache) StoreRSS(id int, rawRSS []byte) {
 
 func (c *Cache) GetRSS(id int) ([]byte, bool) {
 	val, ok := c.cache.Get(id)
+	if !ok {
+		return nil, false
+	}
+
+	return val.([]byte), true
+}
+
+func (c *Cache) StoreHash(id int, hash []byte) {
+	c.cache.SetWithTTL(fmt.Sprintf("hash:%d", id), hash, int64(len(hash)), time.Hour*24*7)
+}
+
+func (c *Cache) GetHash(id int) ([]byte, bool) {
+	val, ok := c.cache.Get(fmt.Sprintf("hash:%d", id))
 	if !ok {
 		return nil, false
 	}

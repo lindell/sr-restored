@@ -1,6 +1,7 @@
 package podcast
 
 import (
+	"bytes"
 	"context"
 	"encoding/xml"
 	"fmt"
@@ -26,6 +27,8 @@ type Podcast struct {
 type Cache interface {
 	StoreRSS(id int, rawRSS []byte)
 	GetRSS(id int) ([]byte, bool)
+	StoreHash(id int, hash []byte)
+	GetHash(id int) ([]byte, bool)
 }
 
 type Database interface {
@@ -35,7 +38,7 @@ type Database interface {
 	InsertProgram(ctx context.Context, program domain.Program) error
 }
 
-func (p *Podcast) GetPodcast(ctx context.Context, id int) ([]byte, error) {
+func (p *Podcast) GetPodcast(ctx context.Context, id int) (rawRSS []byte, hash []byte, err error) {
 	before := time.Now()
 	cached := false
 	defer func() {
@@ -50,7 +53,9 @@ func (p *Podcast) GetPodcast(ctx context.Context, id int) ([]byte, error) {
 
 	if rss, ok := p.Cache.GetRSS(id); ok {
 		cached = true
-		return rss, nil
+
+		hash, _ := p.Cache.GetHash(id)
+		return rss, hash, nil
 	}
 
 	program, err := client.GetProgram(ctx, id)
@@ -59,7 +64,7 @@ func (p *Podcast) GetPodcast(ctx context.Context, id int) ([]byte, error) {
 		var dbErr error
 		program, dbErr = p.Database.GetProgram(ctx, id)
 		if dbErr != nil {
-			return nil, errors.WithMessage(err, dbErr.Error())
+			return nil, nil, errors.WithMessage(err, dbErr.Error())
 		}
 	}
 
@@ -67,10 +72,11 @@ func (p *Podcast) GetPodcast(ctx context.Context, id int) ([]byte, error) {
 
 	raw, err := xml.MarshalIndent(rss, "  ", "    ")
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
 	go func() {
+		p.Cache.StoreHash(id, program.Hash)
 		p.Cache.StoreRSS(id, raw)
 
 		err := p.Database.InsertEpisodes(context.Background(), program.Episodes)
@@ -84,5 +90,14 @@ func (p *Podcast) GetPodcast(ctx context.Context, id int) ([]byte, error) {
 		}
 	}()
 
-	return raw, nil
+	return raw, program.Hash, nil
+}
+
+func (p *Podcast) IsNewestVersion(ctx context.Context, id int, hash []byte) bool {
+	cachedHash, ok := p.Cache.GetHash(id)
+	if !ok {
+		return false
+	}
+
+	return bytes.Equal(cachedHash, hash)
 }
