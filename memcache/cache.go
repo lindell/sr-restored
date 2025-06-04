@@ -12,6 +12,8 @@ type Cache struct {
 	cache *ristretto.Cache
 }
 
+const cacheDuration = time.Minute * 30
+
 func NewCache() *Cache {
 	cache, err := ristretto.NewCache(&ristretto.Config{
 		NumCounters: 1e6,
@@ -39,7 +41,7 @@ func NewCache() *Cache {
 }
 
 func (c *Cache) StoreRSS(id int, rawRSS []byte) {
-	c.cache.SetWithTTL(id, rawRSS, int64(len(rawRSS)), time.Minute*15)
+	c.cache.SetWithTTL(id, rawRSS, int64(len(rawRSS)), cacheDuration)
 }
 
 func (c *Cache) GetRSS(id int) ([]byte, bool) {
@@ -52,7 +54,7 @@ func (c *Cache) GetRSS(id int) ([]byte, bool) {
 }
 
 func (c *Cache) StoreHash(id int, hash []byte) {
-	c.cache.SetWithTTL(fmt.Sprintf("hash:%d", id), hash, int64(len(hash)), time.Hour*24*7)
+	c.cache.SetWithTTL(fmt.Sprintf("hash:%d", id), hash, int64(len(hash)), cacheDuration)
 }
 
 func (c *Cache) GetHash(id int) ([]byte, bool) {
