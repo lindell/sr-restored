@@ -50,10 +50,10 @@ func (s *Server) Handler() http.Handler {
 	rootMux.Handle("/metrics", promhttp.Handler())
 
 	mainMux := http.NewServeMux()
-	rootMux.Handle("/", loggingMiddleware(slog.Default())(mainMux))
+	rootMux.Handle("/", loggingMiddleware(slog.Default())(gziphandler.GzipHandler(mainMux)))
 
 	mainMux.HandleFunc("/rss/{id}", s.getRSS)
-	mainMux.Handle("/", gziphandler.GzipHandler(http.FileServer(http.Dir("./static"))))
+	mainMux.Handle("/", http.FileServer(http.Dir("./static")))
 
 	return rootMux
 }
