@@ -1,0 +1,56 @@
+User-agent: Googlebot
+Disallow: /rss/
+
+User-agent: Bingbot
+Disallow: /rss/
+
+User-agent: Yahoo! Slurp
+Disallow: /rss/
+
+User-agent: DuckDuckBot
+Disallow: /rss/
+
+User-agent: Baiduspider
+Disallow: /rss/
+
+User-agent: YandexBot
+Disallow: /rss/
+
+User-agent: AhrefsBot
+Disallow: /rss/
+
+User-agent: SemrushBot
+Disallow: /rss/
+
+User-agent: Applebot
+Disallow: /rss/
+
+User-agent: Sogou-Test-Spider
+Disallow: /rss/
+
+User-agent: Sogou_spider
+Disallow: /rss/
+
+User-agent: Sogou-Spider
+Disallow: /rss/
+
+User-agent: Sogou-Web-Spider
+Disallow: /rss/
+
+User-agent: Exabot
+Disallow: /rss/
+
+User-agent: FacebookExternalHit
+Disallow: /rss/
+
+User-agent: Swiftbot
+Disallow: /rss/
+
+User-agent: Slurp
+Disallow: /rss/
+
+User-agent: CCBot
+Disallow: /rss/
+
+User-agent: GoogleOther
+Disallow: /rss/
