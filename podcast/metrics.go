@@ -15,4 +15,8 @@ var (
 		Name: "rss_get_total",
 		Help: "Number of fetched RSS feeds",
 	}, []string{"program_id"})
+	hashLookup = promauto.NewCounterVec(prometheus.CounterOpts{
+		Name: "hash_lookup",
+		Help: "Number of times a hash was provided to and used to lookup cached podcasts",
+	}, []string{"success"})
 )

@@ -93,7 +93,13 @@ func (p *Podcast) GetPodcast(ctx context.Context, id int) (rawRSS []byte, hash [
 	return raw, program.Hash, nil
 }
 
-func (p *Podcast) IsNewestVersion(ctx context.Context, id int, hash []byte) bool {
+func (p *Podcast) IsNewestVersion(ctx context.Context, id int, hash []byte) (isNewest bool) {
+	defer func() {
+		hashLookup.With(prometheus.Labels{
+			"success": fmt.Sprint(isNewest),
+		}).Inc()
+	}()
+
 	cachedHash, ok := p.Cache.GetHash(id)
 	if !ok {
 		return false
