@@ -11,12 +11,30 @@ import (
 	"time"
 
 	"github.com/NYTimes/gziphandler"
+	"github.com/lindell/sr-restored/parallel"
 	"github.com/lindell/sr-restored/podcast"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 type Server struct {
-	Podcast *podcast.Podcast
+	Podcast         *podcast.Podcast
+	parallelFetcher *parallel.SharedGetter[rssWithHash]
+}
+
+type rssWithHash struct {
+	value []byte
+	hash  []byte
+}
+
+// NewServer creates a new HTTP server with the given podcast service.
+func NewServer(podcast *podcast.Podcast) *Server {
+	return &Server{
+		Podcast: podcast,
+		parallelFetcher: parallel.NewSharedGetter(func(ctx context.Context, id int) (rssWithHash, error) {
+			rawRSS, hash, err := podcast.GetPodcast(ctx, id)
+			return rssWithHash{value: rawRSS, hash: hash}, err
+		}),
+	}
 }
 
 func (s *Server) ListenAndServe(ctx context.Context, addr string) (stop func(context.Context) error) {
@@ -72,22 +90,22 @@ func (s *Server) getRSS(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	b, hash, err := s.Podcast.GetPodcast(r.Context(), int(id))
+	result, err := s.parallelFetcher.Fetch(r.Context(), int(id))
 	if err != nil {
 		handleError(w, r, err)
 		return
 	}
 
 	w.Header().Add("Content-Type", "application/xml")
-	if len(hash) > 0 {
-		if bytes.Equal(hash, sentHash) {
-			responseWithCacheHit(w, hash)
+	if len(result.hash) > 0 {
+		if bytes.Equal(result.hash, sentHash) {
+			responseWithCacheHit(w, result.hash)
 			return
 		}
-		w.Header().Add("Etag", fmt.Sprintf("\"%s\"", base64.StdEncoding.EncodeToString(hash)))
+		w.Header().Add("Etag", fmt.Sprintf("\"%s\"", base64.StdEncoding.EncodeToString(result.hash)))
 	}
 	w.WriteHeader(http.StatusOK)
-	_, _ = w.Write(b)
+	_, _ = w.Write(result.value)
 }
 
 func responseWithCacheHit(w http.ResponseWriter, hash []byte) {

@@ -52,9 +52,7 @@ func Run(ctx context.Context, config Config) error {
 		Now: config.Now,
 	}
 
-	httpServer := httpserver.Server{
-		Podcast: podcast,
-	}
+	httpServer := httpserver.NewServer(podcast)
 
 	stopHTTPServer := httpServer.ListenAndServe(ctx, config.ServerAddr)
 
