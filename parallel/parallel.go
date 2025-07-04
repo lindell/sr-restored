@@ -46,7 +46,7 @@ func (pf *SharedGetter[T]) Fetch(ctx context.Context, id int) (T, error) {
 		ch <- valueWithError[T]{value: result, err: err}
 		close(ch)
 	}
-	pf.currentFetches[id] = nil // Clear the channel list for this ID
+	delete(pf.currentFetches, id)
 	pf.currentFetchesLock.Unlock()
 
 	return result, err

@@ -39,14 +39,22 @@ func Test_newSharedGetter(t *testing.T) {
 		assert.Equal(t, val, 2, "Expected value to be 2")
 		assert.NilError(t, err, "Expected no error for ID 2")
 	}()
+	time.Sleep(10 * time.Millisecond) // Make sure all goroutines are started
 	releaseLock()
-
 	time.Sleep(10 * time.Millisecond) // Allow goroutines to finish
 
 	assert.Equal(t, calls[1], 1, "Expected fetchFunc to be called once for ID 1")
 	assert.Equal(t, calls[2], 1, "Expected fetchFunc to be called once for ID 2")
 	assert.Equal(t, calls[3], 1, "Expected fetchFunc to be called once for ID 3")
 	assert.Equal(t, len(calls), 3, "Expected fetchFunc to be called for 3 different IDs")
+
+	val, err := sg.Fetch(ctx, 1)
+	assert.Equal(t, val, 1, "Expected value to be 1")
+	assert.NilError(t, err, "Expected no error for ID 1")
+
+	time.Sleep(10 * time.Millisecond) // Allow goroutines to finish
+
+	assert.Equal(t, calls[1], 2, "Expected fetchFunc to be called once more for ID 1")
 }
 
 func createTester() (func(context.Context, int) (int, error), func(), map[int]int) {
@@ -55,8 +63,8 @@ func createTester() (func(context.Context, int) (int, error), func(), map[int]in
 	lock.Lock()
 
 	testFetchFunc := func(ctx context.Context, id int) (int, error) {
-		calls[id]++
 		lock.Lock()
+		calls[id]++
 		lock.Unlock()
 		if id == 3 {
 			return 0, testErr
