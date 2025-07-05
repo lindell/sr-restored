@@ -78,10 +78,10 @@ func (p *Podcast) GetPodcast(ctx context.Context, id int) (rawRSS []byte, hash [
 
 	gzipedBuffer := bytes.NewBuffer(nil)
 	gzipWriter := gzip.NewWriter(gzipedBuffer)
-	defer gzipWriter.Close()
 	if _, err := gzipWriter.Write(raw); err != nil {
 		return nil, nil, errors.WithMessage(err, "could not gzip data")
 	}
+	gzipWriter.Close()
 	gzipedRaw := gzipedBuffer.Bytes()
 
 	go func() {
