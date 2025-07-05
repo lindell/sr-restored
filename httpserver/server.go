@@ -9,6 +9,7 @@ import (
 	"io"
 	"log/slog"
 	"net/http"
+	"net/http/pprof"
 	"strconv"
 	"strings"
 	"time"
@@ -69,6 +70,10 @@ func (s *Server) Handler() http.Handler {
 	rootMux := http.NewServeMux()
 
 	rootMux.Handle("/metrics", promhttp.Handler())
+
+	rootMux.HandleFunc("/debug/pprof/", pprof.Index)
+	rootMux.HandleFunc("/debug/pprof/{action}", pprof.Index)
+	rootMux.HandleFunc("/debug/pprof/symbol", pprof.Symbol)
 
 	mainMux := http.NewServeMux()
 	rootMux.Handle("/", loggingMiddleware(slog.Default())(gziphandler.GzipHandler(mainMux)))
