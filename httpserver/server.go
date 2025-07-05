@@ -2,12 +2,15 @@ package httpserver
 
 import (
 	"bytes"
+	"compress/gzip"
 	"context"
 	"encoding/base64"
 	"fmt"
+	"io"
 	"log/slog"
 	"net/http"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/NYTimes/gziphandler"
@@ -104,8 +107,30 @@ func (s *Server) getRSS(w http.ResponseWriter, r *http.Request) {
 		}
 		w.Header().Add("Etag", fmt.Sprintf("\"%s\"", base64.StdEncoding.EncodeToString(result.hash)))
 	}
+	respondWithGzippedData(w, r, result.value)
+}
+
+// The data is usually gzipped, but to support clients that do not support gzip,
+// we check the Accept-Encoding header and decode the gzip data if necessary.
+func respondWithGzippedData(w http.ResponseWriter, r *http.Request, data []byte) {
+	if strings.Contains(r.Header.Get("Accept-Encoding"), "gzip") {
+		w.Header().Set("Content-Encoding", "gzip")
+		w.WriteHeader(http.StatusOK)
+		_, _ = w.Write(data)
+		return
+	}
+
+	slog.Debug("responding with non-gzipped data")
+	gzipReader, err := gzip.NewReader(bytes.NewReader(data))
+	if err != nil {
+		slog.Error("failed to create gzip reader", "error", err)
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
+	}
+	defer gzipReader.Close()
+
 	w.WriteHeader(http.StatusOK)
-	_, _ = w.Write(result.value)
+	_, _ = io.Copy(w, gzipReader)
 }
 
 func responseWithCacheHit(w http.ResponseWriter, hash []byte) {
