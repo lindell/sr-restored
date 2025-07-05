@@ -2,6 +2,7 @@ package podcast
 
 import (
 	"bytes"
+	"compress/gzip"
 	"context"
 	"encoding/xml"
 	"fmt"
@@ -75,9 +76,21 @@ func (p *Podcast) GetPodcast(ctx context.Context, id int) (rawRSS []byte, hash [
 		return nil, nil, err
 	}
 
+	gzipedBuffer := bytes.NewBuffer(nil)
+	gzipWriter := gzip.NewWriter(gzipedBuffer)
+	if _, err := gzipWriter.Write(raw); err != nil {
+		return nil, nil, errors.WithMessage(err, "could not gzip data")
+	}
+	gzipWriter.Close()
+	gzipedRaw := gzipedBuffer.Bytes()
+
+	if err != nil {
+		return nil, nil, errors.WithMessage(err, "could not read gzip data")
+	}
+
 	go func() {
 		p.Cache.StoreHash(id, program.Hash)
-		p.Cache.StoreRSS(id, raw)
+		p.Cache.StoreRSS(id, gzipedRaw)
 
 		err := p.Database.InsertEpisodes(context.Background(), program.Episodes)
 		if err != nil {
@@ -90,7 +103,7 @@ func (p *Podcast) GetPodcast(ctx context.Context, id int) (rawRSS []byte, hash [
 		}
 	}()
 
-	return raw, program.Hash, nil
+	return gzipedRaw, program.Hash, nil
 }
 
 func (p *Podcast) IsNewestVersion(ctx context.Context, id int, hash []byte) (isNewest bool) {
