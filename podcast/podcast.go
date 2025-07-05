@@ -70,7 +70,7 @@ func (p *Podcast) GetPodcast(ctx context.Context, id int) (rawRSS []byte, hash [
 
 	rss := p.convertToPodRSS(program)
 
-	raw, err := xml.MarshalIndent(rss, "  ", "    ")
+	raw, err := xml.Marshal(rss)
 	if err != nil {
 		return nil, nil, err
 	}
