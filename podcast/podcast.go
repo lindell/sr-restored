@@ -85,15 +85,18 @@ func (p *Podcast) GetPodcast(ctx context.Context, id int) (rawRSS []byte, hash [
 	gzipedRaw := gzipedBuffer.Bytes()
 
 	go func() {
+		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+		defer cancel()
+
 		p.Cache.StoreHash(id, program.Hash)
 		p.Cache.StoreRSS(id, gzipedRaw)
 
-		err := p.Database.InsertEpisodes(context.Background(), program.Episodes)
+		err := p.Database.InsertEpisodes(ctx, program.Episodes)
 		if err != nil {
 			slog.Error(err.Error())
 		}
 
-		err = p.Database.InsertProgram(context.Background(), program)
+		err = p.Database.InsertProgram(ctx, program)
 		if err != nil {
 			slog.Error(err.Error())
 		}
