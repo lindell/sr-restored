@@ -2,6 +2,7 @@ package parallel
 
 import (
 	"context"
+	"fmt"
 	"sync"
 )
 
@@ -39,7 +40,7 @@ func (pf *SharedGetter[T]) Fetch(ctx context.Context, id int) (T, error) {
 	pf.currentFetches[id] = []chan valueWithError[T]{}
 	pf.currentFetchesLock.Unlock()
 
-	result, err := pf.fetchFunc(ctx, id)
+	result, err := pf.runWithPanicRecover(ctx, id)
 
 	pf.currentFetchesLock.Lock()
 	for _, ch := range pf.currentFetches[id] {
@@ -50,4 +51,13 @@ func (pf *SharedGetter[T]) Fetch(ctx context.Context, id int) (T, error) {
 	pf.currentFetchesLock.Unlock()
 
 	return result, err
+}
+
+func (pf *SharedGetter[T]) runWithPanicRecover(ctx context.Context, id int) (res T, err error) {
+	defer func() {
+		if recovered := recover(); recovered != nil {
+			err = fmt.Errorf("panic recover: %x", recovered)
+		}
+	}()
+	return pf.fetchFunc(ctx, id)
 }
