@@ -1,4 +1,4 @@
-## SR Restored
+## [SR Restored](https://sr-restored.se)
 
 Sveriges Radio började 2023 plocka bort innehåll från sina RSS flöden och andra platformar, för att exlusivt lansera innehåll på SR Play.
 
@@ -14,8 +14,12 @@ Podcasts är en underbar öppen teknologi där det öppna gränssnittet (podcast
 
 Snälla Sveriges Radio, gör så detta projektet kan arkiveras genom att inte exlusivt börja lansera innehåll på Sveriges Radio Play.
 
+# Tekniskt om projektet
+
+Projektets huvudsakliga fokus är att vara lätt och billigt att hosta. Cachning körs därför direkt i minnet istället för t.ex. Redis. Den kör för tillfället på en maskin med 256mb RAM + 1vCPU och klarar att av tiotals miljoner requests per dag med den konfigurationen. 
+
 # Hur använder jag projektet:
 
-1. Hitta URLen till podcasten: `https://sr-restored.se`
+1. Hitta URLen till podcasten: [sr-restored.se](https://sr-restored.se)
 2. Skriv in URLen i valfri podcastspelare
 3. Nu kan du fortsätta lyssna på podden i din favoritspelare 🎉
