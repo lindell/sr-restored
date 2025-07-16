@@ -36,9 +36,9 @@ type RSS struct {
 		} `xml:"category"`
 		ItunesOwner struct {
 			Text  string `xml:",chardata"`
-			Name  string `xml:"name"`
-			Email string `xml:"email"`
-		} `xml:"owner"`
+			Name  string `xml:"itunes:name"`
+			Email string `xml:"itunes:email"`
+		} `xml:"itunes:owner"`
 		Title       string    `xml:"title"`
 		Description string    `xml:"description"`
 		Language    string    `xml:"language"`

@@ -32,7 +32,7 @@ func (p *Podcast) convertToPodRSS(program domain.Program) RSS {
 	// rss.Channel.ItunesCategory
 
 	rss.Channel.ItunesOwner.Name = title
-	rss.Channel.ItunesOwner.Email = program.Email
+	rss.Channel.ItunesOwner.Email = "johan+srrestored@lindell.me"
 
 	rss.Channel.Link = program.URL
 	rss.Channel.Description = program.Description
