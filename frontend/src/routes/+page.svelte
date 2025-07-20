@@ -9,8 +9,8 @@
 
 <div class="info">
 	<section>
-		Sveriges Radio började 2023 plocka bort innehåll från sina RSS flöden och andra platformar, för
-		att exlusivt lansera innehåll på SR Play.
+		Sveriges Radio började 2023 plocka bort innehåll från sina RSS-flöden och andra plattformar, för
+		att exklusivt lansera innehåll på SR Play.
 	</section>
 
 	<section>
@@ -25,25 +25,25 @@
 	</section>
 
 	<section>
-		Detta projekt har som mål att hjälpa Sveriges Radio att uppfylla deras uppdrag genom att
-		generera Podcast RSS flöden med allt tillgängligt innehåll.
+		Detta projekt har som mål att hjälpa Sveriges Radio att uppfylla sitt uppdrag genom att
+		generera Podcast-RSS-flöden med allt tillgängligt innehåll.
 	</section>
 
 	<section>
 		<h2>Ett litet manifest... typ</h2>
 
-		Podcasts är en underbar öppen teknologi där det öppna gränssnittet (podcast RSS flöden) tillåter
+		Podcasts är en underbar öppen teknologi där det öppna gränssnittet (podcast-RSS-flöden) tillåter
 		både producenterna av media, samt lyssningsverktygen, att vara oberoende av varandra ❤️ Bland de
 		stängda plattformarna som vi sett växa fram de senaste åren, så står podcasts fortfarande kvar
-		som en av de få riktigt öppna teknologierna. Dessvärre har flera streamingplatformar börjat låsa
-		innehåll exklusivt till deras tjänster. Detta är tråkigt, men med privata bolag så är det
+		som en av de få riktigt öppna teknologierna. Dessvärre har flera streamingplattformar börjat låsa
+		innehåll exklusivt till sina egna tjänster. Detta är tråkigt, men med privata bolag så är det
 		förståeligt, och något som är lätt att bojkotta om man inte tycker om metoderna. Att public
 		service artificiellt börjar låsa innehåll är dock förbryllande. Snälla Sveriges Radio, gör så
-		detta projektet kan arkiveras genom att inte exklusivt börja lansera innehåll på Sveriges Radio
+		att det här projektet kan arkiveras genom att inte exklusivt börja lansera innehåll på Sveriges Radio
 		Play.
 
 		<section>
-			Snälla Sveriges Radio, gör så detta projektet kan arkiveras genom att inte exlusivt börja
+			Snälla Sveriges Radio, gör så att det här projektet kan arkiveras genom att inte exklusivt börja
 			lansera innehåll på Sveriges Radio Play.
 		</section>
 	</section>
