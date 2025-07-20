@@ -25,8 +25,8 @@
 	</section>
 
 	<section>
-		Detta projekt har som mål att hjälpa Sveriges Radio att uppfylla sitt uppdrag genom att
-		generera Podcast-RSS-flöden med allt tillgängligt innehåll.
+		Detta projekt har som mål att hjälpa Sveriges Radio att uppfylla sitt uppdrag genom att generera
+		Podcast-RSS-flöden med allt tillgängligt innehåll.
 	</section>
 
 	<section>
@@ -35,16 +35,16 @@
 		Podcasts är en underbar öppen teknologi där det öppna gränssnittet (podcast-RSS-flöden) tillåter
 		både producenterna av media, samt lyssningsverktygen, att vara oberoende av varandra ❤️ Bland de
 		stängda plattformarna som vi sett växa fram de senaste åren, så står podcasts fortfarande kvar
-		som en av de få riktigt öppna teknologierna. Dessvärre har flera streamingplattformar börjat låsa
-		innehåll exklusivt till sina egna tjänster. Detta är tråkigt, men med privata bolag så är det
-		förståeligt, och något som är lätt att bojkotta om man inte tycker om metoderna. Att public
+		som en av de få riktigt öppna teknologierna. Dessvärre har flera streamingplattformar börjat
+		låsa innehåll exklusivt till sina egna tjänster. Detta är tråkigt, men med privata bolag så är
+		det förståeligt, och något som är lätt att bojkotta om man inte tycker om metoderna. Att public
 		service artificiellt börjar låsa innehåll är dock förbryllande. Snälla Sveriges Radio, gör så
-		att det här projektet kan arkiveras genom att inte exklusivt börja lansera innehåll på Sveriges Radio
-		Play.
+		att det här projektet kan arkiveras genom att inte exklusivt börja lansera innehåll på Sveriges
+		Radio Play.
 
 		<section>
-			Snälla Sveriges Radio, gör så att det här projektet kan arkiveras genom att inte exklusivt börja
-			lansera innehåll på Sveriges Radio Play.
+			Snälla Sveriges Radio, gör så att det här projektet kan arkiveras genom att inte exklusivt
+			börja lansera innehåll på Sveriges Radio Play.
 		</section>
 	</section>
 
