@@ -21,8 +21,9 @@ import (
 )
 
 type Server struct {
-	Podcast         *podcast.Podcast
-	parallelFetcher *parallel.SharedGetter[rssWithHash]
+	Podcast                  *podcast.Podcast
+	parallelFetcher          *parallel.SharedGetter[rssWithHash]
+	parallelFetcherBroadcast *parallel.SharedGetter[rssWithHash]
 }
 
 type rssWithHash struct {
@@ -36,6 +37,10 @@ func NewServer(podcast *podcast.Podcast) *Server {
 		Podcast: podcast,
 		parallelFetcher: parallel.NewSharedGetter(func(ctx context.Context, id int) (rssWithHash, error) {
 			rawRSS, hash, err := podcast.GetPodcast(ctx, id)
+			return rssWithHash{value: rawRSS, hash: hash}, err
+		}),
+		parallelFetcherBroadcast: parallel.NewSharedGetter(func(ctx context.Context, id int) (rssWithHash, error) {
+			rawRSS, hash, err := podcast.GetPodcastWithPreference(ctx, id, true)
 			return rssWithHash{value: rawRSS, hash: hash}, err
 		}),
 	}
@@ -79,6 +84,7 @@ func (s *Server) Handler() http.Handler {
 	rootMux.Handle("/", loggingMiddleware(slog.Default())(gziphandler.GzipHandler(mainMux)))
 
 	mainMux.HandleFunc("/rss/{id}", s.getRSS)
+	mainMux.HandleFunc("/rss/{id}/broadcast", s.getRSSBroadcast)
 	mainMux.Handle("/", http.FileServer(http.Dir("./static")))
 
 	return rootMux
@@ -99,6 +105,33 @@ func (s *Server) getRSS(w http.ResponseWriter, r *http.Request) {
 	}
 
 	result, err := s.parallelFetcher.Fetch(r.Context(), int(id))
+	if err != nil {
+		handleError(w, r, err)
+		return
+	}
+
+	w.Header().Add("Content-Type", "application/xml")
+	if len(result.hash) > 0 {
+		if bytes.Equal(result.hash, sentHash) {
+			responseWithCacheHit(w, result.hash)
+			return
+		}
+		w.Header().Add("Etag", fmt.Sprintf("\"%s\"", base64.StdEncoding.EncodeToString(result.hash)))
+	}
+	respondWithGzippedData(w, r, result.value)
+}
+
+func (s *Server) getRSSBroadcast(w http.ResponseWriter, r *http.Request) {
+	id, err := strconv.ParseInt(r.PathValue("id"), 10, 64)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		_, _ = w.Write([]byte(err.Error()))
+		return
+	}
+
+	sentHash := getIfNoneMatchHash(r)
+
+	result, err := s.parallelFetcherBroadcast.Fetch(r.Context(), int(id))
 	if err != nil {
 		handleError(w, r, err)
 		return

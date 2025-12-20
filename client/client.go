@@ -22,6 +22,10 @@ func init() {
 }
 
 func GetProgram(ctx context.Context, id int) (domain.Program, error) {
+	return GetProgramWithPreference(ctx, id, false)
+}
+
+func GetProgramWithPreference(ctx context.Context, id int, preferBroadcast bool) (domain.Program, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 
@@ -30,7 +34,7 @@ func GetProgram(ctx context.Context, id int) (domain.Program, error) {
 		return domain.Program{}, errors.WithMessage(err, "could not fetch program from api")
 	}
 
-	program.Episodes, program.Hash, err = getEpisodes(ctx, id)
+	program.Episodes, program.Hash, err = getEpisodes(ctx, id, preferBroadcast)
 	if err != nil {
 		return domain.Program{}, errors.WithMessage(err, "could not fetch episodes from api")
 	}
@@ -38,7 +42,7 @@ func GetProgram(ctx context.Context, id int) (domain.Program, error) {
 	return program, nil
 }
 
-func getEpisodes(ctx context.Context, id int) ([]domain.Episode, []byte, error) {
+func getEpisodes(ctx context.Context, id int, preferBroadcast bool) ([]domain.Episode, []byte, error) {
 	u := baseURL.JoinPath("episodes/index")
 	q := u.Query()
 	q.Add("audioquality", "hi")
@@ -58,7 +62,7 @@ func getEpisodes(ctx context.Context, id int) ([]domain.Episode, []byte, error) 
 
 	episodes := make([]domain.Episode, 0, len(listing.Episodes.Episode))
 	for _, episode := range listing.Episodes.Episode {
-		if converted, err := convertEpisode(episode); err == nil {
+		if converted, err := convertEpisodeWithPreference(episode, preferBroadcast); err == nil {
 			episodes = append(episodes, converted)
 		} else {
 			slog.Error("could not convert episode",

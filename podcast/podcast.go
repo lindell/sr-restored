@@ -40,8 +40,17 @@ type Database interface {
 }
 
 func (p *Podcast) GetPodcast(ctx context.Context, id int) (rawRSS []byte, hash []byte, err error) {
+	return p.GetPodcastWithPreference(ctx, id, false)
+}
+
+func (p *Podcast) GetPodcastWithPreference(ctx context.Context, id int, preferBroadcast bool) (rawRSS []byte, hash []byte, err error) {
 	before := time.Now()
 	cached := false
+	cacheKey := id
+	if preferBroadcast {
+		cacheKey = -id
+	}
+
 	defer func() {
 		rssGetSecondsMetric.With(prometheus.Labels{
 			"cached": fmt.Sprint(cached),
@@ -52,14 +61,14 @@ func (p *Podcast) GetPodcast(ctx context.Context, id int) (rawRSS []byte, hash [
 		}).Inc()
 	}()
 
-	if rss, ok := p.Cache.GetRSS(id); ok {
+	if rss, ok := p.Cache.GetRSS(cacheKey); ok {
 		cached = true
 
-		hash, _ := p.Cache.GetHash(id)
+		hash, _ := p.Cache.GetHash(cacheKey)
 		return rss, hash, nil
 	}
 
-	program, err := client.GetProgram(ctx, id)
+	program, err := client.GetProgramWithPreference(ctx, id, preferBroadcast)
 	if err != nil {
 		// Try to fetch from DB as a backup
 		var dbErr error
@@ -89,8 +98,8 @@ func (p *Podcast) GetPodcast(ctx context.Context, id int) (rawRSS []byte, hash [
 		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 		defer cancel()
 
-		p.Cache.StoreHash(id, program.Hash)
-		p.Cache.StoreRSS(id, gzipedRaw)
+		p.Cache.StoreHash(cacheKey, program.Hash)
+		p.Cache.StoreRSS(cacheKey, gzipedRaw)
 
 		err := p.Database.InsertEpisodes(ctx, program.Episodes)
 		if err != nil {

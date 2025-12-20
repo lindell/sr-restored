@@ -170,14 +170,14 @@
         <playlist id="9300114">
           <url>https://api.sr.se/api/radio/radio.aspx?type=broadcast&amp;id=9300114&amp;codingformat=.m4a&amp;metafile=asx&amp;quality=hi</url>
           <statkey>/app/avsnitt/p3[k(164)]/p3 historia[p(5067)]/[e(2384004)]</statkey>
-          <duration>3584</duration>
+          <duration>10800</duration>
           <publishdateutc>2024-04-25T05:00:00Z</publishdateutc>
         </playlist>
         <broadcastfiles>
           <broadcastfile id="9300114">
             <url>https://sverigesradio.se/topsy/ljudfil/srapi/9300114-hi.m4a</url>
             <statkey>/app/avsnitt/p3[k(164)]/p3 historia[p(5067)]/[e(2384004)]</statkey>
-            <duration>3584</duration>
+            <duration>10800</duration>
             <publishdateutc>2024-04-25T05:00:00Z</publishdateutc>
           </broadcastfile>
         </broadcastfiles>

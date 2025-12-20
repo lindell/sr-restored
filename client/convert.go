@@ -21,6 +21,10 @@ func convertProgram(program ProgramInfo) domain.Program {
 }
 
 func convertEpisode(episode Episode) (domain.Episode, error) {
+	return convertEpisodeWithPreference(episode, false)
+}
+
+func convertEpisodeWithPreference(episode Episode, preferBroadcast bool) (domain.Episode, error) {
 	converted := domain.Episode{
 		ID:          episode.ID,
 		ProgramID:   episode.Program.ID,
@@ -34,7 +38,19 @@ func convertEpisode(episode Episode) (domain.Episode, error) {
 	downloadFile := episode.Downloadpodfile
 	broadCastFile := episode.Broadcast.Broadcastfiles.Broadcastfile
 
-	if downloadFile.URL != "" {
+	useBroadcast := preferBroadcast && broadCastFile.URL != ""
+
+	if useBroadcast {
+		converted.FileURL = broadCastFile.URL
+		converted.FileDurationSeconds = broadCastFile.Duration
+
+		contentType, fileSize, err := getFileInfo(broadCastFile.URL)
+		if err != nil {
+			return converted, errors.WithMessage(err, "could not determine file size")
+		}
+		converted.FileBytes = fileSize
+		converted.ContentType = contentType
+	} else if downloadFile.URL != "" {
 		converted.FileURL = downloadFile.URL
 		converted.FileDurationSeconds = downloadFile.Duration
 		converted.FileBytes = downloadFile.Filesizeinbytes
