@@ -3,6 +3,9 @@ name: Deploy
 on:
   push:
     branches: [ "master" ]
+  schedule:
+    # Runs at 03:14 UTC every Saturday
+    - cron: '14 3 * * 6'
 
 jobs:
   deploy:
