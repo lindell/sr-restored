@@ -26,10 +26,10 @@ type Podcast struct {
 }
 
 type Cache interface {
-	StoreRSS(id int, rawRSS []byte)
-	GetRSS(id int) ([]byte, bool)
-	StoreHash(id int, hash []byte)
-	GetHash(id int) ([]byte, bool)
+	StoreRSS(key string, rawRSS []byte)
+	GetRSS(key string) ([]byte, bool)
+	StoreHash(key string, hash []byte)
+	GetHash(key string) ([]byte, bool)
 }
 
 type Database interface {
@@ -39,17 +39,11 @@ type Database interface {
 	InsertProgram(ctx context.Context, program domain.Program) error
 }
 
-func (p *Podcast) GetPodcast(ctx context.Context, id int) (rawRSS []byte, hash []byte, err error) {
-	return p.GetPodcastWithPreference(ctx, id, false)
-}
-
-func (p *Podcast) GetPodcastWithPreference(ctx context.Context, id int, preferBroadcast bool) (rawRSS []byte, hash []byte, err error) {
+func (p *Podcast) GetPodcast(ctx context.Context, id int, feedTypes []domain.FeedType) (rawRSS []byte, hash []byte, err error) {
 	before := time.Now()
 	cached := false
-	cacheKey := id
-	if preferBroadcast {
-		cacheKey = -id
-	}
+
+	cacheKey := fmt.Sprintf("%d:%v", id, feedTypes)
 
 	defer func() {
 		rssGetSecondsMetric.With(prometheus.Labels{
@@ -68,7 +62,7 @@ func (p *Podcast) GetPodcastWithPreference(ctx context.Context, id int, preferBr
 		return rss, hash, nil
 	}
 
-	program, err := client.GetProgramWithPreference(ctx, id, preferBroadcast)
+	program, err := client.GetProgram(ctx, id, feedTypes)
 	if err != nil {
 		// Try to fetch from DB as a backup
 		var dbErr error
@@ -115,14 +109,14 @@ func (p *Podcast) GetPodcastWithPreference(ctx context.Context, id int, preferBr
 	return gzipedRaw, program.Hash, nil
 }
 
-func (p *Podcast) IsNewestVersion(ctx context.Context, id int, hash []byte) (isNewest bool) {
+func (p *Podcast) IsNewestVersion(ctx context.Context, id int, feedTypes []domain.FeedType, hash []byte) (isNewest bool) {
 	defer func() {
 		hashLookup.With(prometheus.Labels{
 			"success": fmt.Sprint(isNewest),
 		}).Inc()
 	}()
 
-	cachedHash, ok := p.Cache.GetHash(id)
+	cachedHash, ok := p.Cache.GetHash(fmt.Sprintf("%d:%v", id, feedTypes))
 	if !ok {
 		return false
 	}

@@ -1,7 +1,6 @@
 package memcache
 
 import (
-	"fmt"
 	"log/slog"
 	"time"
 
@@ -40,12 +39,12 @@ func NewCache() *Cache {
 	}
 }
 
-func (c *Cache) StoreRSS(id int, rawRSS []byte) {
-	c.cache.SetWithTTL(id, rawRSS, int64(len(rawRSS)), cacheDuration)
+func (c *Cache) StoreRSS(key string, rawRSS []byte) {
+	c.cache.SetWithTTL(key, rawRSS, int64(len(rawRSS)), cacheDuration)
 }
 
-func (c *Cache) GetRSS(id int) ([]byte, bool) {
-	val, ok := c.cache.Get(id)
+func (c *Cache) GetRSS(key string) ([]byte, bool) {
+	val, ok := c.cache.Get(key)
 	if !ok {
 		return nil, false
 	}
@@ -53,12 +52,12 @@ func (c *Cache) GetRSS(id int) ([]byte, bool) {
 	return val.([]byte), true
 }
 
-func (c *Cache) StoreHash(id int, hash []byte) {
-	c.cache.SetWithTTL(fmt.Sprintf("hash:%d", id), hash, int64(len(hash)), cacheDuration)
+func (c *Cache) StoreHash(key string, hash []byte) {
+	c.cache.SetWithTTL("hash:"+key, hash, int64(len(hash)), cacheDuration)
 }
 
-func (c *Cache) GetHash(id int) ([]byte, bool) {
-	val, ok := c.cache.Get(fmt.Sprintf("hash:%d", id))
+func (c *Cache) GetHash(key string) ([]byte, bool) {
+	val, ok := c.cache.Get("hash:" + key)
 	if !ok {
 		return nil, false
 	}
