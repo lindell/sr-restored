@@ -5,10 +5,11 @@
 	import type { Program } from './types/program';
 
 	export let program: Program;
-	$: rssUrl = `${PUBLIC_BASE_URL}/rss/${program.id}`;
+	export let full: boolean = false;
+	export let includeFeeds: boolean = false;
 
-	function copy() {
-		navigator.clipboard.writeText(rssUrl);
+	function copy(text: string) {
+		navigator.clipboard.writeText(text);
 	}
 
 	function select(e: MouseEvent) {
@@ -18,9 +19,12 @@
 	}
 </script>
 
-<div class="program">
-	<div class="thumbnail">
-		<a href={program.url}
+<div
+	class="program {full ? 'full' : ''}"
+	style="view-transition-name: program-{program.id}; view-transition-class: program-card;"
+>
+	<div class="thumbnail" style="view-transition-name: program-thumb-{program.id};">
+		<a href={'/programs/' + program.id}
 			><img
 				src={program.image}
 				alt={program.name}
@@ -32,20 +36,33 @@
 	</div>
 
 	<div class="content">
-		<h2><a href={program.url}>{program.name}</a></h2>
+		<h2>
+			<a style="view-transition-name: program-title-{program.id};" href={'/programs/' + program.id}
+				>{program.name}</a
+			>
+		</h2>
 		<div class="description">
 			{program.description}
 		</div>
 	</div>
 
-	<div class="link">
-		<!-- svelte-ignore a11y_click_events_have_key_events a11y_no_noninteractive_element_interactions -->
-		<code on:click={select}>{rssUrl}</code>
-
-		<div>
-			<Button on:click={copy}>Kopiera</Button>
+	{#if includeFeeds}
+		<div class="link">
+			<!-- svelte-ignore a11y_click_events_have_key_events a11y_no_noninteractive_element_interactions -->
+			{#each ['', '/broadcast', '/download'] as suffix}
+				{@const url = `${PUBLIC_BASE_URL}/rss/${program.id}${suffix}`}
+				<div class="feed-row">
+					<div>Normala RSS flödet, fungerar för de flesta.</div>
+					<div class="feed-link">
+						<code on:click={select}>{url}</code>
+						<div class="copy-btn">
+							<Button on:click={() => copy(url)}>Kopiera</Button>
+						</div>
+					</div>
+				</div>
+			{/each}
 		</div>
-	</div>
+	{/if}
 </div>
 
 <style lang="scss">
@@ -62,7 +79,11 @@
 		color: #252323;
 		box-shadow: 1px 1px 5px #00000011;
 		flex: 0 0 25rem;
-		max-width: 100%;
+		max-width: 50rem;
+	}
+
+	.program.full {
+		flex: 0 0 100%;
 	}
 
 	.program:hover .thumbnail {
@@ -103,7 +124,7 @@
 
 	.content {
 		text-align: center;
-		padding: 0.25rem 1rem;
+		padding: 1.5rem 1rem;
 	}
 
 	.link {
@@ -117,5 +138,17 @@
 
 	.link > * {
 		margin: 1rem;
+	}
+
+	.feed-link {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 1rem;
+		flex-wrap: wrap;
+	}
+
+	.copy-btn {
+		margin-top: 0.5rem;
 	}
 </style>
