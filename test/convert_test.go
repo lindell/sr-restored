@@ -12,6 +12,17 @@ import (
 	"gotest.tools/v3/golden"
 )
 
+func getAndAssert(t *testing.T, url string, expectedFile string) {
+	resp, err := http.Get(url)
+	if err != nil {
+		t.Fatal(err)
+	}
+	resultBody, err := io.ReadAll(resp.Body)
+	require.NoError(t, err)
+
+	golden.Assert(t, string(resultBody), expectedFile)
+}
+
 func TestConvert(t *testing.T) {
 	mockTransport := testutil.MockTransport{}
 	prevClient := client.DefaultClient
@@ -27,14 +38,21 @@ func TestConvert(t *testing.T) {
 
 	u := setup(ctx, t)
 
-	rssURL := u.JoinPath("rss/2519").String()
+	getAndAssert(
+		t,
+		u.JoinPath("rss/2519").String(),
+		"default-rss.xml",
+	)
 
-	resp, err := http.Get(rssURL)
-	if err != nil {
-		t.Fatal(err)
-	}
-	resultBody, err := io.ReadAll(resp.Body)
-	require.NoError(t, err)
+	getAndAssert(
+		t,
+		u.JoinPath("rss/2519/broadcast").String(),
+		"broadcast-rss.xml",
+	)
 
-	golden.Assert(t, string(resultBody), "resulting-rss.xml")
+	getAndAssert(
+		t,
+		u.JoinPath("rss/2519/on-demand").String(),
+		"on-demand-rss.xml",
+	)
 }
