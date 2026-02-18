@@ -90,7 +90,7 @@ func (s *Server) Handler() http.Handler {
 
 	mainMux.HandleFunc("/rss/{id}", s.getRSS)
 	mainMux.HandleFunc("/rss/{id}/broadcast", s.getRSSBroadcast)
-	mainMux.HandleFunc("/rss/{id}/short", s.getRSSShort)
+	mainMux.HandleFunc("/rss/{id}/on-demand", s.getRSSOnDemand)
 	mainMux.Handle("/", http.FileServer(http.Dir("./static")))
 
 	return rootMux
@@ -104,7 +104,7 @@ func (s *Server) getRSSBroadcast(w http.ResponseWriter, r *http.Request) {
 	s.handleRSSFetch(w, r, []domain.FeedType{domain.FeedTypeBroadcast})
 }
 
-func (s *Server) getRSSShort(w http.ResponseWriter, r *http.Request) {
+func (s *Server) getRSSOnDemand(w http.ResponseWriter, r *http.Request) {
 	s.handleRSSFetch(w, r, []domain.FeedType{domain.FeedTypeDownload})
 }
 
