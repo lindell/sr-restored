@@ -20,7 +20,15 @@ func convertProgram(program ProgramInfo) domain.Program {
 	}
 }
 
-func convertEpisode(episode Episode) (domain.Episode, error) {
+// fileInfo holds the resolved audio file metadata for an episode.
+type fileInfo struct {
+	URL             string
+	DurationSeconds int
+	Bytes           int
+	ContentType     string
+}
+
+func convertEpisode(episode Episode, feedTypes []domain.FeedType) (domain.Episode, error) {
 	converted := domain.Episode{
 		ID:          episode.ID,
 		ProgramID:   episode.Program.ID,
@@ -31,27 +39,55 @@ func convertEpisode(episode Episode) (domain.Episode, error) {
 		ImageURL:    episode.Imageurl,
 	}
 
-	downloadFile := episode.Downloadpodfile
-	broadCastFile := episode.Broadcast.Broadcastfiles.Broadcastfile
-
-	if downloadFile.URL != "" {
-		converted.FileURL = downloadFile.URL
-		converted.FileDurationSeconds = downloadFile.Duration
-		converted.FileBytes = downloadFile.Filesizeinbytes
-		converted.ContentType = "audio/mpeg"
-	} else if broadCastFile.URL != "" {
-		converted.FileURL = broadCastFile.URL
-		converted.FileDurationSeconds = broadCastFile.Duration
-
-		contentType, fileSize, err := getFileInfo(broadCastFile.URL)
-		if err != nil {
-			return converted, errors.WithMessage(err, "could not determine file size")
-		}
-		converted.FileBytes = fileSize
-		converted.ContentType = contentType
+	fi, err := resolveFileInfo(episode, feedTypes)
+	if err != nil {
+		return converted, err
 	}
 
+	converted.FileURL = fi.URL
+	converted.FileDurationSeconds = fi.DurationSeconds
+	converted.FileBytes = fi.Bytes
+	converted.ContentType = fi.ContentType
+
 	return converted, nil
+}
+
+// resolveFileInfo selects the best available audio file for an episode based on
+// the preferred feed types. It returns nil if no suitable file is found.
+func resolveFileInfo(episode Episode, feedTypes []domain.FeedType) (fileInfo, error) {
+	for _, ft := range feedTypes {
+		switch ft {
+		case domain.FeedTypeDownload:
+			dl := episode.Downloadpodfile
+			if dl.URL == "" {
+				continue
+			}
+			return fileInfo{
+				URL:             dl.URL,
+				DurationSeconds: dl.Duration,
+				Bytes:           dl.Filesizeinbytes,
+				ContentType:     "audio/mpeg",
+			}, nil
+
+		case domain.FeedTypeBroadcast:
+			bc := episode.Broadcast.Broadcastfiles.Broadcastfile
+			if bc.URL == "" {
+				continue
+			}
+			contentType, size, err := getFileInfo(bc.URL)
+			if err != nil {
+				return fileInfo{}, errors.WithMessage(err, "could not determine broadcast file info")
+			}
+			return fileInfo{
+				URL:             bc.URL,
+				DurationSeconds: bc.Duration,
+				Bytes:           size,
+				ContentType:     contentType,
+			}, nil
+		}
+	}
+
+	return fileInfo{}, errors.New("could not find download file")
 }
 
 func getFileInfo(fileURL string) (contentType string, size int, err error) {

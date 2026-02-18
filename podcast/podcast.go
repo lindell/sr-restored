@@ -26,10 +26,10 @@ type Podcast struct {
 }
 
 type Cache interface {
-	StoreRSS(id int, rawRSS []byte)
-	GetRSS(id int) ([]byte, bool)
-	StoreHash(id int, hash []byte)
-	GetHash(id int) ([]byte, bool)
+	StoreRSS(key string, rawRSS []byte)
+	GetRSS(key string) ([]byte, bool)
+	StoreHash(key string, hash []byte)
+	GetHash(key string) ([]byte, bool)
 }
 
 type Database interface {
@@ -39,9 +39,12 @@ type Database interface {
 	InsertProgram(ctx context.Context, program domain.Program) error
 }
 
-func (p *Podcast) GetPodcast(ctx context.Context, id int) (rawRSS []byte, hash []byte, err error) {
+func (p *Podcast) GetPodcast(ctx context.Context, id int, feedTypes []domain.FeedType) (rawRSS []byte, hash []byte, err error) {
 	before := time.Now()
 	cached := false
+
+	cacheKey := fmt.Sprintf("%d:%v", id, feedTypes)
+
 	defer func() {
 		rssGetSecondsMetric.With(prometheus.Labels{
 			"cached": fmt.Sprint(cached),
@@ -52,14 +55,14 @@ func (p *Podcast) GetPodcast(ctx context.Context, id int) (rawRSS []byte, hash [
 		}).Inc()
 	}()
 
-	if rss, ok := p.Cache.GetRSS(id); ok {
+	if rss, ok := p.Cache.GetRSS(cacheKey); ok {
 		cached = true
 
-		hash, _ := p.Cache.GetHash(id)
+		hash, _ := p.Cache.GetHash(cacheKey)
 		return rss, hash, nil
 	}
 
-	program, err := client.GetProgram(ctx, id)
+	program, err := client.GetProgram(ctx, id, feedTypes)
 	if err != nil {
 		// Try to fetch from DB as a backup
 		var dbErr error
@@ -89,8 +92,8 @@ func (p *Podcast) GetPodcast(ctx context.Context, id int) (rawRSS []byte, hash [
 		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 		defer cancel()
 
-		p.Cache.StoreHash(id, program.Hash)
-		p.Cache.StoreRSS(id, gzipedRaw)
+		p.Cache.StoreHash(cacheKey, program.Hash)
+		p.Cache.StoreRSS(cacheKey, gzipedRaw)
 
 		err := p.Database.InsertEpisodes(ctx, program.Episodes)
 		if err != nil {
@@ -106,14 +109,14 @@ func (p *Podcast) GetPodcast(ctx context.Context, id int) (rawRSS []byte, hash [
 	return gzipedRaw, program.Hash, nil
 }
 
-func (p *Podcast) IsNewestVersion(ctx context.Context, id int, hash []byte) (isNewest bool) {
+func (p *Podcast) IsNewestVersion(ctx context.Context, id int, feedTypes []domain.FeedType, hash []byte) (isNewest bool) {
 	defer func() {
 		hashLookup.With(prometheus.Labels{
 			"success": fmt.Sprint(isNewest),
 		}).Inc()
 	}()
 
-	cachedHash, ok := p.Cache.GetHash(id)
+	cachedHash, ok := p.Cache.GetHash(fmt.Sprintf("%d:%v", id, feedTypes))
 	if !ok {
 		return false
 	}

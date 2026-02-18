@@ -15,6 +15,7 @@ import (
 	"time"
 
 	"github.com/NYTimes/gziphandler"
+	"github.com/lindell/sr-restored/domain"
 	"github.com/lindell/sr-restored/parallel"
 	"github.com/lindell/sr-restored/podcast"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
@@ -22,7 +23,16 @@ import (
 
 type Server struct {
 	Podcast         *podcast.Podcast
-	parallelFetcher *parallel.SharedGetter[rssWithHash]
+	parallelFetcher *parallel.SharedGetter[rssRequest, rssWithHash]
+}
+
+type rssRequest struct {
+	id        int
+	feedTypes []domain.FeedType
+}
+
+func (r rssRequest) String() string {
+	return fmt.Sprintf("%d:%v", r.id, r.feedTypes)
 }
 
 type rssWithHash struct {
@@ -34,8 +44,8 @@ type rssWithHash struct {
 func NewServer(podcast *podcast.Podcast) *Server {
 	return &Server{
 		Podcast: podcast,
-		parallelFetcher: parallel.NewSharedGetter(func(ctx context.Context, id int) (rssWithHash, error) {
-			rawRSS, hash, err := podcast.GetPodcast(ctx, id)
+		parallelFetcher: parallel.NewSharedGetter(func(ctx context.Context, req rssRequest) (rssWithHash, error) {
+			rawRSS, hash, err := podcast.GetPodcast(ctx, req.id, req.feedTypes)
 			return rssWithHash{value: rawRSS, hash: hash}, err
 		}),
 	}
@@ -79,12 +89,26 @@ func (s *Server) Handler() http.Handler {
 	rootMux.Handle("/", loggingMiddleware(slog.Default())(gziphandler.GzipHandler(mainMux)))
 
 	mainMux.HandleFunc("/rss/{id}", s.getRSS)
+	mainMux.HandleFunc("/rss/{id}/broadcast", s.getRSSBroadcast)
+	mainMux.HandleFunc("/rss/{id}/on-demand", s.getRSSOnDemand)
 	mainMux.Handle("/", http.FileServer(http.Dir("./static")))
 
 	return rootMux
 }
 
 func (s *Server) getRSS(w http.ResponseWriter, r *http.Request) {
+	s.handleRSSFetch(w, r, []domain.FeedType{domain.FeedTypeDownload, domain.FeedTypeBroadcast})
+}
+
+func (s *Server) getRSSBroadcast(w http.ResponseWriter, r *http.Request) {
+	s.handleRSSFetch(w, r, []domain.FeedType{domain.FeedTypeBroadcast})
+}
+
+func (s *Server) getRSSOnDemand(w http.ResponseWriter, r *http.Request) {
+	s.handleRSSFetch(w, r, []domain.FeedType{domain.FeedTypeDownload})
+}
+
+func (s *Server) handleRSSFetch(w http.ResponseWriter, r *http.Request, feedTypes []domain.FeedType) {
 	id, err := strconv.ParseInt(r.PathValue("id"), 10, 64)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
@@ -93,12 +117,12 @@ func (s *Server) getRSS(w http.ResponseWriter, r *http.Request) {
 	}
 
 	sentHash := getIfNoneMatchHash(r)
-	if sentHash != nil && s.Podcast.IsNewestVersion(r.Context(), int(id), sentHash) {
+	if sentHash != nil && s.Podcast.IsNewestVersion(r.Context(), int(id), feedTypes, sentHash) {
 		responseWithCacheHit(w, sentHash)
 		return
 	}
 
-	result, err := s.parallelFetcher.Fetch(r.Context(), int(id))
+	result, err := s.parallelFetcher.Fetch(r.Context(), rssRequest{id: int(id), feedTypes: feedTypes})
 	if err != nil {
 		handleError(w, r, err)
 		return

@@ -1,489 +1,561 @@
 <?xml version="1.0" encoding="utf-8"?>
 <sr>
-  <copyright>Copyright Sveriges Radio 2024. All rights reserved.</copyright>
+  <copyright>Copyright Sveriges Radio 2026. All rights reserved.</copyright>
   <pagination>
     <page>1</page>
     <size>10</size>
-    <totalhits>185</totalhits>
-    <totalpages>19</totalpages>
-    <nextpage>https://api.sr.se/v2/episodes/index?programid=5067&amp;audioquality=hi&amp;page=2</nextpage>
+    <totalhits>4787</totalhits>
+    <totalpages>479</totalpages>
+    <nextpage>https://api.sr.se/v2/episodes/index?programid=2024&amp;page=2</nextpage>
   </pagination>
   <episodes>
-    <episode id="2398612">
-      <title>Mary Seacole – skyddsängeln på slagfältet</title>
-      <description>En av Krimkrigets hjältinnor, som driven av sitt kall att vårda trotsade farliga smittohärdar och tidens rasism. Men jämte människokärleken fanns också en äventyrslängtan som gav henne ett remarkabelt liv.</description>
-      <url>https://sverigesradio.se/avsnitt/2398612</url>
-      <program id="5067" name="P3 Historia" />
-      <audiopreference>pod</audiopreference>
+    <episode id="2757769">
+      <title>Anna Anka, EU utreder sexdockehärvan och sovrumssängen</title>
+      <description>Migrationsverket om tonårsutvisningarna, klyvda Linnea, och stora pirog-resan.</description>
+      <url>https://www.sverigesradio.se/avsnitt/2757769</url>
+      <program id="2024" name="Morgonpasset i P3" />
+      <audiopreference>broadcast</audiopreference>
       <audiopriority>mp3</audiopriority>
-      <audiopresentation>format</audiopresentation>
-      <publishdateutc>2024-06-20T05:00:00Z</publishdateutc>
-      <imageurl>https://static-cdn.sr.se/images/5067/2fec2b26-b98b-4648-bc7a-20a056db1069.jpg?preset=api-default-square</imageurl>
-      <imageurltemplate>https://static-cdn.sr.se/images/5067/2fec2b26-b98b-4648-bc7a-20a056db1069.jpg</imageurltemplate>
-      <photographer>Kollage: Elina Perdahl</photographer>
-      <listenpodfile id="9343056">
-        <url>https://sverigesradio.se/topsy/ljudfil/srapi/9343056.mp3</url>
-        <statkey>/app/avsnitt/p3[k(164)]/p3 historia[p(5067)]/[e(2398612)]</statkey>
-        <duration>3528</duration>
-        <publishdateutc>2024-06-20T05:00:00Z</publishdateutc>
-        <title>Mary Seacole – skyddsängeln på slagfältet</title>
-        <description />
-        <filesizeinbytes>56467378</filesizeinbytes>
-        <program id="5067" name="P3 Historia" />
-        <availablefromutc>2024-06-20T05:00:00Z</availablefromutc>
-      </listenpodfile>
-      <downloadpodfile id="9343056">
-        <url>https://sverigesradio.se/topsy/ljudfil/srapi/9343056.mp3</url>
-        <statkey>/app/avsnitt/p3[k(164)]/p3 historia[p(5067)]/[e(2398612)]</statkey>
-        <duration>3528</duration>
-        <publishdateutc>2024-06-20T05:00:00Z</publishdateutc>
-        <title>Mary Seacole – skyddsängeln på slagfältet</title>
-        <description />
-        <filesizeinbytes>56467378</filesizeinbytes>
-        <program id="5067" name="P3 Historia" />
-        <availablefromutc>2024-06-20T05:00:00Z</availablefromutc>
-      </downloadpodfile>
-    </episode>
-    <episode id="2398611">
-      <title>Madame de Pompadour – älskad av kungen, hatad av folket</title>
-      <description>Borgarflickan som mot alla odds blev Frankrikes mäktigaste kvinna och vann kungens hjärta. Men för sin dröm fick hon betala med sin egen hälsa, och tvingades utstå hela det franska folkets hat och avsky.</description>
-      <url>https://sverigesradio.se/avsnitt/2398611</url>
-      <program id="5067" name="P3 Historia" />
-      <audiopreference>pod</audiopreference>
-      <audiopriority>mp3</audiopriority>
-      <audiopresentation>format</audiopresentation>
-      <publishdateutc>2024-06-06T05:00:00Z</publishdateutc>
-      <imageurl>https://static-cdn.sr.se/images/5067/29839159-78b3-45c7-b0ea-63d8938f4f8f.jpg?preset=api-default-square</imageurl>
-      <imageurltemplate>https://static-cdn.sr.se/images/5067/29839159-78b3-45c7-b0ea-63d8938f4f8f.jpg</imageurltemplate>
-      <photographer>Kollage: Elina Perdahl</photographer>
-      <listenpodfile id="9344012">
-        <url>https://sverigesradio.se/topsy/ljudfil/srapi/9344012.mp3</url>
-        <statkey>/app/avsnitt/p3[k(164)]/p3 historia[p(5067)]/[e(2398611)]</statkey>
-        <duration>3501</duration>
-        <publishdateutc>2024-06-06T05:00:00Z</publishdateutc>
-        <title>Madame de Pompadour – älskad av kungen, hatad av folket</title>
-        <description />
-        <filesizeinbytes>56039485</filesizeinbytes>
-        <program id="5067" name="P3 Historia" />
-        <availablefromutc>2024-06-06T05:00:00Z</availablefromutc>
-      </listenpodfile>
-      <downloadpodfile id="9344012">
-        <url>https://sverigesradio.se/topsy/ljudfil/srapi/9344012.mp3</url>
-        <statkey>/app/avsnitt/p3[k(164)]/p3 historia[p(5067)]/[e(2398611)]</statkey>
-        <duration>3501</duration>
-        <publishdateutc>2024-06-06T05:00:00Z</publishdateutc>
-        <title>Madame de Pompadour – älskad av kungen, hatad av folket</title>
-        <description />
-        <filesizeinbytes>56039485</filesizeinbytes>
-        <program id="5067" name="P3 Historia" />
-        <availablefromutc>2024-06-06T05:00:00Z</availablefromutc>
-      </downloadpodfile>
-    </episode>
-    <episode id="2377263">
-      <title>Cecilia rekommenderar: Leonardo da Vinci</title>
-      <description>Hör berättelsen om historiens största snille. Leonardo da Vinci var konstnären, ingenjören och visionären, som likt ingen annan gav kropp åt tidens ideal – den ultimata renässansmänniskan.</description>
-      <url>https://sverigesradio.se/avsnitt/2377263</url>
-      <program id="5067" name="P3 Historia" />
-      <audiopreference>pod</audiopreference>
-      <audiopriority>mp3</audiopriority>
-      <audiopresentation>format</audiopresentation>
-      <publishdateutc>2024-05-23T05:00:00Z</publishdateutc>
-      <imageurl>https://static-cdn.sr.se/images/5067/e5a246a5-cd7c-40eb-822f-d583473fa7dc.jpg?preset=api-default-square</imageurl>
-      <imageurltemplate>https://static-cdn.sr.se/images/5067/e5a246a5-cd7c-40eb-822f-d583473fa7dc.jpg</imageurltemplate>
-      <photographer>Kollage: Elina Perdahl</photographer>
-      <broadcasttime>
-        <starttimeutc>2024-05-23T05:00:00Z</starttimeutc>
-        <endtimeutc>2024-05-23T05:01:00Z</endtimeutc>
-      </broadcasttime>
-      <listenpodfile id="9287316">
-        <url>https://sverigesradio.se/topsy/ljudfil/srapi/9287316.mp3</url>
-        <statkey>/app/avsnitt/p3[k(164)]/p3 historia[p(5067)]/[e(2377263)]</statkey>
-        <duration>3292</duration>
-        <publishdateutc>2024-05-23T05:00:00Z</publishdateutc>
-        <title>Cecilia rekommenderar: Leonardo da Vinci</title>
-        <description />
-        <filesizeinbytes>52701902</filesizeinbytes>
-        <program id="5067" name="P3 Historia" />
-        <availablefromutc>2024-05-23T05:00:00Z</availablefromutc>
-      </listenpodfile>
-      <downloadpodfile id="9287316">
-        <url>https://sverigesradio.se/topsy/ljudfil/srapi/9287316.mp3</url>
-        <statkey>/app/avsnitt/p3[k(164)]/p3 historia[p(5067)]/[e(2377263)]</statkey>
-        <duration>3292</duration>
-        <publishdateutc>2024-05-23T05:00:00Z</publishdateutc>
-        <title>Cecilia rekommenderar: Leonardo da Vinci</title>
-        <description />
-        <filesizeinbytes>52701902</filesizeinbytes>
-        <program id="5067" name="P3 Historia" />
-        <availablefromutc>2024-05-23T05:00:00Z</availablefromutc>
-      </downloadpodfile>
-    </episode>
-    <episode id="2386637">
-      <title>Marilyn Monroe – glitter, glamour och nattsvart tragik</title>
-      <description>Filmhistoriens kanske mest berömda skådespelerska. Hon gick från inget till allt, skördade fantastiska framgångar – men vandrade hela sitt korta liv i skuggan av andras fördomar och sina egna demoner.</description>
-      <url>https://sverigesradio.se/avsnitt/2386637</url>
-      <program id="5067" name="P3 Historia" />
-      <audiopreference>pod</audiopreference>
-      <audiopriority>mp3</audiopriority>
-      <audiopresentation>format</audiopresentation>
-      <publishdateutc>2024-05-09T05:00:00Z</publishdateutc>
-      <imageurl>https://static-cdn.sr.se/images/5067/8e7aa2ea-8071-4d22-b1ae-48763dfff3e7.jpg?preset=api-default-square</imageurl>
-      <imageurltemplate>https://static-cdn.sr.se/images/5067/8e7aa2ea-8071-4d22-b1ae-48763dfff3e7.jpg</imageurltemplate>
-      <photographer>Elina Perdahl</photographer>
-      <listenpodfile id="9347881">
-        <url>https://sverigesradio.se/topsy/ljudfil/srapi/9347881.mp3</url>
-        <statkey>/app/avsnitt/p3[k(164)]/p3 historia[p(5067)]/[e(2386637)]</statkey>
-        <duration>3511</duration>
-        <publishdateutc>2024-05-09T05:00:00Z</publishdateutc>
-        <title>Marilyn Monroe – glitter, glamour och nattsvart tragik</title>
-        <description />
-        <filesizeinbytes>56199614</filesizeinbytes>
-        <program id="5067" name="P3 Historia" />
-        <availablefromutc>2024-05-09T05:00:00Z</availablefromutc>
-      </listenpodfile>
-      <downloadpodfile id="9347881">
-        <url>https://sverigesradio.se/topsy/ljudfil/srapi/9347881.mp3</url>
-        <statkey>/app/avsnitt/p3[k(164)]/p3 historia[p(5067)]/[e(2386637)]</statkey>
-        <duration>3511</duration>
-        <publishdateutc>2024-05-09T05:00:00Z</publishdateutc>
-        <title>Marilyn Monroe – glitter, glamour och nattsvart tragik</title>
-        <description />
-        <filesizeinbytes>56199614</filesizeinbytes>
-        <program id="5067" name="P3 Historia" />
-        <availablefromutc>2024-05-09T05:00:00Z</availablefromutc>
-      </downloadpodfile>
-    </episode>
-    <episode id="2384004">
-      <title>Elisabeth av Bayern – den motvilliga kejsarinnan</title>
-      <description>Den gudomligt vackra kejsarinnan som ständigt levde på flykt undan en kvävande tillvaro. I sin strävan efter kontroll förklarade hon krig mot sin egen kropp – något som nästan kostade henne livet.</description>
-      <url>https://sverigesradio.se/avsnitt/2384004</url>
-      <program id="5067" name="P3 Historia" />
-      <audiopreference>pod</audiopreference>
-      <audiopriority>mp3</audiopriority>
-      <audiopresentation>format</audiopresentation>
-      <publishdateutc>2024-04-25T05:00:00Z</publishdateutc>
-      <imageurl>https://static-cdn.sr.se/images/5067/45ec06a4-35a9-48e4-acfb-d17558867826.jpg?preset=api-default-square</imageurl>
-      <imageurltemplate>https://static-cdn.sr.se/images/5067/45ec06a4-35a9-48e4-acfb-d17558867826.jpg</imageurltemplate>
-      <photographer>Elina Perdahl</photographer>
+      <audiopresentation>music</audiopresentation>
+      <publishdateutc>2026-02-18T04:59:00Z</publishdateutc>
+      <imageurl>https://static-cdn.sr.se/images/2024/f0c1528c-d7a9-43d2-bf1a-086b4491d452.jpg?preset=api-default-square</imageurl>
+      <imageurltemplate>https://static-cdn.sr.se/images/2024/f0c1528c-d7a9-43d2-bf1a-086b4491d452.jpg</imageurltemplate>
+      <photographer>Sveriges Radio</photographer>
       <broadcast>
-        <availablestoputc p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
-        <playlist id="9300114">
-          <url>https://api.sr.se/api/radio/radio.aspx?type=broadcast&amp;id=9300114&amp;codingformat=.m4a&amp;metafile=asx&amp;quality=hi</url>
-          <statkey>/app/avsnitt/p3[k(164)]/p3 historia[p(5067)]/[e(2384004)]</statkey>
-          <duration>3584</duration>
-          <publishdateutc>2024-04-25T05:00:00Z</publishdateutc>
+        <availablestoputc>2026-03-20T08:30:00Z</availablestoputc>
+        <playlist id="10081421">
+          <url>https://api.sr.se/api/radio/radio.aspx?type=broadcast&amp;id=10081421&amp;codingformat=.m4a&amp;metafile=asx</url>
+          <statkey>/app/avsnitt/p3[k(164)]/morgonpasset i p3[p(2024)]/[e(2757769)]</statkey>
+          <duration>12660</duration>
+          <publishdateutc>2026-02-18T04:59:00Z</publishdateutc>
         </playlist>
         <broadcastfiles>
-          <broadcastfile id="9300114">
-            <url>https://sverigesradio.se/topsy/ljudfil/srapi/9300114-hi.m4a</url>
-            <statkey>/app/avsnitt/p3[k(164)]/p3 historia[p(5067)]/[e(2384004)]</statkey>
-            <duration>3584</duration>
-            <publishdateutc>2024-04-25T05:00:00Z</publishdateutc>
+          <broadcastfile id="10081421">
+            <url>https://lyssna-cdn.sr.se/ljudit/p3/morgonpasset_i_p3/2026/02/morgonpasset_i_p3_20260218_0559_192.m4a</url>
+            <statkey>/app/avsnitt/p3[k(164)]/morgonpasset i p3[p(2024)]/[e(2757769)]</statkey>
+            <duration>12660</duration>
+            <publishdateutc>2026-02-18T04:59:00Z</publishdateutc>
           </broadcastfile>
         </broadcastfiles>
       </broadcast>
       <broadcasttime>
-        <starttimeutc>2024-04-25T05:00:00Z</starttimeutc>
-        <endtimeutc>2024-04-25T05:01:00Z</endtimeutc>
+        <starttimeutc>2026-02-18T04:59:00Z</starttimeutc>
+        <endtimeutc>2026-02-18T08:30:00Z</endtimeutc>
       </broadcasttime>
-      <listenpodfile id="9300139">
-        <url>https://sverigesradio.se/topsy/ljudfil/srapi/9300139.mp3</url>
-        <statkey>/app/avsnitt/p3[k(164)]/p3 historia[p(5067)]/[e(2384004)]</statkey>
-        <duration>3584</duration>
-        <publishdateutc>2024-04-25T05:00:00Z</publishdateutc>
-        <title>Elisabeth av Bayern – den motvilliga kejsarinnan</title>
-        <description />
-        <filesizeinbytes>57360883</filesizeinbytes>
-        <program id="5067" name="P3 Historia" />
-        <availablefromutc>2024-05-02T05:00:00Z</availablefromutc>
-      </listenpodfile>
-      <downloadpodfile id="9300139">
-        <url>https://sverigesradio.se/topsy/ljudfil/srapi/9300139.mp3</url>
-        <statkey>/app/avsnitt/p3[k(164)]/p3 historia[p(5067)]/[e(2384004)]</statkey>
-        <duration>3584</duration>
-        <publishdateutc>2024-04-25T05:00:00Z</publishdateutc>
-        <title>Elisabeth av Bayern – den motvilliga kejsarinnan</title>
-        <description />
-        <filesizeinbytes>57360883</filesizeinbytes>
-        <program id="5067" name="P3 Historia" />
-        <availablefromutc>2024-05-02T05:00:00Z</availablefromutc>
-      </downloadpodfile>
+      <channelid>164</channelid>
     </episode>
-    <episode id="2373658">
-      <title>Lili'uokalani – Hawaiis sista drottning</title>
-      <description>Historien om den sista i raden av det fria Hawaiis regenter. Hon bar på hoppet om en ny gryning för nationens självständighet. Men i den ojämna kampen mot en hungrig, västerländsk elit förlorade hon sin krona – och landet sin suveränitet.</description>
-      <url>https://sverigesradio.se/avsnitt/2373658</url>
-      <program id="5067" name="P3 Historia" />
-      <audiopreference>pod</audiopreference>
+    <episode id="2742651">
+      <title>Jimmy Guo, Trollkarlen Druid och förlåter vi Tyra Banks?</title>
+      <description>Kinas mjuka makt, Fettisarnas dag, och Tigern och Råttans nya år.</description>
+      <url>https://www.sverigesradio.se/avsnitt/2742651</url>
+      <program id="2024" name="Morgonpasset i P3" />
+      <audiopreference>broadcast</audiopreference>
       <audiopriority>mp3</audiopriority>
-      <audiopresentation>format</audiopresentation>
-      <publishdateutc>2024-04-11T05:00:00Z</publishdateutc>
-      <imageurl>https://static-cdn.sr.se/images/5067/eee93be6-fd4b-429e-95bf-5fcd262f41e4.jpg?preset=api-default-square</imageurl>
-      <imageurltemplate>https://static-cdn.sr.se/images/5067/eee93be6-fd4b-429e-95bf-5fcd262f41e4.jpg</imageurltemplate>
+      <audiopresentation>music</audiopresentation>
+      <publishdateutc>2026-02-17T04:59:00Z</publishdateutc>
+      <imageurl>https://static-cdn.sr.se/images/2024/f0c1528c-d7a9-43d2-bf1a-086b4491d452.jpg?preset=api-default-square</imageurl>
+      <imageurltemplate>https://static-cdn.sr.se/images/2024/f0c1528c-d7a9-43d2-bf1a-086b4491d452.jpg</imageurltemplate>
+      <photographer>Sveriges Radio</photographer>
       <broadcast>
-        <availablestoputc p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
-        <playlist id="9275096">
-          <url>https://api.sr.se/api/radio/radio.aspx?type=broadcast&amp;id=9275096&amp;codingformat=.m4a&amp;metafile=asx&amp;quality=hi</url>
-          <statkey>/app/avsnitt/p3[k(164)]/p3 historia[p(5067)]/[e(2373658)]</statkey>
-          <duration>3548</duration>
-          <publishdateutc>2024-04-11T05:00:00Z</publishdateutc>
+        <availablestoputc>2026-03-19T08:30:00Z</availablestoputc>
+        <playlist id="10080287">
+          <url>https://api.sr.se/api/radio/radio.aspx?type=broadcast&amp;id=10080287&amp;codingformat=.m4a&amp;metafile=asx</url>
+          <statkey>/app/avsnitt/p3[k(164)]/morgonpasset i p3[p(2024)]/[e(2742651)]</statkey>
+          <duration>12660</duration>
+          <publishdateutc>2026-02-17T04:59:00Z</publishdateutc>
         </playlist>
         <broadcastfiles>
-          <broadcastfile id="9275096">
-            <url>https://sverigesradio.se/topsy/ljudfil/srapi/9275096-hi.m4a</url>
-            <statkey>/app/avsnitt/p3[k(164)]/p3 historia[p(5067)]/[e(2373658)]</statkey>
-            <duration>3548</duration>
-            <publishdateutc>2024-04-11T05:00:00Z</publishdateutc>
+          <broadcastfile id="10080287">
+            <url>https://lyssna-cdn.sr.se/autorec/et2w/p3/morgonpasset_i_p3/2026/02/SRP3_2026-02-17_055900_12660_a32.m4a</url>
+            <statkey>/app/avsnitt/p3[k(164)]/morgonpasset i p3[p(2024)]/[e(2742651)]</statkey>
+            <duration>12660</duration>
+            <publishdateutc>2026-02-17T04:59:00Z</publishdateutc>
           </broadcastfile>
         </broadcastfiles>
       </broadcast>
       <broadcasttime>
-        <starttimeutc>2024-04-11T05:00:00Z</starttimeutc>
-        <endtimeutc>2024-04-11T05:01:00Z</endtimeutc>
+        <starttimeutc>2026-02-17T04:59:00Z</starttimeutc>
+        <endtimeutc>2026-02-17T08:30:00Z</endtimeutc>
       </broadcasttime>
-      <listenpodfile id="9280051">
-        <url>https://sverigesradio.se/topsy/ljudfil/srapi/9280051.mp3</url>
-        <statkey>/app/avsnitt/p3[k(164)]/p3 historia[p(5067)]/[e(2373658)]</statkey>
-        <duration>3548</duration>
-        <publishdateutc>2024-04-11T05:00:00Z</publishdateutc>
-        <title>Lili'uokalani – Hawaiis sista drottning</title>
+      <listenpodfile id="10080274">
+        <url>https://static-cdn.sr.se/laddahem/podradio/2026/02/program_mp_172_20260217_1004351522.mp3</url>
+        <statkey>/app/avsnitt/p3[k(164)]/morgonpasset i p3[p(2024)]/[e(2742651)]</statkey>
+        <duration>5453</duration>
+        <publishdateutc>2026-02-17T04:59:00Z</publishdateutc>
+        <title>Jimmy Guo, Trollkarlen Druid och förlåter vi Tyra Banks?</title>
         <description />
-        <filesizeinbytes>56791384</filesizeinbytes>
-        <program id="5067" name="P3 Historia" />
-        <availablefromutc>2024-04-11T05:00:00Z</availablefromutc>
+        <filesizeinbytes>87261578</filesizeinbytes>
+        <program id="2024" name="Morgonpasset i P3" />
+        <availablefromutc>2026-02-17T08:47:00Z</availablefromutc>
       </listenpodfile>
-      <downloadpodfile id="9280051">
-        <url>https://sverigesradio.se/topsy/ljudfil/srapi/9280051.mp3</url>
-        <statkey>/app/avsnitt/p3[k(164)]/p3 historia[p(5067)]/[e(2373658)]</statkey>
-        <duration>3548</duration>
-        <publishdateutc>2024-04-11T05:00:00Z</publishdateutc>
-        <title>Lili'uokalani – Hawaiis sista drottning</title>
+      <downloadpodfile id="10080274">
+        <url>https://static-cdn.sr.se/laddahem/podradio/2026/02/program_mp_172_20260217_1004351522.mp3</url>
+        <statkey>/app/avsnitt/p3[k(164)]/morgonpasset i p3[p(2024)]/[e(2742651)]</statkey>
+        <duration>5453</duration>
+        <publishdateutc>2026-02-17T04:59:00Z</publishdateutc>
+        <title>Jimmy Guo, Trollkarlen Druid och förlåter vi Tyra Banks?</title>
         <description />
-        <filesizeinbytes>56791384</filesizeinbytes>
-        <program id="5067" name="P3 Historia" />
-        <availablefromutc>2024-04-11T05:00:00Z</availablefromutc>
+        <filesizeinbytes>87261578</filesizeinbytes>
+        <program id="2024" name="Morgonpasset i P3" />
+        <availablefromutc>2026-02-17T08:47:00Z</availablefromutc>
       </downloadpodfile>
+      <channelid>164</channelid>
     </episode>
-    <episode id="2366289">
-      <title>Vidkun Quisling – Hitlers norska hantlangare</title>
-      <description>Berättelsen om den norska officeren som ställde Norges portar på vid gavel för Hitler. Något som gjorde honom medskyldig till nazisternas ockupation – som sände tusentals av hans landsmän i döden.</description>
-      <url>https://sverigesradio.se/avsnitt/2366289</url>
-      <program id="5067" name="P3 Historia" />
-      <audiopreference>pod</audiopreference>
+    <episode id="2742637">
+      <title>Sarah Dawn Finer, Davids drömjobb och sperm hotell</title>
+      <description>Ta ingen sak i taget, point finger Pete och Linnea och Sarahs duett.</description>
+      <url>https://www.sverigesradio.se/avsnitt/2742637</url>
+      <program id="2024" name="Morgonpasset i P3" />
+      <audiopreference>broadcast</audiopreference>
       <audiopriority>mp3</audiopriority>
-      <audiopresentation>format</audiopresentation>
-      <publishdateutc>2024-03-28T06:00:00Z</publishdateutc>
-      <imageurl>https://static-cdn.sr.se/images/5067/7c235be2-57f6-46d7-bb84-fa758a1d092d.jpg?preset=api-default-square</imageurl>
-      <imageurltemplate>https://static-cdn.sr.se/images/5067/7c235be2-57f6-46d7-bb84-fa758a1d092d.jpg</imageurltemplate>
-      <photographer>Nami Kawakita</photographer>
+      <audiopresentation>music</audiopresentation>
+      <publishdateutc>2026-02-16T04:59:00Z</publishdateutc>
+      <imageurl>https://static-cdn.sr.se/images/2024/f0c1528c-d7a9-43d2-bf1a-086b4491d452.jpg?preset=api-default-square</imageurl>
+      <imageurltemplate>https://static-cdn.sr.se/images/2024/f0c1528c-d7a9-43d2-bf1a-086b4491d452.jpg</imageurltemplate>
+      <photographer>Sveriges Radio</photographer>
       <broadcast>
-        <availablestoputc p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
-        <playlist id="9257684">
-          <url>https://api.sr.se/api/radio/radio.aspx?type=broadcast&amp;id=9257684&amp;codingformat=.m4a&amp;metafile=asx&amp;quality=hi</url>
-          <statkey>/app/avsnitt/p3[k(164)]/p3 historia[p(5067)]/[e(2366289)]</statkey>
-          <duration>3414</duration>
-          <publishdateutc>2024-03-28T06:00:00Z</publishdateutc>
+        <availablestoputc>2026-03-18T08:30:00Z</availablestoputc>
+        <playlist id="10079184">
+          <url>https://api.sr.se/api/radio/radio.aspx?type=broadcast&amp;id=10079184&amp;codingformat=.m4a&amp;metafile=asx</url>
+          <statkey>/app/avsnitt/p3[k(164)]/morgonpasset i p3[p(2024)]/[e(2742637)]</statkey>
+          <duration>12660</duration>
+          <publishdateutc>2026-02-16T04:59:00Z</publishdateutc>
         </playlist>
         <broadcastfiles>
-          <broadcastfile id="9257684">
-            <url>https://sverigesradio.se/topsy/ljudfil/srapi/9257684-hi.m4a</url>
-            <statkey>/app/avsnitt/p3[k(164)]/p3 historia[p(5067)]/[e(2366289)]</statkey>
-            <duration>3414</duration>
-            <publishdateutc>2024-03-28T06:00:00Z</publishdateutc>
+          <broadcastfile id="10079184">
+            <url>https://lyssna-cdn.sr.se/ljudit/p3/morgonpasset_i_p3/2026/02/morgonpasset_i_p3_20260216_0559_192.m4a</url>
+            <statkey>/app/avsnitt/p3[k(164)]/morgonpasset i p3[p(2024)]/[e(2742637)]</statkey>
+            <duration>12660</duration>
+            <publishdateutc>2026-02-16T04:59:00Z</publishdateutc>
           </broadcastfile>
         </broadcastfiles>
       </broadcast>
       <broadcasttime>
-        <starttimeutc>2024-03-28T06:00:00Z</starttimeutc>
-        <endtimeutc>2024-03-28T06:01:00Z</endtimeutc>
+        <starttimeutc>2026-02-16T04:59:00Z</starttimeutc>
+        <endtimeutc>2026-02-16T08:30:00Z</endtimeutc>
       </broadcasttime>
-      <listenpodfile id="9257696">
-        <url>https://sverigesradio.se/topsy/ljudfil/srapi/9257696.mp3</url>
-        <statkey>/app/avsnitt/p3[k(164)]/p3 historia[p(5067)]/[e(2366289)]</statkey>
-        <duration>3414</duration>
-        <publishdateutc>2024-03-28T06:00:00Z</publishdateutc>
-        <title>Vidkun Quisling – Hitlers norska hantlangare</title>
+      <listenpodfile id="10079229">
+        <url>https://static-cdn.sr.se/laddahem/podradio/2026/02/program_sarah_dawn_finer_davids_dromj_20260216_1006221652.mp3</url>
+        <statkey>/app/avsnitt/p3[k(164)]/morgonpasset i p3[p(2024)]/[e(2742637)]</statkey>
+        <duration>5937</duration>
+        <publishdateutc>2026-02-16T04:59:00Z</publishdateutc>
+        <title>Sarah Dawn Finer, Davids drömjobb och sperm hotell</title>
         <description />
-        <filesizeinbytes>54646709</filesizeinbytes>
-        <program id="5067" name="P3 Historia" />
-        <availablefromutc>2024-04-04T05:00:00Z</availablefromutc>
+        <filesizeinbytes>95003913</filesizeinbytes>
+        <program id="2024" name="Morgonpasset i P3" />
+        <availablefromutc>2026-02-16T08:51:00Z</availablefromutc>
       </listenpodfile>
-      <downloadpodfile id="9257696">
-        <url>https://sverigesradio.se/topsy/ljudfil/srapi/9257696.mp3</url>
-        <statkey>/app/avsnitt/p3[k(164)]/p3 historia[p(5067)]/[e(2366289)]</statkey>
-        <duration>3414</duration>
-        <publishdateutc>2024-03-28T06:00:00Z</publishdateutc>
-        <title>Vidkun Quisling – Hitlers norska hantlangare</title>
+      <downloadpodfile id="10079229">
+        <url>https://static-cdn.sr.se/laddahem/podradio/2026/02/program_sarah_dawn_finer_davids_dromj_20260216_1006221652.mp3</url>
+        <statkey>/app/avsnitt/p3[k(164)]/morgonpasset i p3[p(2024)]/[e(2742637)]</statkey>
+        <duration>5937</duration>
+        <publishdateutc>2026-02-16T04:59:00Z</publishdateutc>
+        <title>Sarah Dawn Finer, Davids drömjobb och sperm hotell</title>
         <description />
-        <filesizeinbytes>54646709</filesizeinbytes>
-        <program id="5067" name="P3 Historia" />
-        <availablefromutc>2024-04-04T05:00:00Z</availablefromutc>
+        <filesizeinbytes>95003913</filesizeinbytes>
+        <program id="2024" name="Morgonpasset i P3" />
+        <availablefromutc>2026-02-16T08:51:00Z</availablefromutc>
       </downloadpodfile>
+      <channelid>164</channelid>
     </episode>
-    <episode id="2356166">
-      <title>Ivar Kreuger – svindlande höjder och bottenlöst fall</title>
-      <description>Om tändstickskungen som bländade en hel värld. Under det glada 20-talet skapade han ett världsomspännande affärsimperium. Men när de ekonomiska hjulen började kärva föll allt ihop som ett korthus – och slutade i total katastrof.</description>
-      <url>https://sverigesradio.se/avsnitt/2356166</url>
-      <program id="5067" name="P3 Historia" />
-      <audiopreference>pod</audiopreference>
+    <episode id="2738212">
+      <title>Dolph Lundgren, Magges vinter-k och fingrar i mun</title>
+      <description>Harry Styles upptäcker en kopp kaffe, OS-silver i tvätteri och IFS nya programledare.</description>
+      <url>https://www.sverigesradio.se/avsnitt/2738212</url>
+      <program id="2024" name="Morgonpasset i P3" />
+      <audiopreference>broadcast</audiopreference>
       <audiopriority>mp3</audiopriority>
-      <audiopresentation>format</audiopresentation>
-      <publishdateutc>2024-03-14T06:00:00Z</publishdateutc>
-      <imageurl>https://static-cdn.sr.se/images/5067/962406d9-101a-40c2-a3fb-ea92882bef20.jpg?preset=api-default-square</imageurl>
-      <imageurltemplate>https://static-cdn.sr.se/images/5067/962406d9-101a-40c2-a3fb-ea92882bef20.jpg</imageurltemplate>
+      <audiopresentation>music</audiopresentation>
+      <publishdateutc>2026-02-15T07:00:00Z</publishdateutc>
+      <imageurl>https://static-cdn.sr.se/images/2024/f0c1528c-d7a9-43d2-bf1a-086b4491d452.jpg?preset=api-default-square</imageurl>
+      <imageurltemplate>https://static-cdn.sr.se/images/2024/f0c1528c-d7a9-43d2-bf1a-086b4491d452.jpg</imageurltemplate>
+      <photographer>Sveriges Radio</photographer>
       <broadcast>
-        <availablestoputc p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
-        <playlist id="9236412">
-          <url>https://api.sr.se/api/radio/radio.aspx?type=broadcast&amp;id=9236412&amp;codingformat=.m4a&amp;metafile=asx&amp;quality=hi</url>
-          <statkey>/app/avsnitt/p3[k(164)]/p3 historia[p(5067)]/[e(2356166)]</statkey>
-          <duration>3385</duration>
-          <publishdateutc>2024-03-14T06:00:00Z</publishdateutc>
+        <availablestoputc>2026-03-17T10:00:00Z</availablestoputc>
+        <playlist id="10078641">
+          <url>https://api.sr.se/api/radio/radio.aspx?type=broadcast&amp;id=10078641&amp;codingformat=.m4a&amp;metafile=asx</url>
+          <statkey>/app/avsnitt/p3[k(164)]/morgonpasset i p3[p(2024)]/[e(2738212)]</statkey>
+          <duration>10800</duration>
+          <publishdateutc>2026-02-15T07:00:00Z</publishdateutc>
         </playlist>
         <broadcastfiles>
-          <broadcastfile id="9236412">
-            <url>https://sverigesradio.se/topsy/ljudfil/srapi/9236412-hi.m4a</url>
-            <statkey>/app/avsnitt/p3[k(164)]/p3 historia[p(5067)]/[e(2356166)]</statkey>
-            <duration>3385</duration>
-            <publishdateutc>2024-03-14T06:00:00Z</publishdateutc>
+          <broadcastfile id="10078641">
+            <url>https://lyssna-cdn.sr.se/ljudit/p3/morgonpasset_i_p3/2026/02/morgonpasset_i_p3_20260215_0800_192.m4a</url>
+            <statkey>/app/avsnitt/p3[k(164)]/morgonpasset i p3[p(2024)]/[e(2738212)]</statkey>
+            <duration>10800</duration>
+            <publishdateutc>2026-02-15T07:00:00Z</publishdateutc>
           </broadcastfile>
         </broadcastfiles>
       </broadcast>
       <broadcasttime>
-        <starttimeutc>2024-03-14T06:00:00Z</starttimeutc>
-        <endtimeutc>2024-03-14T06:01:00Z</endtimeutc>
+        <starttimeutc>2026-02-15T07:00:00Z</starttimeutc>
+        <endtimeutc>2026-02-15T10:00:00Z</endtimeutc>
       </broadcasttime>
-      <listenpodfile id="9243626">
-        <url>https://sverigesradio.se/topsy/ljudfil/srapi/9243626.mp3</url>
-        <statkey>/app/avsnitt/p3[k(164)]/p3 historia[p(5067)]/[e(2356166)]</statkey>
-        <duration>3385</duration>
-        <publishdateutc>2024-03-14T06:00:00Z</publishdateutc>
-        <title>Ivar Kreuger – svindlande höjder och bottenlöst fall</title>
+      <listenpodfile id="10078651">
+        <url>https://static-cdn.sr.se/laddahem/podradio/2026/02/program_mp_152_20260215_1135350967.mp3</url>
+        <statkey>/app/avsnitt/p3[k(164)]/morgonpasset i p3[p(2024)]/[e(2738212)]</statkey>
+        <duration>4836</duration>
+        <publishdateutc>2026-02-15T07:00:00Z</publishdateutc>
+        <title>Dolph Lundgren, Magges vinter-k och fingrar i mun</title>
         <description />
-        <filesizeinbytes>54182109</filesizeinbytes>
-        <program id="5067" name="P3 Historia" />
-        <availablefromutc>2024-03-21T06:00:00Z</availablefromutc>
+        <filesizeinbytes>77386250</filesizeinbytes>
+        <program id="2024" name="Morgonpasset i P3" />
+        <availablefromutc>2026-02-15T10:24:00Z</availablefromutc>
       </listenpodfile>
-      <downloadpodfile id="9243626">
-        <url>https://sverigesradio.se/topsy/ljudfil/srapi/9243626.mp3</url>
-        <statkey>/app/avsnitt/p3[k(164)]/p3 historia[p(5067)]/[e(2356166)]</statkey>
-        <duration>3385</duration>
-        <publishdateutc>2024-03-14T06:00:00Z</publishdateutc>
-        <title>Ivar Kreuger – svindlande höjder och bottenlöst fall</title>
+      <downloadpodfile id="10078651">
+        <url>https://static-cdn.sr.se/laddahem/podradio/2026/02/program_mp_152_20260215_1135350967.mp3</url>
+        <statkey>/app/avsnitt/p3[k(164)]/morgonpasset i p3[p(2024)]/[e(2738212)]</statkey>
+        <duration>4836</duration>
+        <publishdateutc>2026-02-15T07:00:00Z</publishdateutc>
+        <title>Dolph Lundgren, Magges vinter-k och fingrar i mun</title>
         <description />
-        <filesizeinbytes>54182109</filesizeinbytes>
-        <program id="5067" name="P3 Historia" />
-        <availablefromutc>2024-03-21T06:00:00Z</availablefromutc>
+        <filesizeinbytes>77386250</filesizeinbytes>
+        <program id="2024" name="Morgonpasset i P3" />
+        <availablefromutc>2026-02-15T10:24:00Z</availablefromutc>
       </downloadpodfile>
+      <channelid>164</channelid>
     </episode>
-    <episode id="2350388">
-      <title>Agrippina den yngre – kejsarinna, giftmördare, intrigmakare</title>
-      <description>Berättelsen om Agrippina den yngre, född rakt in i Roms elit till ett liv fyllt av överflöd, makt och ständig livsfara.</description>
-      <url>https://sverigesradio.se/avsnitt/2350388</url>
-      <program id="5067" name="P3 Historia" />
-      <audiopreference>pod</audiopreference>
+    <episode id="2738201">
+      <title>Johanna Wagrell, curlingskandalen och polariserad kärlek</title>
+      <description>Curling-graniten från Epstein-ön, naken protest och alla hjärtansdag-fails.</description>
+      <url>https://www.sverigesradio.se/avsnitt/2738201</url>
+      <program id="2024" name="Morgonpasset i P3" />
+      <audiopreference>broadcast</audiopreference>
       <audiopriority>mp3</audiopriority>
-      <audiopresentation>format</audiopresentation>
-      <publishdateutc>2024-02-29T06:00:00Z</publishdateutc>
-      <imageurl>https://static-cdn.sr.se/images/5067/b524c552-9d57-48dd-ae0d-6ac050810126.jpg?preset=api-default-square</imageurl>
-      <imageurltemplate>https://static-cdn.sr.se/images/5067/b524c552-9d57-48dd-ae0d-6ac050810126.jpg</imageurltemplate>
+      <audiopresentation>music</audiopresentation>
+      <publishdateutc>2026-02-14T07:00:00Z</publishdateutc>
+      <imageurl>https://static-cdn.sr.se/images/2024/11891787-7955-47c6-be52-a11cd0a2dbc2.jpg?preset=api-default-square</imageurl>
+      <imageurltemplate>https://static-cdn.sr.se/images/2024/11891787-7955-47c6-be52-a11cd0a2dbc2.jpg</imageurltemplate>
+      <photographer>Sveriges Radio</photographer>
       <broadcast>
-        <availablestoputc p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
-        <playlist id="9223822">
-          <url>https://api.sr.se/api/radio/radio.aspx?type=broadcast&amp;id=9223822&amp;codingformat=.m4a&amp;metafile=asx&amp;quality=hi</url>
-          <statkey>/app/avsnitt/p3[k(164)]/p3 historia[p(5067)]/[e(2350388)]</statkey>
-          <duration>3492</duration>
-          <publishdateutc>2024-02-29T06:00:00Z</publishdateutc>
+        <availablestoputc>2026-03-16T10:00:00Z</availablestoputc>
+        <playlist id="10078201">
+          <url>https://api.sr.se/api/radio/radio.aspx?type=broadcast&amp;id=10078201&amp;codingformat=.m4a&amp;metafile=asx</url>
+          <statkey>/app/avsnitt/p3[k(164)]/morgonpasset i p3[p(2024)]/[e(2738201)]</statkey>
+          <duration>10800</duration>
+          <publishdateutc>2026-02-14T07:00:00Z</publishdateutc>
         </playlist>
         <broadcastfiles>
-          <broadcastfile id="9223822">
-            <url>https://sverigesradio.se/topsy/ljudfil/srapi/9223822-hi.m4a</url>
-            <statkey>/app/avsnitt/p3[k(164)]/p3 historia[p(5067)]/[e(2350388)]</statkey>
-            <duration>3492</duration>
-            <publishdateutc>2024-02-29T06:00:00Z</publishdateutc>
+          <broadcastfile id="10078201">
+            <url>https://lyssna-cdn.sr.se/ljudit/p3/morgonpasset_i_p3/2026/02/morgonpasset_i_p3_20260214_0800_192.m4a</url>
+            <statkey>/app/avsnitt/p3[k(164)]/morgonpasset i p3[p(2024)]/[e(2738201)]</statkey>
+            <duration>10800</duration>
+            <publishdateutc>2026-02-14T07:00:00Z</publishdateutc>
           </broadcastfile>
         </broadcastfiles>
       </broadcast>
       <broadcasttime>
-        <starttimeutc>2024-02-29T06:00:00Z</starttimeutc>
-        <endtimeutc>2024-02-29T06:01:00Z</endtimeutc>
+        <starttimeutc>2026-02-14T07:00:00Z</starttimeutc>
+        <endtimeutc>2026-02-14T10:00:00Z</endtimeutc>
       </broadcasttime>
-      <listenpodfile id="9223881">
-        <url>https://sverigesradio.se/topsy/ljudfil/srapi/9223881.mp3</url>
-        <statkey>/app/avsnitt/p3[k(164)]/p3 historia[p(5067)]/[e(2350388)]</statkey>
-        <duration>3492</duration>
-        <publishdateutc>2024-02-29T06:00:00Z</publishdateutc>
-        <title>Agrippina den yngre – kejsarinna, giftmördare, intrigmakare</title>
+      <listenpodfile id="10078211">
+        <url>https://static-cdn.sr.se/laddahem/podradio/2026/02/program_mp_142_20260214_1139022798.mp3</url>
+        <statkey>/app/avsnitt/p3[k(164)]/morgonpasset i p3[p(2024)]/[e(2738201)]</statkey>
+        <duration>4529</duration>
+        <publishdateutc>2026-02-14T07:00:00Z</publishdateutc>
+        <title>Johanna Wagrell, curlingskandalen och polariserad kärlek</title>
         <description />
-        <filesizeinbytes>55895407</filesizeinbytes>
-        <program id="5067" name="P3 Historia" />
-        <availablefromutc>2024-03-07T06:00:00Z</availablefromutc>
+        <filesizeinbytes>72478346</filesizeinbytes>
+        <program id="2024" name="Morgonpasset i P3" />
+        <availablefromutc>2026-02-14T10:26:00Z</availablefromutc>
       </listenpodfile>
-      <downloadpodfile id="9223881">
-        <url>https://sverigesradio.se/topsy/ljudfil/srapi/9223881.mp3</url>
-        <statkey>/app/avsnitt/p3[k(164)]/p3 historia[p(5067)]/[e(2350388)]</statkey>
-        <duration>3492</duration>
-        <publishdateutc>2024-02-29T06:00:00Z</publishdateutc>
-        <title>Agrippina den yngre – kejsarinna, giftmördare, intrigmakare</title>
+      <downloadpodfile id="10078211">
+        <url>https://static-cdn.sr.se/laddahem/podradio/2026/02/program_mp_142_20260214_1139022798.mp3</url>
+        <statkey>/app/avsnitt/p3[k(164)]/morgonpasset i p3[p(2024)]/[e(2738201)]</statkey>
+        <duration>4529</duration>
+        <publishdateutc>2026-02-14T07:00:00Z</publishdateutc>
+        <title>Johanna Wagrell, curlingskandalen och polariserad kärlek</title>
         <description />
-        <filesizeinbytes>55895407</filesizeinbytes>
-        <program id="5067" name="P3 Historia" />
-        <availablefromutc>2024-03-07T06:00:00Z</availablefromutc>
+        <filesizeinbytes>72478346</filesizeinbytes>
+        <program id="2024" name="Morgonpasset i P3" />
+        <availablefromutc>2026-02-14T10:26:00Z</availablefromutc>
       </downloadpodfile>
+      <channelid>164</channelid>
     </episode>
-    <episode id="2343058">
-      <title>Cecilia rekommenderar: Albert Einstein</title>
-      <description>Ett av våra mest populära avsnitt - om det envisa geniet som skakade om hela vår bild av universum och drömde om världsfred, men blev medskapare till mänsklighetens värsta vapen.</description>
-      <url>https://sverigesradio.se/avsnitt/2343058</url>
-      <program id="5067" name="P3 Historia" />
-      <audiopreference>pod</audiopreference>
+    <episode id="2738192">
+      <title>Isabella Wranå, våga fråga Linnea och statligt tjatsex</title>
+      <description>World worst prisons in the world, Druidopedia och är Linnea och David bättre än Hanna och Garplind?</description>
+      <url>https://www.sverigesradio.se/avsnitt/2738192</url>
+      <program id="2024" name="Morgonpasset i P3" />
+      <audiopreference>broadcast</audiopreference>
       <audiopriority>mp3</audiopriority>
-      <audiopresentation>format</audiopresentation>
-      <publishdateutc>2024-02-15T06:00:00Z</publishdateutc>
-      <imageurl>https://static-cdn.sr.se/images/5067/be098bac-b0ce-42fc-9ffe-92193f607844.jpg?preset=api-default-square</imageurl>
-      <imageurltemplate>https://static-cdn.sr.se/images/5067/be098bac-b0ce-42fc-9ffe-92193f607844.jpg</imageurltemplate>
+      <audiopresentation>music</audiopresentation>
+      <publishdateutc>2026-02-13T04:59:00Z</publishdateutc>
+      <imageurl>https://static-cdn.sr.se/images/2024/f0c1528c-d7a9-43d2-bf1a-086b4491d452.jpg?preset=api-default-square</imageurl>
+      <imageurltemplate>https://static-cdn.sr.se/images/2024/f0c1528c-d7a9-43d2-bf1a-086b4491d452.jpg</imageurltemplate>
+      <photographer>Sveriges Radio</photographer>
       <broadcast>
-        <availablestoputc p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
-        <playlist id="9220285">
-          <url>https://api.sr.se/api/radio/radio.aspx?type=broadcast&amp;id=9220285&amp;codingformat=.m4a&amp;metafile=asx&amp;quality=hi</url>
-          <statkey>/app/avsnitt/p3[k(164)]/p3 historia[p(5067)]/[e(2343058)]</statkey>
-          <duration>3447</duration>
-          <publishdateutc>2024-02-15T06:00:00Z</publishdateutc>
+        <availablestoputc>2026-03-15T08:30:00Z</availablestoputc>
+        <playlist id="10075083">
+          <url>https://api.sr.se/api/radio/radio.aspx?type=broadcast&amp;id=10075083&amp;codingformat=.m4a&amp;metafile=asx</url>
+          <statkey>/app/avsnitt/p3[k(164)]/morgonpasset i p3[p(2024)]/[e(2738192)]</statkey>
+          <duration>12660</duration>
+          <publishdateutc>2026-02-13T04:59:00Z</publishdateutc>
         </playlist>
         <broadcastfiles>
-          <broadcastfile id="9220285">
-            <url>https://sverigesradio.se/topsy/ljudfil/srapi/9220285-hi.m4a</url>
-            <statkey>/app/avsnitt/p3[k(164)]/p3 historia[p(5067)]/[e(2343058)]</statkey>
-            <duration>3447</duration>
-            <publishdateutc>2024-02-15T06:00:00Z</publishdateutc>
+          <broadcastfile id="10075083">
+            <url>https://lyssna-cdn.sr.se/ljudit/p3/morgonpasset_i_p3/2026/02/morgonpasset_i_p3_20260213_0559_192.m4a</url>
+            <statkey>/app/avsnitt/p3[k(164)]/morgonpasset i p3[p(2024)]/[e(2738192)]</statkey>
+            <duration>12660</duration>
+            <publishdateutc>2026-02-13T04:59:00Z</publishdateutc>
           </broadcastfile>
         </broadcastfiles>
       </broadcast>
       <broadcasttime>
-        <starttimeutc>2024-02-15T06:00:00Z</starttimeutc>
-        <endtimeutc>2024-02-15T06:01:00Z</endtimeutc>
+        <starttimeutc>2026-02-13T04:59:00Z</starttimeutc>
+        <endtimeutc>2026-02-13T08:30:00Z</endtimeutc>
       </broadcasttime>
-      <listenpodfile id="9220136">
-        <url>https://sverigesradio.se/topsy/ljudfil/srapi/9220136.mp3</url>
-        <statkey>/app/avsnitt/p3[k(164)]/p3 historia[p(5067)]/[e(2343058)]</statkey>
-        <duration>3447</duration>
-        <publishdateutc>2024-02-15T06:00:00Z</publishdateutc>
-        <title>Cecilia rekommenderar: Albert Einstein</title>
+      <listenpodfile id="10075136">
+        <url>https://static-cdn.sr.se/laddahem/podradio/2026/02/morgonpasset_i_p3_isabella_wrana_vaga_fraga_lin_20260213_1017161895.mp3</url>
+        <statkey>/app/avsnitt/p3[k(164)]/morgonpasset i p3[p(2024)]/[e(2738192)]</statkey>
+        <duration>5669</duration>
+        <publishdateutc>2026-02-13T04:59:00Z</publishdateutc>
+        <title>Isabella Wranå, våga fråga Linnea och statligt tjatsex</title>
         <description />
-        <filesizeinbytes>55171201</filesizeinbytes>
-        <program id="5067" name="P3 Historia" />
-        <availablefromutc>2024-02-22T06:00:00Z</availablefromutc>
+        <filesizeinbytes>90739973</filesizeinbytes>
+        <program id="2024" name="Morgonpasset i P3" />
+        <availablefromutc>2026-02-13T09:00:00Z</availablefromutc>
       </listenpodfile>
-      <downloadpodfile id="9220136">
-        <url>https://sverigesradio.se/topsy/ljudfil/srapi/9220136.mp3</url>
-        <statkey>/app/avsnitt/p3[k(164)]/p3 historia[p(5067)]/[e(2343058)]</statkey>
-        <duration>3447</duration>
-        <publishdateutc>2024-02-15T06:00:00Z</publishdateutc>
-        <title>Cecilia rekommenderar: Albert Einstein</title>
+      <downloadpodfile id="10075136">
+        <url>https://static-cdn.sr.se/laddahem/podradio/2026/02/morgonpasset_i_p3_isabella_wrana_vaga_fraga_lin_20260213_1017161895.mp3</url>
+        <statkey>/app/avsnitt/p3[k(164)]/morgonpasset i p3[p(2024)]/[e(2738192)]</statkey>
+        <duration>5669</duration>
+        <publishdateutc>2026-02-13T04:59:00Z</publishdateutc>
+        <title>Isabella Wranå, våga fråga Linnea och statligt tjatsex</title>
         <description />
-        <filesizeinbytes>55171201</filesizeinbytes>
-        <program id="5067" name="P3 Historia" />
-        <availablefromutc>2024-02-22T06:00:00Z</availablefromutc>
+        <filesizeinbytes>90739973</filesizeinbytes>
+        <program id="2024" name="Morgonpasset i P3" />
+        <availablefromutc>2026-02-13T09:00:00Z</availablefromutc>
       </downloadpodfile>
+      <channelid>164</channelid>
+    </episode>
+    <episode id="2738185">
+      <title>Valter Nilsson, AI-barnprogram och lyssnarna hatar Linnea</title>
+      <description>Vi tar hänsyn till ALLA, SVT:s kritiserade AI-barnprogram och vidriga försäljarbeteenden.</description>
+      <url>https://www.sverigesradio.se/avsnitt/2738185</url>
+      <program id="2024" name="Morgonpasset i P3" />
+      <audiopreference>broadcast</audiopreference>
+      <audiopriority>mp3</audiopriority>
+      <audiopresentation>music</audiopresentation>
+      <publishdateutc>2026-02-12T04:59:00Z</publishdateutc>
+      <imageurl>https://static-cdn.sr.se/images/2024/f0c1528c-d7a9-43d2-bf1a-086b4491d452.jpg?preset=api-default-square</imageurl>
+      <imageurltemplate>https://static-cdn.sr.se/images/2024/f0c1528c-d7a9-43d2-bf1a-086b4491d452.jpg</imageurltemplate>
+      <photographer>Sveriges Radio</photographer>
+      <broadcast>
+        <availablestoputc>2026-03-14T08:30:00Z</availablestoputc>
+        <playlist id="10073887">
+          <url>https://api.sr.se/api/radio/radio.aspx?type=broadcast&amp;id=10073887&amp;codingformat=.m4a&amp;metafile=asx</url>
+          <statkey>/app/avsnitt/p3[k(164)]/morgonpasset i p3[p(2024)]/[e(2738185)]</statkey>
+          <duration>12660</duration>
+          <publishdateutc>2026-02-12T04:59:00Z</publishdateutc>
+        </playlist>
+        <broadcastfiles>
+          <broadcastfile id="10073887">
+            <url>https://lyssna-cdn.sr.se/ljudit/p3/morgonpasset_i_p3/2026/02/morgonpasset_i_p3_20260212_0559_192.m4a</url>
+            <statkey>/app/avsnitt/p3[k(164)]/morgonpasset i p3[p(2024)]/[e(2738185)]</statkey>
+            <duration>12660</duration>
+            <publishdateutc>2026-02-12T04:59:00Z</publishdateutc>
+          </broadcastfile>
+        </broadcastfiles>
+      </broadcast>
+      <broadcasttime>
+        <starttimeutc>2026-02-12T04:59:00Z</starttimeutc>
+        <endtimeutc>2026-02-12T08:30:00Z</endtimeutc>
+      </broadcasttime>
+      <listenpodfile id="10073889">
+        <url>https://static-cdn.sr.se/laddahem/podradio/2026/02/program_mp_122_20260212_0943385327.mp3</url>
+        <statkey>/app/avsnitt/p3[k(164)]/morgonpasset i p3[p(2024)]/[e(2738185)]</statkey>
+        <duration>5694</duration>
+        <publishdateutc>2026-02-12T04:59:00Z</publishdateutc>
+        <title>Valter Nilsson, AI-barnprogram och lyssnarna hatar Linnea</title>
+        <description />
+        <filesizeinbytes>91112330</filesizeinbytes>
+        <program id="2024" name="Morgonpasset i P3" />
+        <availablefromutc>2026-02-12T08:31:00Z</availablefromutc>
+      </listenpodfile>
+      <downloadpodfile id="10073889">
+        <url>https://static-cdn.sr.se/laddahem/podradio/2026/02/program_mp_122_20260212_0943385327.mp3</url>
+        <statkey>/app/avsnitt/p3[k(164)]/morgonpasset i p3[p(2024)]/[e(2738185)]</statkey>
+        <duration>5694</duration>
+        <publishdateutc>2026-02-12T04:59:00Z</publishdateutc>
+        <title>Valter Nilsson, AI-barnprogram och lyssnarna hatar Linnea</title>
+        <description />
+        <filesizeinbytes>91112330</filesizeinbytes>
+        <program id="2024" name="Morgonpasset i P3" />
+        <availablefromutc>2026-02-12T08:31:00Z</availablefromutc>
+      </downloadpodfile>
+      <channelid>164</channelid>
+    </episode>
+    <episode id="2738178">
+      <title>Otrohetsintervjun, Svenska Fröknar och hur mår Norge egentligen?</title>
+      <description>David Druid har begått bandana, era rom-com moments och Babs vingummiterori.</description>
+      <url>https://www.sverigesradio.se/avsnitt/2738178</url>
+      <program id="2024" name="Morgonpasset i P3" />
+      <audiopreference>broadcast</audiopreference>
+      <audiopriority>mp3</audiopriority>
+      <audiopresentation>music</audiopresentation>
+      <publishdateutc>2026-02-11T04:59:00Z</publishdateutc>
+      <imageurl>https://static-cdn.sr.se/images/2024/f0c1528c-d7a9-43d2-bf1a-086b4491d452.jpg?preset=api-default-square</imageurl>
+      <imageurltemplate>https://static-cdn.sr.se/images/2024/f0c1528c-d7a9-43d2-bf1a-086b4491d452.jpg</imageurltemplate>
+      <photographer>Sveriges Radio</photographer>
+      <broadcast>
+        <availablestoputc>2026-03-13T08:30:00Z</availablestoputc>
+        <playlist id="10072691">
+          <url>https://api.sr.se/api/radio/radio.aspx?type=broadcast&amp;id=10072691&amp;codingformat=.m4a&amp;metafile=asx</url>
+          <statkey>/app/avsnitt/p3[k(164)]/morgonpasset i p3[p(2024)]/[e(2738178)]</statkey>
+          <duration>12660</duration>
+          <publishdateutc>2026-02-11T04:59:00Z</publishdateutc>
+        </playlist>
+        <broadcastfiles>
+          <broadcastfile id="10072691">
+            <url>https://lyssna-cdn.sr.se/ljudit/p3/morgonpasset_i_p3/2026/02/morgonpasset_i_p3_20260211_0559_192.m4a</url>
+            <statkey>/app/avsnitt/p3[k(164)]/morgonpasset i p3[p(2024)]/[e(2738178)]</statkey>
+            <duration>12660</duration>
+            <publishdateutc>2026-02-11T04:59:00Z</publishdateutc>
+          </broadcastfile>
+        </broadcastfiles>
+      </broadcast>
+      <broadcasttime>
+        <starttimeutc>2026-02-11T04:59:00Z</starttimeutc>
+        <endtimeutc>2026-02-11T08:30:00Z</endtimeutc>
+      </broadcasttime>
+      <listenpodfile id="10072740">
+        <url>https://static-cdn.sr.se/laddahem/podradio/2026/02/morgonpasset_i_p3_otrohetsintervjun_svenska_fro_20260211_1026321030.mp3</url>
+        <statkey>/app/avsnitt/p3[k(164)]/morgonpasset i p3[p(2024)]/[e(2738178)]</statkey>
+        <duration>6084</duration>
+        <publishdateutc>2026-02-11T04:59:00Z</publishdateutc>
+        <title>Otrohetsintervjun, Svenska Fröknar och hur mår Norge egentligen?</title>
+        <description />
+        <filesizeinbytes>97371254</filesizeinbytes>
+        <program id="2024" name="Morgonpasset i P3" />
+        <availablefromutc>2026-02-11T09:26:00Z</availablefromutc>
+      </listenpodfile>
+      <downloadpodfile id="10072740">
+        <url>https://static-cdn.sr.se/laddahem/podradio/2026/02/morgonpasset_i_p3_otrohetsintervjun_svenska_fro_20260211_1026321030.mp3</url>
+        <statkey>/app/avsnitt/p3[k(164)]/morgonpasset i p3[p(2024)]/[e(2738178)]</statkey>
+        <duration>6084</duration>
+        <publishdateutc>2026-02-11T04:59:00Z</publishdateutc>
+        <title>Otrohetsintervjun, Svenska Fröknar och hur mår Norge egentligen?</title>
+        <description />
+        <filesizeinbytes>97371254</filesizeinbytes>
+        <program id="2024" name="Morgonpasset i P3" />
+        <availablefromutc>2026-02-11T09:26:00Z</availablefromutc>
+      </downloadpodfile>
+      <channelid>164</channelid>
+    </episode>
+    <episode id="2738171">
+      <title>Lisa borg, Sveriges snyggaste kollega och skånska Barbie</title>
+      <description>David kommer aldrig sluta komma ihåg, Brandsta sviker skånskan och storbråk i Örebro.</description>
+      <url>https://www.sverigesradio.se/avsnitt/2738171</url>
+      <program id="2024" name="Morgonpasset i P3" />
+      <audiopreference>broadcast</audiopreference>
+      <audiopriority>mp3</audiopriority>
+      <audiopresentation>music</audiopresentation>
+      <publishdateutc>2026-02-10T04:59:00Z</publishdateutc>
+      <imageurl>https://static-cdn.sr.se/images/2024/f0c1528c-d7a9-43d2-bf1a-086b4491d452.jpg?preset=api-default-square</imageurl>
+      <imageurltemplate>https://static-cdn.sr.se/images/2024/f0c1528c-d7a9-43d2-bf1a-086b4491d452.jpg</imageurltemplate>
+      <photographer>Sveriges Radio</photographer>
+      <broadcast>
+        <availablestoputc>2026-03-12T08:30:00Z</availablestoputc>
+        <playlist id="10071478">
+          <url>https://api.sr.se/api/radio/radio.aspx?type=broadcast&amp;id=10071478&amp;codingformat=.m4a&amp;metafile=asx</url>
+          <statkey>/app/avsnitt/p3[k(164)]/morgonpasset i p3[p(2024)]/[e(2738171)]</statkey>
+          <duration>12660</duration>
+          <publishdateutc>2026-02-10T04:59:00Z</publishdateutc>
+        </playlist>
+        <broadcastfiles>
+          <broadcastfile id="10071478">
+            <url>https://lyssna-cdn.sr.se/ljudit/p3/morgonpasset_i_p3/2026/02/morgonpasset_i_p3_20260210_0559_192.m4a</url>
+            <statkey>/app/avsnitt/p3[k(164)]/morgonpasset i p3[p(2024)]/[e(2738171)]</statkey>
+            <duration>12660</duration>
+            <publishdateutc>2026-02-10T04:59:00Z</publishdateutc>
+          </broadcastfile>
+        </broadcastfiles>
+      </broadcast>
+      <broadcasttime>
+        <starttimeutc>2026-02-10T04:59:00Z</starttimeutc>
+        <endtimeutc>2026-02-10T08:30:00Z</endtimeutc>
+      </broadcasttime>
+      <listenpodfile id="10071554">
+        <url>https://static-cdn.sr.se/laddahem/podradio/2026/02/morgonpasset_i_p3_lisa_borg_sveriges_snyggaste_20260210_1026325786.mp3</url>
+        <statkey>/app/avsnitt/p3[k(164)]/morgonpasset i p3[p(2024)]/[e(2738171)]</statkey>
+        <duration>5312</duration>
+        <publishdateutc>2026-02-10T04:59:00Z</publishdateutc>
+        <title>Lisa borg, Sveriges snyggaste kollega och skånska Barbie</title>
+        <description />
+        <filesizeinbytes>85022200</filesizeinbytes>
+        <program id="2024" name="Morgonpasset i P3" />
+        <availablefromutc>2026-02-10T09:26:00Z</availablefromutc>
+      </listenpodfile>
+      <downloadpodfile id="10071554">
+        <url>https://static-cdn.sr.se/laddahem/podradio/2026/02/morgonpasset_i_p3_lisa_borg_sveriges_snyggaste_20260210_1026325786.mp3</url>
+        <statkey>/app/avsnitt/p3[k(164)]/morgonpasset i p3[p(2024)]/[e(2738171)]</statkey>
+        <duration>5312</duration>
+        <publishdateutc>2026-02-10T04:59:00Z</publishdateutc>
+        <title>Lisa borg, Sveriges snyggaste kollega och skånska Barbie</title>
+        <description />
+        <filesizeinbytes>85022200</filesizeinbytes>
+        <program id="2024" name="Morgonpasset i P3" />
+        <availablefromutc>2026-02-10T09:26:00Z</availablefromutc>
+      </downloadpodfile>
+      <channelid>164</channelid>
+    </episode>
+    <episode id="2738164">
+      <title>Måndagsblund, Bad Bunnys Super Bowl och rodel-ölmage</title>
+      <description>Hela Sverige måndagsblundar, Magges hårda verklighet och kn-hotell i Polen.</description>
+      <url>https://www.sverigesradio.se/avsnitt/2738164</url>
+      <program id="2024" name="Morgonpasset i P3" />
+      <audiopreference>broadcast</audiopreference>
+      <audiopriority>mp3</audiopriority>
+      <audiopresentation>music</audiopresentation>
+      <publishdateutc>2026-02-09T04:59:00Z</publishdateutc>
+      <imageurl>https://static-cdn.sr.se/images/2024/f0c1528c-d7a9-43d2-bf1a-086b4491d452.jpg?preset=api-default-square</imageurl>
+      <imageurltemplate>https://static-cdn.sr.se/images/2024/f0c1528c-d7a9-43d2-bf1a-086b4491d452.jpg</imageurltemplate>
+      <photographer>Sveriges Radio</photographer>
+      <broadcast>
+        <availablestoputc>2026-03-11T08:30:00Z</availablestoputc>
+        <playlist id="10070231">
+          <url>https://api.sr.se/api/radio/radio.aspx?type=broadcast&amp;id=10070231&amp;codingformat=.m4a&amp;metafile=asx</url>
+          <statkey>/app/avsnitt/p3[k(164)]/morgonpasset i p3[p(2024)]/[e(2738164)]</statkey>
+          <duration>12660</duration>
+          <publishdateutc>2026-02-09T04:59:00Z</publishdateutc>
+        </playlist>
+        <broadcastfiles>
+          <broadcastfile id="10070231">
+            <url>https://lyssna-cdn.sr.se/ljudit/p3/morgonpasset_i_p3/2026/02/morgonpasset_i_p3_20260209_0559_32.m4a</url>
+            <statkey>/app/avsnitt/p3[k(164)]/morgonpasset i p3[p(2024)]/[e(2738164)]</statkey>
+            <duration>12660</duration>
+            <publishdateutc>2026-02-09T04:59:00Z</publishdateutc>
+          </broadcastfile>
+        </broadcastfiles>
+      </broadcast>
+      <broadcasttime>
+        <starttimeutc>2026-02-09T04:59:00Z</starttimeutc>
+        <endtimeutc>2026-02-09T08:30:00Z</endtimeutc>
+      </broadcasttime>
+      <listenpodfile id="10070274">
+        <url>https://static-cdn.sr.se/laddahem/podradio/2026/02/program_mp_92_20260209_0956057229.mp3</url>
+        <statkey>/app/avsnitt/p3[k(164)]/morgonpasset i p3[p(2024)]/[e(2738164)]</statkey>
+        <duration>5029</duration>
+        <publishdateutc>2026-02-09T04:59:00Z</publishdateutc>
+        <title>Måndagsblund, Bad Bunnys Super Bowl och rodel-ölmage</title>
+        <description />
+        <filesizeinbytes>80476297</filesizeinbytes>
+        <program id="2024" name="Morgonpasset i P3" />
+        <availablefromutc>2026-02-09T08:44:00Z</availablefromutc>
+      </listenpodfile>
+      <downloadpodfile id="10070274">
+        <url>https://static-cdn.sr.se/laddahem/podradio/2026/02/program_mp_92_20260209_0956057229.mp3</url>
+        <statkey>/app/avsnitt/p3[k(164)]/morgonpasset i p3[p(2024)]/[e(2738164)]</statkey>
+        <duration>5029</duration>
+        <publishdateutc>2026-02-09T04:59:00Z</publishdateutc>
+        <title>Måndagsblund, Bad Bunnys Super Bowl och rodel-ölmage</title>
+        <description />
+        <filesizeinbytes>80476297</filesizeinbytes>
+        <program id="2024" name="Morgonpasset i P3" />
+        <availablefromutc>2026-02-09T08:44:00Z</availablefromutc>
+      </downloadpodfile>
+      <channelid>164</channelid>
     </episode>
   </episodes>
 </sr>

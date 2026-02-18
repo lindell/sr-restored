@@ -3,6 +3,7 @@ package parallel
 import (
 	"context"
 	"errors"
+	"fmt"
 	"sync"
 	"testing"
 	"time"
@@ -10,32 +11,38 @@ import (
 	"gotest.tools/v3/assert"
 )
 
+type testKey int
+
+func (k testKey) String() string {
+	return fmt.Sprint(int(k))
+}
+
 func Test_newSharedGetter(t *testing.T) {
 	fetchFunc, releaseLock, calls := createTester()
 	sg := NewSharedGetter(fetchFunc)
 	ctx := context.Background()
 
 	go func() {
-		val, err := sg.Fetch(ctx, 1)
+		val, err := sg.Fetch(ctx, testKey(1))
 		assert.Equal(t, val, 1, "Expected value to be 1")
 		assert.NilError(t, err, "Expected no error for ID 1")
 	}()
 	go func() {
-		val, err := sg.Fetch(ctx, 1)
+		val, err := sg.Fetch(ctx, testKey(1))
 		assert.Equal(t, val, 1, "Expected value to be 1")
 		assert.NilError(t, err, "Expected no error for ID 1")
 	}()
 	go func() {
-		val, err := sg.Fetch(ctx, 2)
+		val, err := sg.Fetch(ctx, testKey(2))
 		assert.Equal(t, val, 2, "Expected value to be 2")
 		assert.NilError(t, err, "Expected no error for ID 2")
 	}()
 	go func() {
-		_, err := sg.Fetch(ctx, 3)
+		_, err := sg.Fetch(ctx, testKey(3))
 		assert.Equal(t, err, testErr, "Expected error for ID 3")
 	}()
 	go func() {
-		val, err := sg.Fetch(ctx, 2)
+		val, err := sg.Fetch(ctx, testKey(2))
 		assert.Equal(t, val, 2, "Expected value to be 2")
 		assert.NilError(t, err, "Expected no error for ID 2")
 	}()
@@ -57,12 +64,13 @@ func Test_newSharedGetter(t *testing.T) {
 	assert.Equal(t, calls[1], 2, "Expected fetchFunc to be called once more for ID 1")
 }
 
-func createTester() (func(context.Context, int) (int, error), func(), map[int]int) {
+func createTester() (func(context.Context, testKey) (int, error), func(), map[int]int) {
 	lock := &sync.Mutex{}
 	calls := map[int]int{}
 	lock.Lock()
 
-	testFetchFunc := func(ctx context.Context, id int) (int, error) {
+	testFetchFunc := func(ctx context.Context, key testKey) (int, error) {
+		id := int(key)
 		lock.Lock()
 		calls[id]++
 		lock.Unlock()
