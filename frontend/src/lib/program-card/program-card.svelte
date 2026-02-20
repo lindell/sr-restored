@@ -73,7 +73,7 @@
 		<div class="link">
 			<!-- svelte-ignore a11y_click_events_have_key_events a11y_no_noninteractive_element_interactions -->
 			<div class="feed-grid">
-				{#each feeds as feed, i}
+				{#each feeds as feed, i (feed.label)}
 					{@const url = `${PUBLIC_BASE_URL}/rss/${program.id}${feed.suffix}`}
 					{@const hidden = i > 0 && !showMoreFeeds}
 					<div class="feed-row-item" class:hidden>
