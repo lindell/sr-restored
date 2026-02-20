@@ -76,7 +76,9 @@
 				{#each feeds as feed, i}
 					{@const url = `${PUBLIC_BASE_URL}/rss/${program.id}${feed.suffix}`}
 					{@const hidden = i > 0 && !showMoreFeeds}
-					<div class="feed-row-item" class:hidden><InfoPopover label={feed.label} info={feed.info} /></div>
+					<div class="feed-row-item" class:hidden>
+						<InfoPopover label={feed.label} info={feed.info} />
+					</div>
 					<code class:hidden on:click={select}>{url}</code>
 					<div class="feed-row-item copy-btn" class:hidden>
 						<Button on:click={() => copy(url)}>Kopiera</Button>
@@ -171,7 +173,7 @@
 		align-items: center;
 	}
 
-	.feed-grid > :nth-child(n+4) {
+	.feed-grid > :nth-child(n + 4) {
 		margin-top: 0.75rem;
 	}
 

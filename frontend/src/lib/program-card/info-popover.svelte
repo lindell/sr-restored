@@ -19,7 +19,7 @@
 	}
 
 	function handleBlur(e: FocusEvent) {
-		const wrapper = (e.currentTarget as HTMLElement);
+		const wrapper = e.currentTarget as HTMLElement;
 		// Delay to allow focus to move within the wrapper
 		setTimeout(() => {
 			if (!wrapper.contains(document.activeElement)) {
@@ -40,13 +40,7 @@
 	>
 		<img src={infoCircle} alt="" class="info-icon" />
 	</button>
-	<div
-		{id}
-		class="feed-popover"
-		class:open
-		role="tooltip"
-		aria-hidden={!open}
-	>
+	<div {id} class="feed-popover" class:open role="tooltip" aria-hidden={!open}>
 		<strong>{label}</strong>
 		<p>{info}</p>
 	</div>
