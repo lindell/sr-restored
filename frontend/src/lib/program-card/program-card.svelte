@@ -61,9 +61,7 @@
 
 	<div class="content">
 		<h2>
-			<a style="view-transition-name: program-title-{program.id};" href={link}
-				>{program.name}</a
-			>
+			<a style="view-transition-name: program-title-{program.id};" href={link}>{program.name}</a>
 		</h2>
 		<div class="description">
 			{program.description}
