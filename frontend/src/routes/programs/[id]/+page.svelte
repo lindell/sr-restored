@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ProgramCard from '$lib/program-card.svelte';
+	import ProgramCard from '$lib/program-card/program-card.svelte';
 	import type { Program } from '$lib/types/program';
 
 	export let data: PageData;
