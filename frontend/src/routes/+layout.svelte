@@ -1,3 +1,18 @@
+<script lang="ts">
+	import { onNavigate } from '$app/navigation';
+
+	onNavigate((navigation) => {
+		if (!document.startViewTransition) return;
+
+		return new Promise((resolve) => {
+			document.startViewTransition(async () => {
+				resolve();
+				await navigation.complete;
+			});
+		});
+	});
+</script>
+
 <svelte:head>
 	<title>SR restored</title>
 	<meta
@@ -27,6 +42,19 @@
 		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 		background: #252323;
 		color: #eef4ed;
+	}
+
+	/* View transition styles for program cards with changing proportions */
+	:global(::view-transition-group(.program-card)) {
+		overflow: hidden;
+	}
+
+	:global(::view-transition-old(.program-card)),
+	:global(::view-transition-new(.program-card)) {
+		/* Prevent distortion during size changes by keeping content at its natural size */
+		object-fit: none;
+		object-position: top center;
+		overflow: clip;
 	}
 
 	.ribbon {
