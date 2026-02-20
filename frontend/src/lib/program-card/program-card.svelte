@@ -12,6 +12,7 @@
 	export let includeFeeds: boolean = false;
 
 	let showMoreFeeds = false;
+	let link = full ? program.url : '/programs/' + program.id;
 
 	const feeds = [
 		{
@@ -47,7 +48,7 @@
 	style="view-transition-name: program-{program.id}; view-transition-class: program-card;"
 >
 	<div class="thumbnail" style="view-transition-name: program-thumb-{program.id};">
-		<a href={'/programs/' + program.id}
+		<a href={link}
 			><img
 				src={program.image}
 				alt={program.name}
@@ -60,7 +61,7 @@
 
 	<div class="content">
 		<h2>
-			<a style="view-transition-name: program-title-{program.id};" href={'/programs/' + program.id}
+			<a style="view-transition-name: program-title-{program.id};" href={link}
 				>{program.name}</a
 			>
 		</h2>
@@ -96,7 +97,7 @@
 
 <style lang="scss">
 	$border-radius: 2rem;
-	$thumbnail-offset: 2rem;
+	$thumbnail-offset: 3rem;
 
 	.program {
 		position: relative;
@@ -109,6 +110,7 @@
 		box-shadow: 1px 1px 5px #00000011;
 		flex: 0 0 25rem;
 		max-width: 50rem;
+		padding: 1rem;
 	}
 
 	.program.full {
@@ -171,6 +173,7 @@
 		grid-template-columns: auto auto auto;
 		column-gap: 1rem;
 		align-items: center;
+		margin-top: 0;
 	}
 
 	.feed-grid > :nth-child(n + 4) {
