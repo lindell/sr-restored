@@ -59,39 +59,39 @@
 		>
 	</div>
 
-    <div class="program-inner">
-	<div class="content">
-		<h2>
-			<a style="view-transition-name: program-title-{program.id};" href={link}>{program.name}</a>
-		</h2>
-		<div class="description">
-			{program.description}
-		</div>
-	</div>
-
-	{#if includeFeeds}
-		<div class="link">
-			<!-- svelte-ignore a11y_click_events_have_key_events a11y_no_noninteractive_element_interactions -->
-			<div class="feed-grid">
-				{#each feeds as feed, i (feed.label)}
-					{@const url = `${PUBLIC_BASE_URL}/rss/${program.id}${feed.suffix}`}
-					{@const hidden = i > 0 && !showMoreFeeds}
-					<div class="feed-row-item" class:hidden>
-						<InfoPopover label={feed.label} info={feed.info} />
-					</div>
-					<code class:hidden on:click={select}>{url}</code>
-					<div class="feed-row-item copy-btn" class:hidden>
-						<Button on:click={() => copy(url)}>Kopiera</Button>
-					</div>
-				{/each}
+	<div class="program-inner">
+		<div class="content">
+			<h2>
+				<a style="view-transition-name: program-title-{program.id};" href={link}>{program.name}</a>
+			</h2>
+			<div class="description">
+				{program.description}
 			</div>
-
-			<button class="toggle-feeds" on:click={() => (showMoreFeeds = !showMoreFeeds)}>
-				{showMoreFeeds ? 'Dölj alternativa flöden' : 'Visa alternativa flöden'}
-				<img src={showMoreFeeds ? caretUp : caretDown} alt="" class="caret-icon" />
-			</button>
 		</div>
-	{/if}
+
+		{#if includeFeeds}
+			<div class="link">
+				<!-- svelte-ignore a11y_click_events_have_key_events a11y_no_noninteractive_element_interactions -->
+				<div class="feed-grid">
+					{#each feeds as feed, i (feed.label)}
+						{@const url = `${PUBLIC_BASE_URL}/rss/${program.id}${feed.suffix}`}
+						{@const hidden = i > 0 && !showMoreFeeds}
+						<div class="feed-row-item" class:hidden>
+							<InfoPopover label={feed.label} info={feed.info} />
+						</div>
+						<code class:hidden on:click={select}>{url}</code>
+						<div class="feed-row-item copy-btn" class:hidden>
+							<Button on:click={() => copy(url)}>Kopiera</Button>
+						</div>
+					{/each}
+				</div>
+
+				<button class="toggle-feeds" on:click={() => (showMoreFeeds = !showMoreFeeds)}>
+					{showMoreFeeds ? 'Dölj alternativa flöden' : 'Visa alternativa flöden'}
+					<img src={showMoreFeeds ? caretUp : caretDown} alt="" class="caret-icon" />
+				</button>
+			</div>
+		{/if}
 	</div>
 </div>
 
