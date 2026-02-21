@@ -8,10 +8,9 @@ export async function entries() {
 	return programs.map((p) => ({ id: String(p.id) }));
 }
 
-export async function load({ params, parent }) {
-	const parentData = await parent();
-
-	const program = parentData.programs.find((p) => p.id === Number(params.id));
+export async function load({ params }) {
+	const programs = await fetchPrograms();
+	const program = programs.find((p) => p.id === Number(params.id));
 
 	if (!program) error(404);
 
