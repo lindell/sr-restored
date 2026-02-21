@@ -66,6 +66,7 @@ func (c *Cache) GetHash(key string) ([]byte, bool) {
 }
 
 const fileInfoCacheDuration = 7 * 24 * time.Hour
+const fileInfoConst = 50
 
 type CachedFileInfo struct {
 	ContentType string
@@ -76,7 +77,7 @@ func (c *Cache) StoreFileInfo(key string, contentType string, size int) {
 	c.cache.SetWithTTL("fileinfo:"+key, CachedFileInfo{
 		ContentType: contentType,
 		Size:        size,
-	}, 1, fileInfoCacheDuration)
+	}, fileInfoConst, fileInfoCacheDuration)
 }
 
 func (c *Cache) GetFileInfo(key string) (contentType string, size int, ok bool) {
