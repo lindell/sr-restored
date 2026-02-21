@@ -91,7 +91,18 @@ func (s *Server) Handler() http.Handler {
 	mainMux.HandleFunc("/rss/{id}", s.getRSS)
 	mainMux.HandleFunc("/rss/{id}/broadcast", s.getRSSBroadcast)
 	mainMux.HandleFunc("/rss/{id}/on-demand", s.getRSSOnDemand)
-	mainMux.Handle("/", http.FileServer(http.Dir("./static")))
+
+	fileServer := http.FileServer(http.Dir("./static"))
+	mainMux.HandleFunc("/programs/{id}", func(w http.ResponseWriter, r *http.Request) {
+		// Serve index.html so the SvelteKit client-side router handles /programs/{id}
+		http.ServeFile(w, r, "./static/index.html")
+	})
+	mainMux.HandleFunc("/programs/{id}/__data.json", func(w http.ResponseWriter, r *http.Request) {
+		// SvelteKit fetches __data.json for server-loaded layout data.
+		// Serve the root __data.json which contains the prerendered layout data.
+		http.ServeFile(w, r, "./static/__data.json")
+	})
+	mainMux.Handle("/", fileServer)
 
 	return rootMux
 }
