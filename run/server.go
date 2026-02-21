@@ -2,12 +2,14 @@ package run
 
 import (
 	"context"
+	"net/http"
 	"net/url"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
 
+	"github.com/lindell/sr-restored/client"
 	"github.com/lindell/sr-restored/httpserver"
 	"github.com/lindell/sr-restored/memcache"
 	"github.com/lindell/sr-restored/podcast"
@@ -21,6 +23,9 @@ type Config struct {
 	// The URL in which the service is hosted
 	BaseURL     string
 	PostgresURL string
+
+	// HTTPClient overrides the default HTTP client used by the SR API client.
+	HTTPClient *http.Client
 
 	Now func() time.Time
 }
@@ -44,7 +49,13 @@ func Run(ctx context.Context, config Config) error {
 
 	cache := memcache.NewCache()
 
+	srClient := client.NewClient(cache)
+	if config.HTTPClient != nil {
+		srClient.HTTPClient = config.HTTPClient
+	}
+
 	podcast := &podcast.Podcast{
+		Client:   srClient,
 		Cache:    cache,
 		Database: postgresDB,
 		RSSUrl:   baseURL.JoinPath("rss"),

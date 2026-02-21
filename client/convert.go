@@ -28,7 +28,7 @@ type fileInfo struct {
 	ContentType     string
 }
 
-func convertEpisode(episode Episode, feedTypes []domain.FeedType) (domain.Episode, error) {
+func (c *Client) convertEpisode(episode Episode, feedTypes []domain.FeedType) (domain.Episode, error) {
 	converted := domain.Episode{
 		ID:          episode.ID,
 		ProgramID:   episode.Program.ID,
@@ -39,7 +39,7 @@ func convertEpisode(episode Episode, feedTypes []domain.FeedType) (domain.Episod
 		ImageURL:    episode.Imageurl,
 	}
 
-	fi, err := resolveFileInfo(episode, feedTypes)
+	fi, err := c.resolveFileInfo(episode, feedTypes)
 	if err != nil {
 		return converted, err
 	}
@@ -54,7 +54,7 @@ func convertEpisode(episode Episode, feedTypes []domain.FeedType) (domain.Episod
 
 // resolveFileInfo selects the best available audio file for an episode based on
 // the preferred feed types. It returns nil if no suitable file is found.
-func resolveFileInfo(episode Episode, feedTypes []domain.FeedType) (fileInfo, error) {
+func (c *Client) resolveFileInfo(episode Episode, feedTypes []domain.FeedType) (fileInfo, error) {
 	for _, ft := range feedTypes {
 		switch ft {
 		case domain.FeedTypeDownload:
@@ -74,7 +74,7 @@ func resolveFileInfo(episode Episode, feedTypes []domain.FeedType) (fileInfo, er
 			if bc.URL == "" {
 				continue
 			}
-			contentType, size, err := getFileInfo(bc.URL)
+			contentType, size, err := c.getFileInfo(bc.URL)
 			if err != nil {
 				return fileInfo{}, errors.WithMessage(err, "could not determine broadcast file info")
 			}
@@ -90,7 +90,17 @@ func resolveFileInfo(episode Episode, feedTypes []domain.FeedType) (fileInfo, er
 	return fileInfo{}, errors.New("could not find download file")
 }
 
-func getFileInfo(fileURL string) (contentType string, size int, err error) {
+// FileInfoCache is an optional cache for file metadata lookups.
+type FileInfoCache interface {
+	StoreFileInfo(key string, contentType string, size int)
+	GetFileInfo(key string) (contentType string, size int, ok bool)
+}
+
+func (c *Client) getFileInfo(fileURL string) (contentType string, size int, err error) {
+	if contentType, size, ok := c.Cache.GetFileInfo(fileURL); ok {
+		return contentType, size, nil
+	}
+
 	res, err := http.Head(fileURL)
 	if err != nil {
 		return "", 0, errors.WithMessage(err, "could not fetch file url")
@@ -102,5 +112,9 @@ func getFileInfo(fileURL string) (contentType string, size int, err error) {
 		return "", 0, errors.WithMessage(err, "could not parse file url content length")
 	}
 
-	return res.Header.Get("Content-Type"), size, nil
+	contentType = res.Header.Get("Content-Type")
+
+	c.Cache.StoreFileInfo(fileURL, contentType, size)
+
+	return contentType, size, nil
 }

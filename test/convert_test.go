@@ -6,7 +6,6 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/lindell/sr-restored/client"
 	"github.com/lindell/sr-restored/test/testutil"
 	"github.com/stretchr/testify/require"
 	"gotest.tools/v3/golden"
@@ -25,18 +24,15 @@ func getAndAssert(t *testing.T, url string, expectedFile string) {
 
 func TestConvert(t *testing.T) {
 	mockTransport := testutil.MockTransport{}
-	prevClient := client.DefaultClient
-	client.DefaultClient = &http.Client{
-		Transport: &mockTransport,
-	}
-	defer func() { client.DefaultClient = prevClient }()
 	mockTransport.AddFileRespons("/api/v2/programs/2519", "data/program.xml")
 	mockTransport.AddFileRespons("/api/v2/episodes/index", "data/episodes.xml")
 
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	u := setup(ctx, t)
+	u := setupWithHTTPClient(ctx, t, &http.Client{
+		Transport: &mockTransport,
+	})
 
 	getAndAssert(
 		t,

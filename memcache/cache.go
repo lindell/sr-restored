@@ -64,3 +64,28 @@ func (c *Cache) GetHash(key string) ([]byte, bool) {
 
 	return val.([]byte), true
 }
+
+const fileInfoCacheDuration = 7 * 24 * time.Hour
+const fileInfoConst = 50
+
+type CachedFileInfo struct {
+	ContentType string
+	Size        int
+}
+
+func (c *Cache) StoreFileInfo(key string, contentType string, size int) {
+	c.cache.SetWithTTL("fileinfo:"+key, CachedFileInfo{
+		ContentType: contentType,
+		Size:        size,
+	}, fileInfoConst, fileInfoCacheDuration)
+}
+
+func (c *Cache) GetFileInfo(key string) (contentType string, size int, ok bool) {
+	val, found := c.cache.Get("fileinfo:" + key)
+	if !found {
+		return "", 0, false
+	}
+
+	fi := val.(CachedFileInfo)
+	return fi.ContentType, fi.Size, true
+}

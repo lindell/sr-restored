@@ -10,19 +10,23 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/lindell/sr-restored/client"
 	"github.com/lindell/sr-restored/domain"
 	"github.com/pkg/errors"
 	"github.com/prometheus/client_golang/prometheus"
 )
 
 type Podcast struct {
+	Client   Client
 	Cache    Cache
 	Database Database
 
 	RSSUrl *url.URL
 
 	Now func() time.Time
+}
+
+type Client interface {
+	GetProgram(ctx context.Context, id int, feedTypes []domain.FeedType) (domain.Program, error)
 }
 
 type Cache interface {
@@ -62,7 +66,7 @@ func (p *Podcast) GetPodcast(ctx context.Context, id int, feedTypes []domain.Fee
 		return rss, hash, nil
 	}
 
-	program, err := client.GetProgram(ctx, id, feedTypes)
+	program, err := p.Client.GetProgram(ctx, id, feedTypes)
 	if err != nil {
 		// Try to fetch from DB as a backup
 		var dbErr error
