@@ -14,6 +14,10 @@ import (
 )
 
 func setup(ctx context.Context, t *testing.T) *url.URL {
+	return setupWithHTTPClient(ctx, t, nil)
+}
+
+func setupWithHTTPClient(ctx context.Context, t *testing.T, httpClient *http.Client) *url.URL {
 	port, err := getFreePort()
 	if err != nil {
 		t.Fatal(err)
@@ -23,6 +27,7 @@ func setup(ctx context.Context, t *testing.T) *url.URL {
 	go func() {
 		if err := run.Run(ctx, run.Config{
 			ServerAddr: addr,
+			HTTPClient: httpClient,
 			Now:        func() time.Time { return time.Date(2024, 1, 1, 0, 0, 0, 0, time.UTC) },
 		}); err != nil {
 			t.Error(err)

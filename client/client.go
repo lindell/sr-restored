@@ -13,24 +13,35 @@ import (
 	"github.com/pkg/errors"
 )
 
-var DefaultClient = http.DefaultClient
-
 var baseURL *url.URL
 
 func init() {
 	baseURL, _ = url.Parse("https://api.sr.se/api/v2/")
 }
 
-func GetProgram(ctx context.Context, id int, feedTypes []domain.FeedType) (domain.Program, error) {
+// Client is a client for the Sveriges Radio API.
+type Client struct {
+	HTTPClient *http.Client
+	Cache      FileInfoCache
+}
+
+func NewClient(cache FileInfoCache) *Client {
+	return &Client{
+		HTTPClient: http.DefaultClient,
+		Cache:      cache,
+	}
+}
+
+func (c *Client) GetProgram(ctx context.Context, id int, feedTypes []domain.FeedType) (domain.Program, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 
-	program, err := getProgram(ctx, id)
+	program, err := c.getProgram(ctx, id)
 	if err != nil {
 		return domain.Program{}, errors.WithMessage(err, "could not fetch program from api")
 	}
 
-	program.Episodes, program.Hash, err = getEpisodes(ctx, id, feedTypes)
+	program.Episodes, program.Hash, err = c.getEpisodes(ctx, id, feedTypes)
 	if err != nil {
 		return domain.Program{}, errors.WithMessage(err, "could not fetch episodes from api")
 	}
@@ -38,7 +49,7 @@ func GetProgram(ctx context.Context, id int, feedTypes []domain.FeedType) (domai
 	return program, nil
 }
 
-func getEpisodes(ctx context.Context, id int, feedTypes []domain.FeedType) ([]domain.Episode, []byte, error) {
+func (c *Client) getEpisodes(ctx context.Context, id int, feedTypes []domain.FeedType) ([]domain.Episode, []byte, error) {
 	u := baseURL.JoinPath("episodes/index")
 	q := u.Query()
 	q.Add("audioquality", "hi")
@@ -46,7 +57,7 @@ func getEpisodes(ctx context.Context, id int, feedTypes []domain.FeedType) ([]do
 	q.Add("programid", fmt.Sprint(id))
 	u.RawQuery = q.Encode()
 
-	resp, err := fetch(ctx, http.MethodGet, u.String())
+	resp, err := c.fetch(ctx, http.MethodGet, u.String())
 	if err != nil {
 		return nil, nil, err
 	}
@@ -58,7 +69,7 @@ func getEpisodes(ctx context.Context, id int, feedTypes []domain.FeedType) ([]do
 
 	episodes := make([]domain.Episode, 0, len(listing.Episodes.Episode))
 	for _, episode := range listing.Episodes.Episode {
-		if converted, err := convertEpisode(episode, feedTypes); err == nil {
+		if converted, err := c.convertEpisode(episode, feedTypes); err == nil {
 			episodes = append(episodes, converted)
 		} else {
 			slog.Error("could not convert episode",
@@ -69,10 +80,10 @@ func getEpisodes(ctx context.Context, id int, feedTypes []domain.FeedType) ([]do
 	return episodes, listing.Hash(), nil
 }
 
-func getProgram(ctx context.Context, id int) (domain.Program, error) {
+func (c *Client) getProgram(ctx context.Context, id int) (domain.Program, error) {
 	u := baseURL.JoinPath("programs", fmt.Sprint(id))
 
-	resp, err := fetch(ctx, http.MethodGet, u.String())
+	resp, err := c.fetch(ctx, http.MethodGet, u.String())
 	if err != nil {
 		return domain.Program{}, err
 	}
@@ -89,14 +100,14 @@ func getProgram(ctx context.Context, id int) (domain.Program, error) {
 	return convertProgram(programInfo), nil
 }
 
-func fetch(ctx context.Context, method string, url string) (*http.Response, error) {
+func (c *Client) fetch(ctx context.Context, method string, url string) (*http.Response, error) {
 	req, err := http.NewRequest(method, url, nil)
 	if err != nil {
 		return nil, err
 	}
 
 	req = req.WithContext(ctx)
-	res, err := DefaultClient.Do(req)
+	res, err := c.HTTPClient.Do(req)
 	if res.StatusCode >= 400 {
 		return res, statusCodeError{
 			msg:  fmt.Sprintf("unexpected status code %d", res.StatusCode),
