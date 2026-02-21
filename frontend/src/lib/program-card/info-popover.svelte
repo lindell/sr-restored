@@ -6,9 +6,26 @@
 
 	const id = `info-popover-${Math.random().toString(36).slice(2, 9)}`;
 	let open = false;
+	let popoverEl: HTMLDivElement;
+	let offsetX = 0;
 
 	function toggle() {
 		open = !open;
+		if (open) {
+			offsetX = 0;
+			requestAnimationFrame(clampToViewport);
+		}
+	}
+
+	function clampToViewport() {
+		if (!popoverEl) return;
+		const rect = popoverEl.getBoundingClientRect();
+		const pad = 8;
+		if (rect.left < pad) {
+			offsetX = pad - rect.left;
+		} else if (rect.right > window.innerWidth - pad) {
+			offsetX = window.innerWidth - pad - rect.right;
+		}
 	}
 
 	function handleKeydown(e: KeyboardEvent) {
@@ -40,7 +57,15 @@
 	>
 		<img src={infoCircle} alt="" class="info-icon" />
 	</button>
-	<div {id} class="feed-popover" class:open role="tooltip" aria-hidden={!open}>
+	<div
+		{id}
+		class="feed-popover"
+		class:open
+		role="tooltip"
+		aria-hidden={!open}
+		bind:this={popoverEl}
+		style:--offset-x="{offsetX}px"
+	>
 		<strong>{label}</strong>
 		<p>{info}</p>
 	</div>
@@ -79,7 +104,7 @@
 		position: absolute;
 		top: calc(100% + 8px);
 		left: 50%;
-		transform: translateX(-50%);
+		transform: translateX(calc(-50% + var(--offset-x, 0px)));
 		padding: 1rem 1.25rem;
 		border-radius: 0.75rem;
 		border: 1px solid #ccc;
@@ -104,7 +129,7 @@
 			content: '';
 			position: absolute;
 			top: -8px;
-			left: 50%;
+			left: calc(50% - var(--offset-x, 0px));
 			margin-left: -7px;
 			width: 14px;
 			height: 14px;
