@@ -59,6 +59,7 @@
 		>
 	</div>
 
+    <div class="program-inner">
 	<div class="content">
 		<h2>
 			<a style="view-transition-name: program-title-{program.id};" href={link}>{program.name}</a>
@@ -91,11 +92,12 @@
 			</button>
 		</div>
 	{/if}
+	</div>
 </div>
 
 <style lang="scss">
 	$border-radius: 2rem;
-	$thumbnail-offset: 3rem;
+	$thumbnail-offset: 2rem;
 
 	.program {
 		position: relative;
@@ -108,7 +110,6 @@
 		box-shadow: 1px 1px 5px #00000011;
 		flex: 0 0 25rem;
 		max-width: 50rem;
-		padding: 1rem;
 	}
 
 	.program.full {
@@ -117,6 +118,10 @@
 
 	.program:hover .thumbnail {
 		transform: scale(1.02);
+	}
+
+	.program-inner {
+		margin: 1rem;
 	}
 
 	.thumbnail {
