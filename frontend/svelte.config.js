@@ -17,7 +17,9 @@ const config = {
 			assets: 'build',
 			precompress: false,
 			strict: true
-		})
+		}),
+		// Inline all CSS into the prerendered HTML to avoid extra requests
+		inlineStyleThreshold: Infinity
 	}
 };
 

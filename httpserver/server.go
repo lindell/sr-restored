@@ -93,6 +93,7 @@ func (s *Server) Handler() http.Handler {
 	mainMux.HandleFunc("/rss/{id}/on-demand", s.getRSSOnDemand)
 
 	fileServer := http.FileServer(http.Dir("./static"))
+	mainMux.Handle("/_app/immutable/", cacheImmutable(fileServer))
 	mainMux.Handle("/", fileServer)
 
 	return rootMux
@@ -186,4 +187,13 @@ func getIfNoneMatchHash(r *http.Request) []byte {
 	}
 
 	return hash
+}
+
+// cacheImmutable wraps a handler to set a long-lived Cache-Control header.
+// SvelteKit's _app/immutable/ files are content-hashed and safe to cache indefinitely.
+func cacheImmutable(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Cache-Control", "public, max-age=31536000, immutable")
+		next.ServeHTTP(w, r)
+	})
 }
