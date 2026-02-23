@@ -33,6 +33,10 @@
 		"vite": "^6.3.5"
 	},
 	"type": "module",
+	"engines": {
+		"node": "24",
+		"npm": "11"
+	},
 	"dependencies": {
 		"@sveltejs/adapter-static": "^3.0.10",
 		"fast-xml-parser": "^5.2.3"
