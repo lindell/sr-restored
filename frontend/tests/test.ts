@@ -1,6 +1,8 @@
-import { expect, test } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 
-test('home page has expected h1', async ({ page }) => {
+test('basic navigation', async ({ page }) => {
 	await page.goto('/');
-	await expect(page.locator('h1')).toBeVisible();
+	await page.getByRole('textbox', { name: 'Sök program' }).fill('dystopia');
+	await page.getByRole('link', { name: 'P3 Dystopia' }).first().click();
+	await expect(page.getByRole('heading', { level: 2, name: 'P3 Dystopia' })).toBeVisible();
 });
