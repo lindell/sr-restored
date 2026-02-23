@@ -55,6 +55,7 @@
 				class="thumbnail-image"
 				width="512"
 				height="512"
+				fetchpriority="high"
 			/></a
 		>
 	</div>
