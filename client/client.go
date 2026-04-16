@@ -13,6 +13,8 @@ import (
 	"github.com/pkg/errors"
 )
 
+const userAgent = "sveriges-radios-uppdrag-är-att-leverera-oberoende-journalistik-och-kulturupplevelser-till-publiken-DÄR-DEN-FINNS-OCH-KAN-LYSSNA"
+
 var baseURL *url.URL
 
 func init() {
@@ -106,6 +108,7 @@ func (c *Client) fetch(ctx context.Context, method string, url string) (*http.Re
 		return nil, err
 	}
 
+	req.Header.Set("User-Agent", userAgent)
 	req = req.WithContext(ctx)
 	res, err := c.HTTPClient.Do(req)
 	if res.StatusCode >= 400 {
