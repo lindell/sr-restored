@@ -1,9 +1,9 @@
-FROM golang:alpine as gobuilder
+FROM golang:alpine AS gobuilder
 
 WORKDIR /build
 
 # Add SSL certs to be transfered
-RUN apk update && apk upgrade && apk add --no-cache ca-certificates
+RUN apk update && apk upgrade && apk add --no-cache ca-certificates git
 RUN update-ca-certificates
 
 COPY go.* ./
