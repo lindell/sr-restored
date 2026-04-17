@@ -6,11 +6,13 @@ import "crypto/sha1"
 func (el EpisodeListing) Hash() []byte {
 	hash := sha1.New()
 
-	for _, episode := range el.Episodes.Episode {
-		// If all files are the same, we assume the listing is the same
-		hash.Write([]byte(episode.Listenpodfile.URL))
-		hash.Write([]byte(episode.Downloadpodfile.URL))
-		hash.Write([]byte(episode.Broadcast.Broadcastfiles.Broadcastfile.URL))
+	for _, episode := range el.Items {
+		if pod := episode.Audio.Podcast; pod != nil && pod.Variants.Standard != nil {
+			hash.Write([]byte(pod.Variants.Standard.URL))
+		}
+		if bc := episode.Audio.Broadcast; bc != nil && bc.Variants.Standard != nil {
+			hash.Write([]byte(bc.Variants.Standard.URL))
+		}
 	}
 
 	return hash.Sum(nil)

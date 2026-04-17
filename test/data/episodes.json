@@ -1,0 +1,495 @@
+{
+    "items": [
+        {
+            "id": 2757769,
+            "title": "Anna Anka, EU utreder sexdockehärvan och sovrumssängen",
+            "description": "Migrationsverket om tonårsutvisningarna, klyvda Linnea, och stora pirog-resan.",
+            "program": {
+                "id": 2024,
+                "title": "Morgonpasset i P3"
+            },
+            "image": {
+                "square1x1": {
+                    "variants": [
+                        {
+                            "url": "https://static-cdn.sr.se/images/2024/f0c1528c-d7a9-43d2-bf1a-086b4491d452.jpg?preset=api-default-square",
+                            "width": 512,
+                            "height": 512
+                        }
+                    ]
+                }
+            },
+            "audio": {
+                "broadcast": {
+                    "id": 10081421,
+                    "duration": {
+                        "seconds": 12660
+                    },
+                    "mimeType": "audio/mp4",
+                    "variants": {
+                        "standard": {
+                            "url": "https://lyssna-cdn.sr.se/ljudit/p3/morgonpasset_i_p3/2026/02/morgonpasset_i_p3_20260218_0559_192.m4a",
+                            "bitrate": 192
+                        }
+                    }
+                },
+                "podcast": null
+            },
+            "published": "2026-02-18T04:59:00Z",
+            "url": "https://www.sverigesradio.se/avsnitt/2757769"
+        },
+        {
+            "id": 2742651,
+            "title": "Jimmy Guo, Trollkarlen Druid och förlåter vi Tyra Banks?",
+            "description": "Kinas mjuka makt, Fettisarnas dag, och Tigern och Råttans nya år.",
+            "program": {
+                "id": 2024,
+                "title": "Morgonpasset i P3"
+            },
+            "image": {
+                "square1x1": {
+                    "variants": [
+                        {
+                            "url": "https://static-cdn.sr.se/images/2024/f0c1528c-d7a9-43d2-bf1a-086b4491d452.jpg?preset=api-default-square",
+                            "width": 512,
+                            "height": 512
+                        }
+                    ]
+                }
+            },
+            "audio": {
+                "broadcast": {
+                    "id": 10080287,
+                    "duration": {
+                        "seconds": 12660
+                    },
+                    "mimeType": "audio/mp4",
+                    "variants": {
+                        "standard": {
+                            "url": "https://lyssna-cdn.sr.se/autorec/et2w/p3/morgonpasset_i_p3/2026/02/SRP3_2026-02-17_055900_12660_a32.m4a",
+                            "bitrate": 32
+                        }
+                    }
+                },
+                "podcast": {
+                    "id": 10080274,
+                    "duration": {
+                        "seconds": 5453
+                    },
+                    "mimeType": "audio/mpeg",
+                    "variants": {
+                        "standard": {
+                            "url": "https://static-cdn.sr.se/laddahem/podradio/2026/02/program_mp_172_20260217_1004351522.mp3",
+                            "bitrate": 128
+                        }
+                    }
+                }
+            },
+            "published": "2026-02-17T04:59:00Z",
+            "url": "https://www.sverigesradio.se/avsnitt/2742651"
+        },
+        {
+            "id": 2742637,
+            "title": "Sarah Dawn Finer, Davids drömjobb och sperm hotell",
+            "description": "Ta ingen sak i taget, point finger Pete och Linnea och Sarahs duett.",
+            "program": {
+                "id": 2024,
+                "title": "Morgonpasset i P3"
+            },
+            "image": {
+                "square1x1": {
+                    "variants": [
+                        {
+                            "url": "https://static-cdn.sr.se/images/2024/f0c1528c-d7a9-43d2-bf1a-086b4491d452.jpg?preset=api-default-square",
+                            "width": 512,
+                            "height": 512
+                        }
+                    ]
+                }
+            },
+            "audio": {
+                "broadcast": {
+                    "id": 10079184,
+                    "duration": {
+                        "seconds": 12660
+                    },
+                    "mimeType": "audio/mp4",
+                    "variants": {
+                        "standard": {
+                            "url": "https://lyssna-cdn.sr.se/ljudit/p3/morgonpasset_i_p3/2026/02/morgonpasset_i_p3_20260216_0559_192.m4a",
+                            "bitrate": 192
+                        }
+                    }
+                },
+                "podcast": {
+                    "id": 10079229,
+                    "duration": {
+                        "seconds": 5937
+                    },
+                    "mimeType": "audio/mpeg",
+                    "variants": {
+                        "standard": {
+                            "url": "https://static-cdn.sr.se/laddahem/podradio/2026/02/program_sarah_dawn_finer_davids_dromj_20260216_1006221652.mp3",
+                            "bitrate": 128
+                        }
+                    }
+                }
+            },
+            "published": "2026-02-16T04:59:00Z",
+            "url": "https://www.sverigesradio.se/avsnitt/2742637"
+        },
+        {
+            "id": 2738212,
+            "title": "Dolph Lundgren, Magges vinter-k och fingrar i mun",
+            "description": "Harry Styles upptäcker en kopp kaffe, OS-silver i tvätteri och IFS nya programledare.",
+            "program": {
+                "id": 2024,
+                "title": "Morgonpasset i P3"
+            },
+            "image": {
+                "square1x1": {
+                    "variants": [
+                        {
+                            "url": "https://static-cdn.sr.se/images/2024/f0c1528c-d7a9-43d2-bf1a-086b4491d452.jpg?preset=api-default-square",
+                            "width": 512,
+                            "height": 512
+                        }
+                    ]
+                }
+            },
+            "audio": {
+                "broadcast": {
+                    "id": 10078641,
+                    "duration": {
+                        "seconds": 10800
+                    },
+                    "mimeType": "audio/mp4",
+                    "variants": {
+                        "standard": {
+                            "url": "https://lyssna-cdn.sr.se/ljudit/p3/morgonpasset_i_p3/2026/02/morgonpasset_i_p3_20260215_0800_192.m4a",
+                            "bitrate": 192
+                        }
+                    }
+                },
+                "podcast": {
+                    "id": 10078651,
+                    "duration": {
+                        "seconds": 4836
+                    },
+                    "mimeType": "audio/mpeg",
+                    "variants": {
+                        "standard": {
+                            "url": "https://static-cdn.sr.se/laddahem/podradio/2026/02/program_mp_152_20260215_1135350967.mp3",
+                            "bitrate": 128
+                        }
+                    }
+                }
+            },
+            "published": "2026-02-15T07:00:00Z",
+            "url": "https://www.sverigesradio.se/avsnitt/2738212"
+        },
+        {
+            "id": 2738201,
+            "title": "Johanna Wagrell, curlingskandalen och polariserad kärlek",
+            "description": "Curling-graniten från Epstein-ön, naken protest och alla hjärtansdag-fails.",
+            "program": {
+                "id": 2024,
+                "title": "Morgonpasset i P3"
+            },
+            "image": {
+                "square1x1": {
+                    "variants": [
+                        {
+                            "url": "https://static-cdn.sr.se/images/2024/11891787-7955-47c6-be52-a11cd0a2dbc2.jpg?preset=api-default-square",
+                            "width": 512,
+                            "height": 512
+                        }
+                    ]
+                }
+            },
+            "audio": {
+                "broadcast": {
+                    "id": 10078201,
+                    "duration": {
+                        "seconds": 10800
+                    },
+                    "mimeType": "audio/mp4",
+                    "variants": {
+                        "standard": {
+                            "url": "https://lyssna-cdn.sr.se/ljudit/p3/morgonpasset_i_p3/2026/02/morgonpasset_i_p3_20260214_0800_192.m4a",
+                            "bitrate": 192
+                        }
+                    }
+                },
+                "podcast": {
+                    "id": 10078211,
+                    "duration": {
+                        "seconds": 4529
+                    },
+                    "mimeType": "audio/mpeg",
+                    "variants": {
+                        "standard": {
+                            "url": "https://static-cdn.sr.se/laddahem/podradio/2026/02/program_mp_142_20260214_1139022798.mp3",
+                            "bitrate": 128
+                        }
+                    }
+                }
+            },
+            "published": "2026-02-14T07:00:00Z",
+            "url": "https://www.sverigesradio.se/avsnitt/2738201"
+        },
+        {
+            "id": 2738192,
+            "title": "Isabella Wranå, våga fråga Linnea och statligt tjatsex",
+            "description": "World worst prisons in the world, Druidopedia och är Linnea och David bättre än Hanna och Garplind?",
+            "program": {
+                "id": 2024,
+                "title": "Morgonpasset i P3"
+            },
+            "image": {
+                "square1x1": {
+                    "variants": [
+                        {
+                            "url": "https://static-cdn.sr.se/images/2024/f0c1528c-d7a9-43d2-bf1a-086b4491d452.jpg?preset=api-default-square",
+                            "width": 512,
+                            "height": 512
+                        }
+                    ]
+                }
+            },
+            "audio": {
+                "broadcast": {
+                    "id": 10075083,
+                    "duration": {
+                        "seconds": 12660
+                    },
+                    "mimeType": "audio/mp4",
+                    "variants": {
+                        "standard": {
+                            "url": "https://lyssna-cdn.sr.se/ljudit/p3/morgonpasset_i_p3/2026/02/morgonpasset_i_p3_20260213_0559_192.m4a",
+                            "bitrate": 192
+                        }
+                    }
+                },
+                "podcast": {
+                    "id": 10075136,
+                    "duration": {
+                        "seconds": 5669
+                    },
+                    "mimeType": "audio/mpeg",
+                    "variants": {
+                        "standard": {
+                            "url": "https://static-cdn.sr.se/laddahem/podradio/2026/02/morgonpasset_i_p3_isabella_wrana_vaga_fraga_lin_20260213_1017161895.mp3",
+                            "bitrate": 128
+                        }
+                    }
+                }
+            },
+            "published": "2026-02-13T04:59:00Z",
+            "url": "https://www.sverigesradio.se/avsnitt/2738192"
+        },
+        {
+            "id": 2738185,
+            "title": "Valter Nilsson, AI-barnprogram och lyssnarna hatar Linnea",
+            "description": "Vi tar hänsyn till ALLA, SVT:s kritiserade AI-barnprogram och vidriga försäljarbeteenden.",
+            "program": {
+                "id": 2024,
+                "title": "Morgonpasset i P3"
+            },
+            "image": {
+                "square1x1": {
+                    "variants": [
+                        {
+                            "url": "https://static-cdn.sr.se/images/2024/f0c1528c-d7a9-43d2-bf1a-086b4491d452.jpg?preset=api-default-square",
+                            "width": 512,
+                            "height": 512
+                        }
+                    ]
+                }
+            },
+            "audio": {
+                "broadcast": {
+                    "id": 10073887,
+                    "duration": {
+                        "seconds": 12660
+                    },
+                    "mimeType": "audio/mp4",
+                    "variants": {
+                        "standard": {
+                            "url": "https://lyssna-cdn.sr.se/ljudit/p3/morgonpasset_i_p3/2026/02/morgonpasset_i_p3_20260212_0559_192.m4a",
+                            "bitrate": 192
+                        }
+                    }
+                },
+                "podcast": {
+                    "id": 10073889,
+                    "duration": {
+                        "seconds": 5694
+                    },
+                    "mimeType": "audio/mpeg",
+                    "variants": {
+                        "standard": {
+                            "url": "https://static-cdn.sr.se/laddahem/podradio/2026/02/program_mp_122_20260212_0943385327.mp3",
+                            "bitrate": 128
+                        }
+                    }
+                }
+            },
+            "published": "2026-02-12T04:59:00Z",
+            "url": "https://www.sverigesradio.se/avsnitt/2738185"
+        },
+        {
+            "id": 2738178,
+            "title": "Otrohetsintervjun, Svenska Fröknar och hur mår Norge egentligen?",
+            "description": "David Druid har begått bandana, era rom-com moments och Babs vingummiterori.",
+            "program": {
+                "id": 2024,
+                "title": "Morgonpasset i P3"
+            },
+            "image": {
+                "square1x1": {
+                    "variants": [
+                        {
+                            "url": "https://static-cdn.sr.se/images/2024/f0c1528c-d7a9-43d2-bf1a-086b4491d452.jpg?preset=api-default-square",
+                            "width": 512,
+                            "height": 512
+                        }
+                    ]
+                }
+            },
+            "audio": {
+                "broadcast": {
+                    "id": 10072691,
+                    "duration": {
+                        "seconds": 12660
+                    },
+                    "mimeType": "audio/mp4",
+                    "variants": {
+                        "standard": {
+                            "url": "https://lyssna-cdn.sr.se/ljudit/p3/morgonpasset_i_p3/2026/02/morgonpasset_i_p3_20260211_0559_192.m4a",
+                            "bitrate": 192
+                        }
+                    }
+                },
+                "podcast": {
+                    "id": 10072740,
+                    "duration": {
+                        "seconds": 6084
+                    },
+                    "mimeType": "audio/mpeg",
+                    "variants": {
+                        "standard": {
+                            "url": "https://static-cdn.sr.se/laddahem/podradio/2026/02/morgonpasset_i_p3_otrohetsintervjun_svenska_fro_20260211_1026321030.mp3",
+                            "bitrate": 128
+                        }
+                    }
+                }
+            },
+            "published": "2026-02-11T04:59:00Z",
+            "url": "https://www.sverigesradio.se/avsnitt/2738178"
+        },
+        {
+            "id": 2738171,
+            "title": "Lisa borg, Sveriges snyggaste kollega och skånska Barbie",
+            "description": "David kommer aldrig sluta komma ihåg, Brandsta sviker skånskan och storbråk i Örebro.",
+            "program": {
+                "id": 2024,
+                "title": "Morgonpasset i P3"
+            },
+            "image": {
+                "square1x1": {
+                    "variants": [
+                        {
+                            "url": "https://static-cdn.sr.se/images/2024/f0c1528c-d7a9-43d2-bf1a-086b4491d452.jpg?preset=api-default-square",
+                            "width": 512,
+                            "height": 512
+                        }
+                    ]
+                }
+            },
+            "audio": {
+                "broadcast": {
+                    "id": 10071478,
+                    "duration": {
+                        "seconds": 12660
+                    },
+                    "mimeType": "audio/mp4",
+                    "variants": {
+                        "standard": {
+                            "url": "https://lyssna-cdn.sr.se/ljudit/p3/morgonpasset_i_p3/2026/02/morgonpasset_i_p3_20260210_0559_192.m4a",
+                            "bitrate": 192
+                        }
+                    }
+                },
+                "podcast": {
+                    "id": 10071554,
+                    "duration": {
+                        "seconds": 5312
+                    },
+                    "mimeType": "audio/mpeg",
+                    "variants": {
+                        "standard": {
+                            "url": "https://static-cdn.sr.se/laddahem/podradio/2026/02/morgonpasset_i_p3_lisa_borg_sveriges_snyggaste_20260210_1026325786.mp3",
+                            "bitrate": 128
+                        }
+                    }
+                }
+            },
+            "published": "2026-02-10T04:59:00Z",
+            "url": "https://www.sverigesradio.se/avsnitt/2738171"
+        },
+        {
+            "id": 2738164,
+            "title": "Måndagsblund, Bad Bunnys Super Bowl och rodel-ölmage",
+            "description": "Hela Sverige måndagsblundar, Magges hårda verklighet och kn-hotell i Polen.",
+            "program": {
+                "id": 2024,
+                "title": "Morgonpasset i P3"
+            },
+            "image": {
+                "square1x1": {
+                    "variants": [
+                        {
+                            "url": "https://static-cdn.sr.se/images/2024/f0c1528c-d7a9-43d2-bf1a-086b4491d452.jpg?preset=api-default-square",
+                            "width": 512,
+                            "height": 512
+                        }
+                    ]
+                }
+            },
+            "audio": {
+                "broadcast": {
+                    "id": 10070231,
+                    "duration": {
+                        "seconds": 12660
+                    },
+                    "mimeType": "audio/mp4",
+                    "variants": {
+                        "standard": {
+                            "url": "https://lyssna-cdn.sr.se/ljudit/p3/morgonpasset_i_p3/2026/02/morgonpasset_i_p3_20260209_0559_32.m4a",
+                            "bitrate": 32
+                        }
+                    }
+                },
+                "podcast": {
+                    "id": 10070274,
+                    "duration": {
+                        "seconds": 5029
+                    },
+                    "mimeType": "audio/mpeg",
+                    "variants": {
+                        "standard": {
+                            "url": "https://static-cdn.sr.se/laddahem/podradio/2026/02/program_mp_92_20260209_0956057229.mp3",
+                            "bitrate": 128
+                        }
+                    }
+                }
+            },
+            "published": "2026-02-09T04:59:00Z",
+            "url": "https://www.sverigesradio.se/avsnitt/2738164"
+        }
+    ],
+    "skip": 0,
+    "take": 500,
+    "totalAmount": 10
+}

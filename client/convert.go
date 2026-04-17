@@ -9,14 +9,18 @@ import (
 )
 
 func convertProgram(program ProgramInfo) domain.Program {
+	var imageURL string
+	if program.Image.Square1x1 != nil && len(program.Image.Square1x1.Variants) > 0 {
+		imageURL = program.Image.Square1x1.Variants[0].URL
+	}
+
 	return domain.Program{
-		ID:          program.Program.ID,
-		Name:        program.Program.Name,
-		Description: program.Program.Description,
-		Email:       program.Program.Email,
-		Copyright:   program.Copyright,
-		URL:         program.Program.Programurl,
-		ImageURL:    program.Program.Programimage,
+		ID:          program.ID,
+		Name:        program.Title,
+		Description: program.Description,
+		Copyright:   "Copyright Sveriges Radio. All rights reserved.",
+		URL:         program.URL,
+		ImageURL:    imageURL,
 	}
 }
 
@@ -29,14 +33,19 @@ type fileInfo struct {
 }
 
 func (c *Client) convertEpisode(episode Episode, feedTypes []domain.FeedType) (domain.Episode, error) {
+	var imageURL string
+	if episode.Image.Square1x1 != nil && len(episode.Image.Square1x1.Variants) > 0 {
+		imageURL = episode.Image.Square1x1.Variants[0].URL
+	}
+
 	converted := domain.Episode{
 		ID:          episode.ID,
 		ProgramID:   episode.Program.ID,
 		Title:       episode.Title,
 		Description: episode.Description,
 		URL:         episode.URL,
-		PublishDate: episode.Publishdateutc,
-		ImageURL:    episode.Imageurl,
+		PublishDate: episode.Published,
+		ImageURL:    imageURL,
 	}
 
 	fi, err := c.resolveFileInfo(episode, feedTypes)
@@ -58,29 +67,33 @@ func (c *Client) resolveFileInfo(episode Episode, feedTypes []domain.FeedType) (
 	for _, ft := range feedTypes {
 		switch ft {
 		case domain.FeedTypeDownload:
-			dl := episode.Downloadpodfile
-			if dl.URL == "" {
+			pod := episode.Audio.Podcast
+			if pod == nil || pod.Variants.Standard == nil || pod.Variants.Standard.URL == "" {
 				continue
 			}
+			contentType, size, err := c.getFileInfo(pod.Variants.Standard.URL)
+			if err != nil {
+				return fileInfo{}, errors.WithMessage(err, "could not determine podcast file info")
+			}
 			return fileInfo{
-				URL:             dl.URL,
-				DurationSeconds: dl.Duration,
-				Bytes:           dl.Filesizeinbytes,
-				ContentType:     "audio/mpeg",
+				URL:             pod.Variants.Standard.URL,
+				DurationSeconds: pod.Duration.Seconds,
+				Bytes:           size,
+				ContentType:     contentType,
 			}, nil
 
 		case domain.FeedTypeBroadcast:
-			bc := episode.Broadcast.Broadcastfiles.Broadcastfile
-			if bc.URL == "" {
+			bc := episode.Audio.Broadcast
+			if bc == nil || bc.Variants.Standard == nil || bc.Variants.Standard.URL == "" {
 				continue
 			}
-			contentType, size, err := c.getFileInfo(bc.URL)
+			contentType, size, err := c.getFileInfo(bc.Variants.Standard.URL)
 			if err != nil {
 				return fileInfo{}, errors.WithMessage(err, "could not determine broadcast file info")
 			}
 			return fileInfo{
-				URL:             bc.URL,
-				DurationSeconds: bc.Duration,
+				URL:             bc.Variants.Standard.URL,
+				DurationSeconds: bc.Duration.Seconds,
 				Bytes:           size,
 				ContentType:     contentType,
 			}, nil
@@ -101,7 +114,11 @@ func (c *Client) getFileInfo(fileURL string) (contentType string, size int, err 
 		return contentType, size, nil
 	}
 
-	res, err := http.Head(fileURL)
+	req, err := http.NewRequest(http.MethodHead, fileURL, nil)
+	if err != nil {
+		return "", 0, errors.WithMessage(err, "could not create HEAD request")
+	}
+	res, err := c.HTTPClient.Do(req)
 	if err != nil {
 		return "", 0, errors.WithMessage(err, "could not fetch file url")
 	}
