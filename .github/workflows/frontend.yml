@@ -39,4 +39,3 @@ jobs:
         timeout-minutes: 3
         env:
           PUBLIC_BASE_URL: "https://sr-restored.example"
-          DEBUG: "pw:browser*"

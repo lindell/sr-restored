@@ -1,6 +1,5 @@
-import type { PlaywrightTestConfig } from '@playwright/test';
-
-const config: PlaywrightTestConfig = {
+/** @type {import('@playwright/test').PlaywrightTestConfig} */
+const config = {
 	webServer: process.env.CI
 		? undefined
 		: {
