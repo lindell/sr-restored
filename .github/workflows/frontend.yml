@@ -24,7 +24,7 @@ jobs:
         env:
           PUBLIC_BASE_URL: "https://sr-restored.example"
       - run: npm run lint
-      - run: npx playwright install --with-deps
+      - run: npx playwright install --with-deps chromium
       - name: Start test server
         run: node test-server.mjs &
       - name: Wait for server
@@ -36,5 +36,7 @@ jobs:
           echo "Server failed to start"
           exit 1
       - run: npx playwright test
+        timeout-minutes: 3
         env:
           PUBLIC_BASE_URL: "https://sr-restored.example"
+          DEBUG: "pw:browser*"

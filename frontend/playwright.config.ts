@@ -9,6 +9,7 @@ const config: PlaywrightTestConfig = {
 			},
 	testDir: 'tests',
 	testMatch: /(.+\.)?(test|spec)\.[jt]s/,
+	timeout: 30000,
 	use: {
 		baseURL: 'http://127.0.0.1:4173'
 	}
