@@ -25,6 +25,16 @@ jobs:
           PUBLIC_BASE_URL: "https://sr-restored.example"
       - run: npm run lint
       - run: npx playwright install --with-deps
-      - run: npm test
+      - name: Start test server
+        run: node test-server.mjs &
+      - name: Wait for server
+        run: |
+          for i in $(seq 1 30); do
+            curl -s http://127.0.0.1:4173 > /dev/null && exit 0
+            sleep 1
+          done
+          echo "Server failed to start"
+          exit 1
+      - run: npx playwright test
         env:
           PUBLIC_BASE_URL: "https://sr-restored.example"
