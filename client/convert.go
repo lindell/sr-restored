@@ -1,9 +1,6 @@
 package client
 
 import (
-	"net/http"
-	"strconv"
-
 	"github.com/lindell/sr-restored/domain"
 	"github.com/pkg/errors"
 )
@@ -71,15 +68,11 @@ func (c *Client) resolveFileInfo(episode Episode, feedTypes []domain.FeedType) (
 			if pod == nil || pod.Variants.Standard == nil || pod.Variants.Standard.URL == "" {
 				continue
 			}
-			contentType, size, err := c.getFileInfo(pod.Variants.Standard.URL)
-			if err != nil {
-				return fileInfo{}, errors.WithMessage(err, "could not determine podcast file info")
-			}
 			return fileInfo{
 				URL:             pod.Variants.Standard.URL,
 				DurationSeconds: pod.Duration.Seconds,
-				Bytes:           size,
-				ContentType:     contentType,
+				Bytes:           estimateFileSize(pod.Variants.Standard.Bitrate, pod.Duration.Seconds),
+				ContentType:     pod.MimeType,
 			}, nil
 
 		case domain.FeedTypeBroadcast:
@@ -87,15 +80,11 @@ func (c *Client) resolveFileInfo(episode Episode, feedTypes []domain.FeedType) (
 			if bc == nil || bc.Variants.Standard == nil || bc.Variants.Standard.URL == "" {
 				continue
 			}
-			contentType, size, err := c.getFileInfo(bc.Variants.Standard.URL)
-			if err != nil {
-				return fileInfo{}, errors.WithMessage(err, "could not determine broadcast file info")
-			}
 			return fileInfo{
 				URL:             bc.Variants.Standard.URL,
 				DurationSeconds: bc.Duration.Seconds,
-				Bytes:           size,
-				ContentType:     contentType,
+				Bytes:           estimateFileSize(bc.Variants.Standard.Bitrate, bc.Duration.Seconds),
+				ContentType:     bc.MimeType,
 			}, nil
 		}
 	}
@@ -109,29 +98,10 @@ type FileInfoCache interface {
 	GetFileInfo(key string) (contentType string, size int, ok bool)
 }
 
-func (c *Client) getFileInfo(fileURL string) (contentType string, size int, err error) {
-	if contentType, size, ok := c.Cache.GetFileInfo(fileURL); ok {
-		return contentType, size, nil
+func estimateFileSize(bitrate int, durationSeconds int) int {
+	if bitrate <= 0 || durationSeconds <= 0 {
+		return 0
 	}
 
-	req, err := http.NewRequest(http.MethodHead, fileURL, nil)
-	if err != nil {
-		return "", 0, errors.WithMessage(err, "could not create HEAD request")
-	}
-	res, err := c.HTTPClient.Do(req)
-	if err != nil {
-		return "", 0, errors.WithMessage(err, "could not fetch file url")
-	}
-
-	contentLength := res.Header.Get("Content-Length")
-	size, err = strconv.Atoi(contentLength)
-	if err != nil {
-		return "", 0, errors.WithMessage(err, "could not parse file url content length")
-	}
-
-	contentType = res.Header.Get("Content-Type")
-
-	c.Cache.StoreFileInfo(fileURL, contentType, size)
-
-	return contentType, size, nil
+	return bitrate * durationSeconds / 8
 }
