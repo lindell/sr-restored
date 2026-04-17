@@ -28,3 +28,4 @@ jobs:
       - run: npm test
         env:
           PUBLIC_BASE_URL: "https://sr-restored.example"
+          PW_DISABLE_TS_ESM: "1"
