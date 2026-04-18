@@ -1,23 +1,22 @@
 package client
 
 import (
+	"sort"
+
 	"github.com/lindell/sr-restored/domain"
 	"github.com/pkg/errors"
 )
 
-func convertProgram(program ProgramInfo) domain.Program {
-	var imageURL string
-	if program.Image.Square1x1 != nil && len(program.Image.Square1x1.Variants) > 0 {
-		imageURL = program.Image.Square1x1.Variants[0].URL
-	}
+const minImageWidth = 1024
 
+func convertProgram(program ProgramInfo) domain.Program {
 	return domain.Program{
 		ID:          program.ID,
 		Name:        program.Title,
 		Description: program.Description,
 		Copyright:   "Copyright Sveriges Radio. All rights reserved.",
 		URL:         program.URL,
-		ImageURL:    imageURL,
+		ImageURL:    selectImageURL(program.Image.Square1x1, minImageWidth),
 	}
 }
 
@@ -30,10 +29,7 @@ type fileInfo struct {
 }
 
 func (c *Client) convertEpisode(episode Episode, feedTypes []domain.FeedType) (domain.Episode, error) {
-	var imageURL string
-	if episode.Image.Square1x1 != nil && len(episode.Image.Square1x1.Variants) > 0 {
-		imageURL = episode.Image.Square1x1.Variants[0].URL
-	}
+	imageURL := selectImageURL(episode.Image.Square1x1, minImageWidth)
 
 	converted := domain.Episode{
 		ID:          episode.ID,
@@ -104,4 +100,28 @@ func estimateFileSize(bitrate int, durationSeconds int) int {
 	}
 
 	return bitrate * durationSeconds / 8
+}
+
+// selectImageURL picks the best image from an ImageSet.
+// It prefers the smallest image with width >= minWidth, falling back to the largest image.
+func selectImageURL(imageSet *ImageSet, minWidth int) string {
+	if imageSet == nil || len(imageSet.Variants) == 0 {
+		return ""
+	}
+
+	sorted := make([]ImageVariant, len(imageSet.Variants))
+	copy(sorted, imageSet.Variants)
+	sort.Slice(sorted, func(i, j int) bool {
+		return sorted[i].Width < sorted[j].Width
+	})
+
+	// Pick the smallest image with width >= minWidth.
+	for _, v := range sorted {
+		if v.Width >= minWidth {
+			return v.URL
+		}
+	}
+
+	// No image meets the threshold; pick the largest.
+	return sorted[len(sorted)-1].URL
 }
