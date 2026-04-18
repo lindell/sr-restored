@@ -13,7 +13,7 @@ import (
 	"github.com/pkg/errors"
 )
 
-const userAgent = "sveriges-radios-uppdrag-är-att-leverera-oberoende-journalistik-och-kulturupplevelser-till-publiken-DÄR-DEN-FINNS-OCH-KAN-LYSSNA"
+const userAgent = "Play/31330 (Android/34; google/Pixel 8 Pro; Scale/2.75)"
 
 var baseURL *url.URL
 
