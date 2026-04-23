@@ -102,6 +102,41 @@ func (c *Client) getProgram(ctx context.Context, id int) (domain.Program, error)
 	return convertProgram(programInfo), nil
 }
 
+// ResolveRedirectURL resolves a topsy redirect URL by following the first redirect.
+// For non-topsy URLs it returns them unchanged.
+func (c *Client) ResolveRedirectURL(rawURL string) (string, error) {
+	noRedirectClient := *c.HTTPClient
+	noRedirectClient.CheckRedirect = func(req *http.Request, via []*http.Request) error {
+		return http.ErrUseLastResponse
+	}
+
+	req, err := http.NewRequest(http.MethodGet, rawURL, nil)
+	if err != nil {
+		return "", errors.WithMessage(err, "could not create topsy request")
+	}
+	req.Header.Set("User-Agent", userAgent)
+	req.Header.Set("Connection", "keep-alive")
+	req.Header.Set("Accept", "*/*")
+
+	resp, err := noRedirectClient.Do(req)
+	if err != nil {
+		return "", errors.WithMessage(err, "could not resolve topsy redirect")
+	}
+	resp.Body.Close()
+
+	loc := resp.Header.Get("Location")
+	if loc == "" {
+		return "", fmt.Errorf("redirect URL %s returned status %d with no Location header", rawURL, resp.StatusCode)
+	}
+
+	parsed, err := resp.Request.URL.Parse(loc)
+	if err != nil {
+		return "", errors.WithMessage(err, "could not parse redirect location")
+	}
+
+	return parsed.String(), nil
+}
+
 func (c *Client) fetch(ctx context.Context, method string, url string) (*http.Response, error) {
 	req, err := http.NewRequest(method, url, nil)
 	if err != nil {
