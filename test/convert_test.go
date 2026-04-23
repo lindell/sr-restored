@@ -24,8 +24,8 @@ func getAndAssert(t *testing.T, url string, expectedFile string) {
 
 func TestConvert(t *testing.T) {
 	mockTransport := testutil.MockTransport{}
-	mockTransport.AddFileRespons("/api/v2/programs/2519", "data/program.xml")
-	mockTransport.AddFileRespons("/api/v2/episodes/index", "data/episodes.xml")
+	mockTransport.AddFileRespons("/programs/2024", "data/program.json")
+	mockTransport.AddFileRespons("/episodes", "data/episodes.json")
 
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
@@ -36,19 +36,19 @@ func TestConvert(t *testing.T) {
 
 	getAndAssert(
 		t,
-		u.JoinPath("rss/2519").String(),
+		u.JoinPath("rss/2024").String(),
 		"default-rss.xml",
 	)
 
 	getAndAssert(
 		t,
-		u.JoinPath("rss/2519/broadcast").String(),
+		u.JoinPath("rss/2024/broadcast").String(),
 		"broadcast-rss.xml",
 	)
 
 	getAndAssert(
 		t,
-		u.JoinPath("rss/2519/on-demand").String(),
+		u.JoinPath("rss/2024/on-demand").String(),
 		"on-demand-rss.xml",
 	)
 }

@@ -1,22 +1,22 @@
 package client
 
 import (
-	"net/http"
-	"strconv"
+	"sort"
 
 	"github.com/lindell/sr-restored/domain"
 	"github.com/pkg/errors"
 )
 
+const minImageWidth = 1024
+
 func convertProgram(program ProgramInfo) domain.Program {
 	return domain.Program{
-		ID:          program.Program.ID,
-		Name:        program.Program.Name,
-		Description: program.Program.Description,
-		Email:       program.Program.Email,
-		Copyright:   program.Copyright,
-		URL:         program.Program.Programurl,
-		ImageURL:    program.Program.Programimage,
+		ID:          program.ID,
+		Name:        program.Title,
+		Description: program.Description,
+		Copyright:   "Copyright Sveriges Radio. All rights reserved.",
+		URL:         program.URL,
+		ImageURL:    selectImageURL(program.Image.Square1x1, minImageWidth),
 	}
 }
 
@@ -29,14 +29,16 @@ type fileInfo struct {
 }
 
 func (c *Client) convertEpisode(episode Episode, feedTypes []domain.FeedType) (domain.Episode, error) {
+	imageURL := selectImageURL(episode.Image.Square1x1, minImageWidth)
+
 	converted := domain.Episode{
 		ID:          episode.ID,
 		ProgramID:   episode.Program.ID,
 		Title:       episode.Title,
 		Description: episode.Description,
 		URL:         episode.URL,
-		PublishDate: episode.Publishdateutc,
-		ImageURL:    episode.Imageurl,
+		PublishDate: episode.Published,
+		ImageURL:    imageURL,
 	}
 
 	fi, err := c.resolveFileInfo(episode, feedTypes)
@@ -58,31 +60,27 @@ func (c *Client) resolveFileInfo(episode Episode, feedTypes []domain.FeedType) (
 	for _, ft := range feedTypes {
 		switch ft {
 		case domain.FeedTypeDownload:
-			dl := episode.Downloadpodfile
-			if dl.URL == "" {
+			pod := episode.Audio.Podcast
+			if pod == nil || pod.Variants.Standard == nil || pod.Variants.Standard.URL == "" {
 				continue
 			}
 			return fileInfo{
-				URL:             dl.URL,
-				DurationSeconds: dl.Duration,
-				Bytes:           dl.Filesizeinbytes,
-				ContentType:     "audio/mpeg",
+				URL:             pod.Variants.Standard.URL,
+				DurationSeconds: pod.Duration.Seconds,
+				Bytes:           estimateFileSize(pod.Variants.Standard.Bitrate, pod.Duration.Seconds),
+				ContentType:     pod.MimeType,
 			}, nil
 
 		case domain.FeedTypeBroadcast:
-			bc := episode.Broadcast.Broadcastfiles.Broadcastfile
-			if bc.URL == "" {
+			bc := episode.Audio.Broadcast
+			if bc == nil || bc.Variants.Standard == nil || bc.Variants.Standard.URL == "" {
 				continue
 			}
-			contentType, size, err := c.getFileInfo(bc.URL)
-			if err != nil {
-				return fileInfo{}, errors.WithMessage(err, "could not determine broadcast file info")
-			}
 			return fileInfo{
-				URL:             bc.URL,
-				DurationSeconds: bc.Duration,
-				Bytes:           size,
-				ContentType:     contentType,
+				URL:             bc.Variants.Standard.URL,
+				DurationSeconds: bc.Duration.Seconds,
+				Bytes:           estimateFileSize(bc.Variants.Standard.Bitrate, bc.Duration.Seconds),
+				ContentType:     bc.MimeType,
 			}, nil
 		}
 	}
@@ -96,25 +94,34 @@ type FileInfoCache interface {
 	GetFileInfo(key string) (contentType string, size int, ok bool)
 }
 
-func (c *Client) getFileInfo(fileURL string) (contentType string, size int, err error) {
-	if contentType, size, ok := c.Cache.GetFileInfo(fileURL); ok {
-		return contentType, size, nil
+func estimateFileSize(bitrate int, durationSeconds int) int {
+	if bitrate <= 0 || durationSeconds <= 0 {
+		return 0
 	}
 
-	res, err := http.Head(fileURL)
-	if err != nil {
-		return "", 0, errors.WithMessage(err, "could not fetch file url")
+	return bitrate * durationSeconds / 8
+}
+
+// selectImageURL picks the best image from an ImageSet.
+// It prefers the smallest image with width >= minWidth, falling back to the largest image.
+func selectImageURL(imageSet *ImageSet, minWidth int) string {
+	if imageSet == nil || len(imageSet.Variants) == 0 {
+		return ""
 	}
 
-	contentLength := res.Header.Get("Content-Length")
-	size, err = strconv.Atoi(contentLength)
-	if err != nil {
-		return "", 0, errors.WithMessage(err, "could not parse file url content length")
+	sorted := make([]ImageVariant, len(imageSet.Variants))
+	copy(sorted, imageSet.Variants)
+	sort.Slice(sorted, func(i, j int) bool {
+		return sorted[i].Width < sorted[j].Width
+	})
+
+	// Pick the smallest image with width >= minWidth.
+	for _, v := range sorted {
+		if v.Width >= minWidth {
+			return v.URL
+		}
 	}
 
-	contentType = res.Header.Get("Content-Type")
-
-	c.Cache.StoreFileInfo(fileURL, contentType, size)
-
-	return contentType, size, nil
+	// No image meets the threshold; pick the largest.
+	return sorted[len(sorted)-1].URL
 }

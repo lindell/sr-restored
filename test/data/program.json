@@ -1,0 +1,52 @@
+{
+    "id": 2024,
+    "title": "Morgonpasset i P3",
+    "description": "Starta dagen på ett oväntat sätt! Ditt sällskap med en mix av unika intervjuer, nyheter och musik.",
+    "image": {
+        "square1x1": {
+            "photographer": null,
+            "altText": "Konvolut för Morgonpasset i P3",
+            "variants": [
+                {
+                    "url": "https://static-cdn.sr.se/images/2024/4bb306a1-4bfc-4667-a1b0-91f8a06b8d44.jpg?preset=2048x2048",
+                    "width": 2048,
+                    "height": 2048
+                },
+                {
+                    "url": "https://static-cdn.sr.se/images/2024/4bb306a1-4bfc-4667-a1b0-91f8a06b8d44.jpg?preset=1024x1024",
+                    "width": 1024,
+                    "height": 1024
+                },
+                {
+                    "url": "https://static-cdn.sr.se/images/2024/4bb306a1-4bfc-4667-a1b0-91f8a06b8d44.jpg?preset=512x512",
+                    "width": 512,
+                    "height": 512
+                },
+                {
+                    "url": "https://static-cdn.sr.se/images/2024/4bb306a1-4bfc-4667-a1b0-91f8a06b8d44.jpg?preset=256x256",
+                    "width": 256,
+                    "height": 256
+                },
+                {
+                    "url": "https://static-cdn.sr.se/images/2024/4bb306a1-4bfc-4667-a1b0-91f8a06b8d44.jpg?preset=100x100",
+                    "width": 100,
+                    "height": 100
+                }
+            ]
+        },
+        "wide16x9": null,
+        "tall5x7": null
+    },
+    "publisher": "Dejan Cokorilo",
+    "programCategories": [
+        {
+            "id": 3,
+            "name": "Nöje",
+            "image": null
+        }
+    ],
+    "url": "https://www.sverigesradio.se/morgonpassetip3",
+    "pushEnabled": true,
+    "archived": false,
+    "channelId": 164
+}

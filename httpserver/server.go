@@ -91,6 +91,7 @@ func (s *Server) Handler() http.Handler {
 	mainMux.HandleFunc("/rss/{id}", s.getRSS)
 	mainMux.HandleFunc("/rss/{id}/broadcast", s.getRSSBroadcast)
 	mainMux.HandleFunc("/rss/{id}/on-demand", s.getRSSOnDemand)
+	mainMux.HandleFunc("/audio-file/{id}", s.redirectAudioFile)
 
 	fileServer := http.FileServer(http.Dir("./static"))
 	mainMux.Handle("/_app/immutable/", cacheImmutable(fileServer))
@@ -109,6 +110,22 @@ func (s *Server) getRSSBroadcast(w http.ResponseWriter, r *http.Request) {
 
 func (s *Server) getRSSOnDemand(w http.ResponseWriter, r *http.Request) {
 	s.handleRSSFetch(w, r, []domain.FeedType{domain.FeedTypeDownload})
+}
+
+func (s *Server) redirectAudioFile(w http.ResponseWriter, r *http.Request) {
+	id, err := strconv.ParseInt(r.PathValue("id"), 10, 64)
+	if err != nil {
+		http.Error(w, "invalid audio file id", http.StatusBadRequest)
+		return
+	}
+
+	resolvedURL, err := s.Podcast.ResolveRedirectURL(int(id))
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadGateway)
+		return
+	}
+
+	http.Redirect(w, r, resolvedURL, http.StatusMovedPermanently)
 }
 
 func (s *Server) handleRSSFetch(w http.ResponseWriter, r *http.Request, feedTypes []domain.FeedType) {

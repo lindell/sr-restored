@@ -2,8 +2,10 @@ package postgres
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/Masterminds/squirrel"
+	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/lindell/go-stderrs/stderrs"
 	"github.com/lindell/sr-restored/domain"
@@ -204,5 +206,41 @@ func (db *DB) InsertProgram(ctx context.Context, program domain.Program) error {
 
 	tag, err := db.db.Exec(ctx, sql, args...)
 	log(tag, "insert program")
+	return err
+}
+
+func (db *DB) GetRedirectURL(ctx context.Context, audioFileID int) (string, error) {
+	var redirectURL string
+	err := db.db.QueryRow(ctx, `
+		SELECT redirect_url
+		FROM redirect_urls
+		WHERE audio_file_id = $1`, audioFileID).Scan(&redirectURL)
+	if err == nil {
+		return redirectURL, nil
+	}
+
+	if stderrors.Is(err, pgx.ErrNoRows) {
+		return "", stderrs.NewNotFound("could not find redirect URL")
+	}
+
+	return "", errors.WithMessage(err, "could not select redirect URL")
+}
+
+func (db *DB) StoreRedirectURL(ctx context.Context, audioFileID int, redirectURL string) error {
+	query := db.sq.Insert("redirect_urls").Columns(
+		"audio_file_id",
+		"redirect_url",
+	).Values(
+		audioFileID,
+		redirectURL,
+	).Suffix("ON CONFLICT (audio_file_id) DO UPDATE SET redirect_url = EXCLUDED.redirect_url")
+
+	sql, args, err := query.ToSql()
+	if err != nil {
+		return errors.WithMessage(err, "could not build query")
+	}
+
+	tag, err := db.db.Exec(ctx, sql, args...)
+	log(tag, "store redirect URL")
 	return err
 }

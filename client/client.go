@@ -2,7 +2,7 @@ package client
 
 import (
 	"context"
-	"encoding/xml"
+	"encoding/json"
 	"fmt"
 	"log/slog"
 	"net/http"
@@ -13,12 +13,12 @@ import (
 	"github.com/pkg/errors"
 )
 
-const userAgent = "sveriges-radios-uppdrag-är-att-leverera-oberoende-journalistik-och-kulturupplevelser-till-publiken-DÄR-DEN-FINNS-OCH-KAN-LYSSNA"
+const userAgent = "Play/31330 (Android/34; google/Pixel 8 Pro; Scale/2.75)"
 
 var baseURL *url.URL
 
 func init() {
-	baseURL, _ = url.Parse("https://api.sr.se/api/v2/")
+	baseURL, _ = url.Parse("https://app-api.sr.se/")
 }
 
 // Client is a client for the Sveriges Radio API.
@@ -52,11 +52,11 @@ func (c *Client) GetProgram(ctx context.Context, id int, feedTypes []domain.Feed
 }
 
 func (c *Client) getEpisodes(ctx context.Context, id int, feedTypes []domain.FeedType) ([]domain.Episode, []byte, error) {
-	u := baseURL.JoinPath("episodes/index")
+	u := baseURL.JoinPath("episodes")
 	q := u.Query()
-	q.Add("audioquality", "hi")
-	q.Add("size", fmt.Sprint(500))
-	q.Add("programid", fmt.Sprint(id))
+	q.Add("programId", fmt.Sprint(id))
+	q.Add("skip", "0")
+	q.Add("take", fmt.Sprint(500))
 	u.RawQuery = q.Encode()
 
 	resp, err := c.fetch(ctx, http.MethodGet, u.String())
@@ -65,12 +65,12 @@ func (c *Client) getEpisodes(ctx context.Context, id int, feedTypes []domain.Fee
 	}
 
 	var listing EpisodeListing
-	if err := xml.NewDecoder(resp.Body).Decode(&listing); err != nil {
+	if err := json.NewDecoder(resp.Body).Decode(&listing); err != nil {
 		return nil, nil, err
 	}
 
-	episodes := make([]domain.Episode, 0, len(listing.Episodes.Episode))
-	for _, episode := range listing.Episodes.Episode {
+	episodes := make([]domain.Episode, 0, len(listing.Items))
+	for _, episode := range listing.Items {
 		if converted, err := c.convertEpisode(episode, feedTypes); err == nil {
 			episodes = append(episodes, converted)
 		} else {
@@ -95,11 +95,46 @@ func (c *Client) getProgram(ctx context.Context, id int) (domain.Program, error)
 	}
 
 	var programInfo ProgramInfo
-	if err := xml.NewDecoder(resp.Body).Decode(&programInfo); err != nil {
-		return domain.Program{}, errors.WithMessage(err, "could not decode XML")
+	if err := json.NewDecoder(resp.Body).Decode(&programInfo); err != nil {
+		return domain.Program{}, errors.WithMessage(err, "could not decode JSON")
 	}
 
 	return convertProgram(programInfo), nil
+}
+
+// ResolveRedirectURL resolves a topsy redirect URL by following the first redirect.
+// For non-topsy URLs it returns them unchanged.
+func (c *Client) ResolveRedirectURL(rawURL string) (string, error) {
+	noRedirectClient := *c.HTTPClient
+	noRedirectClient.CheckRedirect = func(req *http.Request, via []*http.Request) error {
+		return http.ErrUseLastResponse
+	}
+
+	req, err := http.NewRequest(http.MethodGet, rawURL, nil)
+	if err != nil {
+		return "", errors.WithMessage(err, "could not create topsy request")
+	}
+	req.Header.Set("User-Agent", userAgent)
+	req.Header.Set("Connection", "keep-alive")
+	req.Header.Set("Accept", "*/*")
+
+	resp, err := noRedirectClient.Do(req)
+	if err != nil {
+		return "", errors.WithMessage(err, "could not resolve topsy redirect")
+	}
+	resp.Body.Close()
+
+	loc := resp.Header.Get("Location")
+	if loc == "" {
+		return "", fmt.Errorf("redirect URL %s returned status %d with no Location header", rawURL, resp.StatusCode)
+	}
+
+	parsed, err := resp.Request.URL.Parse(loc)
+	if err != nil {
+		return "", errors.WithMessage(err, "could not parse redirect location")
+	}
+
+	return parsed.String(), nil
 }
 
 func (c *Client) fetch(ctx context.Context, method string, url string) (*http.Response, error) {

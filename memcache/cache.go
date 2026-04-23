@@ -89,3 +89,18 @@ func (c *Cache) GetFileInfo(key string) (contentType string, size int, ok bool) 
 	fi := val.(CachedFileInfo)
 	return fi.ContentType, fi.Size, true
 }
+
+const redirectURLCacheDuration = 24 * time.Hour
+
+func (c *Cache) StoreRedirectURL(key string, redirectURL string) {
+	c.cache.SetWithTTL("redirect:"+key, redirectURL, int64(len(redirectURL)), redirectURLCacheDuration)
+}
+
+func (c *Cache) GetRedirectURL(key string) (string, bool) {
+	val, ok := c.cache.Get("redirect:" + key)
+	if !ok {
+		return "", false
+	}
+
+	return val.(string), true
+}

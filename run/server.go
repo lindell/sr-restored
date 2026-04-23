@@ -55,10 +55,11 @@ func Run(ctx context.Context, config Config) error {
 	}
 
 	podcast := &podcast.Podcast{
-		Client:   srClient,
-		Cache:    cache,
-		Database: postgresDB,
-		RSSUrl:   baseURL.JoinPath("rss"),
+		Client:          srClient,
+		Cache:           cache,
+		Database:        postgresDB,
+		RSSUrl:          baseURL.JoinPath("rss"),
+		PodcastsFileURL: baseURL.JoinPath("audio-file"),
 
 		Now: config.Now,
 	}
