@@ -12,6 +12,8 @@ type Episode struct {
 	ImageURL    string    `db:"image_url"`
 	ContentType string
 
+	Presenter string `db:"presenter"`
+
 	FileURL             string `db:"file_url"`
 	FileDurationSeconds int    `db:"file_duration"`
 	FileBytes           int    `db:"file_bytes"`
