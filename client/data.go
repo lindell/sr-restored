@@ -74,6 +74,7 @@ type Episode struct {
 		} `xml:"program"`
 		Availablefromutc string `xml:"availablefromutc"`
 	} `xml:"downloadpodfile"`
+	Reporter     string `xml:"reporter"`
 	Photographer string `xml:"photographer"`
 	Broadcast    struct {
 		Text             string `xml:",chardata"`

@@ -37,6 +37,7 @@ func (c *Client) convertEpisode(episode Episode, feedTypes []domain.FeedType) (d
 		URL:         episode.URL,
 		PublishDate: episode.Publishdateutc,
 		ImageURL:    episode.Imageurl,
+		Presenter:   episode.Reporter,
 	}
 
 	fi, err := c.resolveFileInfo(episode, feedTypes)

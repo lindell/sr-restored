@@ -71,6 +71,9 @@ func convertEpisode(original domain.Episode) PodItem {
 	target.Summary = description
 
 	target.Author = "Sveriges Radio"
+	if original.Presenter != "" {
+		target.Author = original.Presenter
+	}
 
 	target.Keywords = strings.ReplaceAll(original.Title, " ", ",")
 
