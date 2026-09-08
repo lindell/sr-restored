@@ -26,7 +26,9 @@ type RSS struct {
 			Link  string `xml:"link"`
 			URL   string `xml:"url"`
 		} `xml:"image"`
-		ItunesImage    string `xml:"itunes:image"`
+		ItunesImage    struct {
+			Href string `xml:"href,attr"`
+		} `xml:"itunes:image"`
 		ItunesExplicit string `xml:"itunes:explicit"`
 		ItunesSummary  string `xml:"itunes:summary"`
 		ItunesAuthor   string `xml:"itunes:author"`

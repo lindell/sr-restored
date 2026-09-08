@@ -101,10 +101,21 @@ func (c *Client) getFileInfo(fileURL string) (contentType string, size int, err 
 		return contentType, size, nil
 	}
 
-	res, err := http.Head(fileURL)
+	req, err := http.NewRequest(http.MethodHead, fileURL, nil)
+	if err != nil {
+		return "", 0, errors.WithMessage(err, "could not create head request")
+	}
+
+	httpClient := c.HTTPClient
+	if httpClient == nil {
+		httpClient = http.DefaultClient
+	}
+
+	res, err := httpClient.Do(req)
 	if err != nil {
 		return "", 0, errors.WithMessage(err, "could not fetch file url")
 	}
+	defer res.Body.Close()
 
 	contentLength := res.Header.Get("Content-Length")
 	size, err = strconv.Atoi(contentLength)
