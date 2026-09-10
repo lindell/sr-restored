@@ -22,6 +22,8 @@ type Podcast struct {
 
 	RSSUrl *url.URL
 
+	IndentXML bool
+
 	Now func() time.Time
 }
 
@@ -78,7 +80,12 @@ func (p *Podcast) GetPodcast(ctx context.Context, id int, feedTypes []domain.Fee
 
 	rss := p.convertToPodRSS(program)
 
-	raw, err := xml.Marshal(rss)
+	var raw []byte
+	if p.IndentXML {
+		raw, err = xml.MarshalIndent(rss, "", "  ")
+	} else {
+		raw, err = xml.Marshal(rss)
+	}
 	if err != nil {
 		return nil, nil, err
 	}

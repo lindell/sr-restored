@@ -28,6 +28,7 @@ func setupWithHTTPClient(ctx context.Context, t *testing.T, httpClient *http.Cli
 		if err := run.Run(ctx, run.Config{
 			ServerAddr: addr,
 			HTTPClient: httpClient,
+			IndentXML:  true,
 			Now:        func() time.Time { return time.Date(2024, 1, 1, 0, 0, 0, 0, time.UTC) },
 		}); err != nil {
 			t.Error(err)
