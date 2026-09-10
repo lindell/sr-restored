@@ -8,7 +8,7 @@
       <link>https://www.sverigesradio.se/morgonpassetip3</link>
       <url>https://static-cdn.sr.se/images/2024/4bb306a1-4bfc-4667-a1b0-91f8a06b8d44.jpg?preset=api-default-square</url>
     </image>
-    <itunes:image>https://static-cdn.sr.se/images/2024/4bb306a1-4bfc-4667-a1b0-91f8a06b8d44.jpg?preset=api-default-square</itunes:image>
+    <itunes:image href="https://static-cdn.sr.se/images/2024/4bb306a1-4bfc-4667-a1b0-91f8a06b8d44.jpg?preset=api-default-square"></itunes:image>
     <itunes:explicit></itunes:explicit>
     <itunes:summary>Starta dagen på ett oväntat sätt! Ditt sällskap med en mix av unika intervjuer, nyheter och musik.</itunes:summary>
     <itunes:author>Sveriges Radio</itunes:author>
