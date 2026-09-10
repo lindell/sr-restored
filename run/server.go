@@ -27,6 +27,9 @@ type Config struct {
 	// HTTPClient overrides the default HTTP client used by the SR API client.
 	HTTPClient *http.Client
 
+	// IndentXML specifies whether the rendered XML should have newlines and indentation.
+	IndentXML bool
+
 	Now func() time.Time
 }
 
@@ -55,10 +58,11 @@ func Run(ctx context.Context, config Config) error {
 	}
 
 	podcast := &podcast.Podcast{
-		Client:   srClient,
-		Cache:    cache,
-		Database: postgresDB,
-		RSSUrl:   baseURL.JoinPath("rss"),
+		Client:    srClient,
+		Cache:     cache,
+		Database:  postgresDB,
+		RSSUrl:    baseURL.JoinPath("rss"),
+		IndentXML: config.IndentXML,
 
 		Now: config.Now,
 	}
