@@ -26,7 +26,7 @@ func (p *Podcast) convertToPodRSS(program domain.Program) RSS {
 	rss.Channel.Image.Title = title
 	rss.Channel.Image.Link = program.URL
 
-	rss.Channel.ItunesImage = program.ImageURL
+	rss.Channel.ItunesImage.Href = program.ImageURL
 	rss.Channel.ItunesSummary = program.Description
 	rss.Channel.ItunesAuthor = "Sveriges Radio"
 	// rss.Channel.ItunesCategory
